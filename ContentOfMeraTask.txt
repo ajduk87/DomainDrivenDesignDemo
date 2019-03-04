@@ -1,0 +1,8 @@
+Content of directory MERA task
+1. ClientApplication is client application
+2. TransactionServiceCS is windows service which processes business logic. This windows service in this task is something like server process.
+3. Buffers contents two txt files bufferForRequest and bufferForResponse
+4. TranscationServiceStorage contents two directories Database and Files.
+   Database contents accdb file Storages. This file Storages.accdb in this task is something like server database.
+   Files contents txt files. One txt file for one storage.
+5. File ExceptionsFromService.db is for recording exceptions of windows service.

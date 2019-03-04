@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="ClientApplicationWithGui.UserControls.EnterInStorageControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClientApplicationWithGui.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Label Name="lblNameOfStorage" Content="Enter name of storage :"/>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <TextBox Name="tfNameOfStorage" 
+                         FontSize="16"
+                         Height="30"
+                         FontWeight="Normal"/>
+        </Grid>     
+
+        <Grid Grid.Row="3" Grid.Column="0">
+            <Button    Name="btnEnterInExistingStorage"
+                                   Content="Enter in exisitng storage"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Stretch"
+                                   Click="btnEnterInExistingStorage_Click"/>
+        </Grid>
+
+        <Grid Grid.Row="4" Grid.Column="0">
+            <Label Name="lblEnteredStorage" Content=""/>
+        </Grid>
+
+        <Grid Grid.Row="5" Grid.Column="0">
+            <ComboBox Grid.Column="2" HorizontalAlignment="Stretch" SelectedIndex="0"  Name="cmbMenu" VerticalAlignment="Center" Width="Auto" Cursor="Hand" SelectionChanged="cmbMenu_SelectionChanged">
+
+                <ComboBoxItem>Choose option</ComboBoxItem>
+                <ComboBoxItem>Insert new product</ComboBoxItem>
+                <ComboBoxItem>Read existing product</ComboBoxItem>
+                <ComboBoxItem>Update existing product</ComboBoxItem>
+                <ComboBoxItem>Delete existing product</ComboBoxItem>
+                <ComboBoxItem>Get min cost of products</ComboBoxItem>
+                <ComboBoxItem>Get max cost of products</ComboBoxItem>
+                <ComboBoxItem>Get average cost of products</ComboBoxItem>
+                <ComboBoxItem>Get sum cost of all products</ComboBoxItem>
+                <ComboBoxItem>Display state of current storage</ComboBoxItem>
+                <ComboBoxItem>Exit from storage</ComboBoxItem>
+            </ComboBox>
+        </Grid>
+
+        <Grid Grid.Row="6" Grid.Column="0">
+            <Label Name="lblNameOfProduct" Content="Enter name of Product :"/>
+        </Grid>
+        <Grid Grid.Row="6" Grid.Column="1">
+            <TextBox Name="tfNameOfProduct" 
+                         FontSize="16"
+                         Height="30"
+                         FontWeight="Normal"/>
+        </Grid>
+
+        <Grid Grid.Row="7" Grid.Column="0">
+            <Label Name="lblUnitCostOfProduct" Content="Enter unit cost of product :"/>
+        </Grid>
+        <Grid Grid.Row="7" Grid.Column="1">
+            <TextBox Name="tfUnitCostOfProduct" 
+                         FontSize="16"
+                         Height="30"
+                         FontWeight="Normal"/>
+        </Grid>
+
+        <Grid Grid.Row="8" Grid.Column="0">
+            <Label Name="lblCountOfProduct" Content="Enter count of product :"/>
+        </Grid>
+        <Grid Grid.Row="8" Grid.Column="1">
+            <TextBox Name="tfCountOfProduct" 
+                         FontSize="16"
+                         Height="30"
+                         FontWeight="Normal"/>
+        </Grid>
+        <Grid Grid.Row="9" Grid.Column="0">
+            <Button    Name="btnProcessProductRequest"
+                                   Content="Process product request"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Stretch"
+                                   Click="btnProcessProductRequest_Click"/>
+        </Grid>
+        <Grid Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2">
+            <DataGrid  
+                                   ItemsSource="{Binding storageItems}" 
+                                   HorizontalAlignment="Stretch"  
+                                   Name="dataGridStorage" 
+                                   VerticalAlignment="Stretch" 
+                                   Width="Auto"                                   
+                                   AutoGenerateColumns="False" 
+                                   CanUserReorderColumns="False" 
+                                   CanUserAddRows="False"  
+                                   RowBackground="Snow" 
+                                   VerticalContentAlignment="Stretch" 
+                                   HorizontalContentAlignment="Stretch">
+
+
+
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Header="NameOfProduct" Width="*" IsReadOnly="True" Binding="{Binding NameOfProduct}"/>
+                    <DataGridTextColumn Header="CountOfProduct" Width="*" IsReadOnly="True" Binding="{Binding CountOfProduct}"/>
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+        </Grid>
+
+    </Grid>
+</UserControl>

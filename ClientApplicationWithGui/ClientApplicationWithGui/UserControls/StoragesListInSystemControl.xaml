@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="ClientApplicationWithGui.UserControls.StoragesListInSystemControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClientApplicationWithGui.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="35"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Button    Name="btnEnterNewStorage"
+                                   Content="    Show exisitng storages   "
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Click="btnEnterNewStorage_Click"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <DataGrid  
+                                   ItemsSource="{Binding storages}" 
+                                   HorizontalAlignment="Stretch"  
+                                   Name="dataGridStorages" 
+                                   VerticalAlignment="Stretch" 
+                                   Width="Auto"                                   
+                                   AutoGenerateColumns="False" 
+                                   CanUserReorderColumns="False" 
+                                   CanUserAddRows="False"  
+                                   RowBackground="Snow" 
+                                   VerticalContentAlignment="Stretch" 
+                                   HorizontalContentAlignment="Stretch">
+
+          
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="NameOfStorage" Width="*" IsReadOnly="True" Binding="{Binding Name}"/>
+                <DataGridTextColumn Header="KindOfStorage" Width="*" IsReadOnly="True" Binding="{Binding Kind}"/>
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+        </Grid>
+
+    </Grid>
+</UserControl>
