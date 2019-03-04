@@ -52,6 +52,9 @@
     <Compile Include="DDDDemoServerService.Designer.cs">
       <DependentUpon>DDDDemoServerService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\Storage.cs" />
+    <Compile Include="Entities\StorageItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
