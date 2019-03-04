@@ -55,6 +55,11 @@
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\Storage.cs" />
     <Compile Include="Entities\StorageItem.cs" />
+    <Compile Include="Entities\UnitCost.cs" />
+    <Compile Include="Entities\ValueObjects\Currency.cs" />
+    <Compile Include="Entities\ValueObjects\KindOfStorage.cs" />
+    <Compile Include="Entities\ValueObjects\NameOfProduct.cs" />
+    <Compile Include="Entities\ValueObjects\NameOfStorage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>

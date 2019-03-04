@@ -6,9 +6,9 @@ using System.Text;
 
 namespace ServerApplication.Entities
 {
-    public class Product
+    public class UnitCost
     {
-        public NameOfProduct NameOfProduct { get; set; }
-        public UnitCost Cost { get; set; }
+        public double Value { get; set; }
+        public Currency Currency { get; set; }
     }
 }
