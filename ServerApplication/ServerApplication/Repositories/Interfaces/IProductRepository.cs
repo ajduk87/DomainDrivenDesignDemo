@@ -8,7 +8,7 @@ namespace ServerApplication.Repositories.Interfaces
 {
     public interface IProductRepository
     {
-        void Insert(string name);
+        void Insert(Product product);
         Product SelectByName(string name);
         void Update(Product product);
         void Delete(string name);

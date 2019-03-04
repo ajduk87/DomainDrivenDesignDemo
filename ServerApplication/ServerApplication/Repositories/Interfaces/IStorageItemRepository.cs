@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ServerApplication.Services.Interfaces
+namespace ServerApplication.Repositories.Interfaces
 {
-    public interface IStorageItemService
+    public interface IStorageItemRepository
     {
         void Insert(Product product, string nameOfStorage);
-        StorageItem Get(string nameOfStorage, string nameOfProduct);
+        StorageItem SelectByNameOfStorageAndProduct(string nameOfStorage, string nameOfProduct);
         void Update(Product product, string nameOfStorage);
         void Delete(string nameOfStorage, string nameOfProduct);
-        IEnumerable<StorageItem> Get(string nameOfStorage);
+        IEnumerable<StorageItem> Select(string nameOfStorage);
     }
 }
