@@ -8,6 +8,13 @@ using System.IO;
 using System.Collections.Generic;
 using System.Data.OleDb;
 using System.Globalization;
+using System.Linq;
+using ServerApplication.Repositories.Interfaces;
+using ServerApplication.Repositories.Implementations;
+using ServerApplication.Services.Interfaces;
+using ServerApplication.Services.Implementations;
+using ServerApplication.Entities;
+using ServerApplication.Entities.ValueObjects;
 
 namespace ServerApplication
 {
@@ -207,7 +214,7 @@ namespace ServerApplication
                 case 10: requestForProductsCostAvg(rq); break;
                 case 11: requestForProductsCostSum(rq); break;
                 case 12: requestForUpdateProduct(rq); break;
-                case 13: requestForDeleteProduct(rq); break;
+                case 13: requestForDeleteProductFromStorage(rq); break;
             }
         }    
 
@@ -215,23 +222,19 @@ namespace ServerApplication
 
         private void requestForGetAllStoragesInfo()
         {
-            string query = "SELECT NameOfStorage, KindOfStorage FROM Storages";
             try
             {
-                con.Open();
-                OleDbCommand com = new OleDbCommand(query, con);
-                OleDbDataReader dr = com.ExecuteReader();
-                string response = string.Empty;
-                while (dr.Read())
-                {
-                    response += dr["NameOfStorage"].ToString() + " " + dr["KindOfStorage"].ToString() + System.Environment.NewLine;
-                }
+                IStorageRepository storageRepository = new StorageRepository();
+                IStorageService storageService = new StorageService(storageRepository);
+                List<Storage>  storages = storageService.GetAll().ToList();
 
-                StreamWriter sw = new StreamWriter(new FileStream(pathForResponse, FileMode.Append, FileAccess.Write));
-                sw.WriteLine(response);
-                sw.Flush();
-                sw.Close();
-                con.Close();
+
+                string response = string.Empty;
+                storages.ForEach(storage => 
+                {
+                    response += storage.NameOfStorage.Content + " " + storage.KindOfStorage.Content + System.Environment.NewLine;
+                });
+                writeResponse(response);
             }
             catch (Exception ex)
             {
@@ -241,24 +244,18 @@ namespace ServerApplication
 
         private void requestForEnterInSpecificStorage(Request rq)
         {
-            string name = rq.Args[0];
-            string query = "SELECT NameOfStorage, KindOfStorage FROM Storages WHERE NameOfStorage = '" + name + "'";
             try
             {
-                con.Open();
-                OleDbCommand com = new OleDbCommand(query, con);
-                OleDbDataReader dr = com.ExecuteReader();
-                string response = string.Empty;
-                if (dr.Read())
-                {
-                    response = dr["NameOfStorage"].ToString() + dr["KindOfStorage"].ToString();
-                }
+                string nameOfStorageContent = rq.Args[0];
 
-                StreamWriter sw = new StreamWriter(new FileStream(pathForResponse, FileMode.Append, FileAccess.Write));
-                sw.WriteLine(response);
-                sw.Flush();
-                sw.Close();
-                con.Close();
+                IStorageRepository storageRepository = new StorageRepository();
+                IStorageService storageService = new StorageService(storageRepository);
+                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                Storage storage = storageService.Enter(nameOfStorage);
+
+
+                string response = storage.NameOfStorage.Content + " " + storage.KindOfStorage.Content;
+                writeResponse(response);
             }
             catch (Exception ex)
             {
@@ -268,26 +265,24 @@ namespace ServerApplication
 
         private void requestForGetStorageState(Request rq)
         {
-            string nameOfStorage = rq.Args[0];
-            string kindOfStorage = rq.Args[1];
-
-            string query = "SELECT NameOfProduct, CountOfProduct FROM StateOfStorages WHERE NameOfStorage = '" + nameOfStorage + "'";
             try
             {
-                con.Open();
-                OleDbCommand com = new OleDbCommand(query, con);
-                OleDbDataReader dr = com.ExecuteReader();
-                string response = string.Empty;
-                while (dr.Read())
-                {
-                    response += dr["NameOfProduct"].ToString() + " " + dr["CountOfProduct"].ToString() + System.Environment.NewLine;
-                }
+                string nameOfStorageContent = rq.Args[0];
+                string kindOfStorage = rq.Args[1];
 
-                StreamWriter sw = new StreamWriter(new FileStream(pathForResponse, FileMode.Append, FileAccess.Write));
-                sw.WriteLine(response);
-                sw.Flush();
-                sw.Close();
-                con.Close();
+                IStorageItemRepository storageItemRepository = new StorageItemRepository();
+                IStorageItemService storageItemsService = new StorageItemService(storageItemRepository);
+                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                List<StorageItem> storageItems = storageItemsService.GetStateOfStorage(nameOfStorage).ToList();
+
+
+
+                string response = string.Empty;
+                storageItems.ForEach(storageItem =>
+                {
+                    response += storageItem.NameOfProduct.Content + " " + storageItem.CountOfProduct + System.Environment.NewLine;
+                });
+                writeResponse(response);
             }
             catch (Exception ex)
             {
@@ -298,18 +293,19 @@ namespace ServerApplication
 
         private void requestForCreateNewStorage(Request rq)
         {
-            string name = rq.Args[0];
-            string kind = rq.Args[1];
-
-            //execute database storage
-            string query = "INSERT INTO Storages(NameOfStorage,KindOfStorage) VALUES('" + name + "','" + kind + "')";
-
             try
             {
-                con.Open();
-                OleDbCommand com = new OleDbCommand(query, con);
-                com.ExecuteNonQuery();
-                con.Close();               
+                string name = rq.Args[0];
+                string kind = rq.Args[1];
+
+                IStorageRepository storageRepository = new StorageRepository();
+                IStorageService storageService = new StorageService(storageRepository);
+                Storage strorage = new Storage
+                {
+                    NameOfStorage = new NameOfStorage { Content = name },
+                    KindOfStorage = new KindOfStorage { Content = kind }
+                };
+                storageService.Create(strorage);
             }
             catch (Exception ex)
             {
@@ -319,36 +315,36 @@ namespace ServerApplication
 
         private void requestForCreateNewProduct(Request rq)
         {
-            string nameOfProduct = rq.Args[0];
-            string unitCostString = rq.Args[1];
-            string countString = rq.Args[2];
-            string nameOfStorage = rq.Args[3];
-            string kindOfStorage = rq.Args[4];
-
-            int count = 0;
-            bool isN = int.TryParse(countString, out count);
-            double unitCost = 0;
-
-            isN = double.TryParse(unitCostString, System.Globalization.NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out unitCost);
-
-            //execute database storage
-            string query0 = "SELECT NameOfProduct FROM Products WHERE NameOfProduct = '" + nameOfProduct + "'";
-            string query1 = "INSERT INTO Products(NameOfProduct,Cost) VALUES('" + nameOfProduct + "','" + unitCost + "')";
-            string query2 = "INSERT INTO StateOfStorages(NameOfStorage,NameOfProduct,CountOfProduct) VALUES('" + nameOfStorage + "','" + nameOfProduct + "','" + count + "')";
-
             try
             {
-                con.Open();
-                OleDbCommand com = new OleDbCommand(query0, con);
-                OleDbDataReader dr = com.ExecuteReader();
-                if (dr.HasRows == false)
+                string nameOfProduct = rq.Args[0];
+                string unitCostString = rq.Args[1];
+                string countString = rq.Args[2];
+                string nameOfStorage = rq.Args[3];
+
+
+                IProductRepository productRepository = new ProductRepository();
+                IProductService productService = new ProductService(productRepository);
+                Product product = new Product
                 {
-                    com = new OleDbCommand(query1, con);
-                    com.ExecuteNonQuery();
-                }
-                com = new OleDbCommand(query2, con);
-                com.ExecuteNonQuery();
-                con.Close();              
+                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
+                    Cost = new UnitCost
+                    {
+                        Value = Convert.ToDouble(unitCostString),
+                        Currency = new Currency { Content = "EUR" }
+                    }                    
+                };
+                productService.Create(product);
+
+                IStorageItemRepository storageItemRepository = new StorageItemRepository();
+                IStorageItemService storageItemService = new StorageItemService(storageItemRepository);
+                StorageItem storageItem = new StorageItem
+                {
+                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
+                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
+                    CountOfProduct = Convert.ToInt32(countString)
+                };
+                storageItemService.Insert(storageItem);
             }
             catch (Exception ex)
             {
@@ -358,39 +354,25 @@ namespace ServerApplication
 
         private void requestForGetProductInfo(Request rq)
         {
-            string nameOfProduct = rq.Args[0];
-            string nameOfStorage = rq.Args[1];
-            string query1 = "SELECT Cost FROM Products WHERE NameOfProduct = '" + nameOfProduct + "'";
-            string query2 = "SELECT CountOfProduct FROM StateOfStorages WHERE NameOfProduct = '" + nameOfProduct + "' AND NameOfStorage = '" + nameOfStorage + "'";
-            string cost = string.Empty;
-            string count = string.Empty;
-
             try
             {
-                con.Open();
-                OleDbCommand com = new OleDbCommand(query1, con);
-                OleDbDataReader dr = com.ExecuteReader();
-                string response = string.Empty;
-                if (dr.Read())
-                {
-                    cost = dr["Cost"].ToString();
-                }
+                string nameOfProductContent = rq.Args[0];
+                string nameOfStorageContent = rq.Args[1];
 
-                com = new OleDbCommand(query2, con);
-                dr = com.ExecuteReader();
+                IProductRepository productRepository = new ProductRepository();
+                IProductService productService = new ProductService(productRepository);
+                NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
+                Product product = productService.Get(nameOfProduct);
 
-                if (dr.Read())
-                {
-                    count = dr["CountOfProduct"].ToString();
-                }
+                IStorageItemRepository storageItemRepository = new StorageItemRepository();
+                IStorageItemService storageItemService = new StorageItemService(storageItemRepository);
+                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                StorageItem storageItem = storageItemService.Get(nameOfStorage, product.NameOfProduct);
 
-                response = nameOfProduct + " " + cost + " " + count;
 
-                StreamWriter sw = new StreamWriter(new FileStream(pathForResponse, FileMode.Append, FileAccess.Write));
-                sw.WriteLine(response);
-                sw.Flush();
-                sw.Close();
-                con.Close();
+                string response = product.NameOfProduct.Content + " " + product.Cost.Value + " " + storageItem.CountOfProduct;
+                writeResponse(response);
+
             }
             catch (Exception ex)
             {
@@ -401,31 +383,30 @@ namespace ServerApplication
 
         private void requestForCheckIsProductExists(Request rq)
         {
-            string nameOfProduct = rq.Args[0];
-            string nameOfStorage = rq.Args[1];
-
-            string query = "SELECT * FROM StateOfStorages WHERE NameOfProduct = '" + nameOfProduct + "' AND NameOfStorage = '" + nameOfStorage + "'";
-
             try
             {
-                con.Open();
-                OleDbCommand com = new OleDbCommand(query, con);
-                OleDbDataReader dr = com.ExecuteReader();
+                string nameOfProductContent = rq.Args[0];
+                string nameOfStorageContent = rq.Args[1];
+
+                IStorageItemRepository storageItemRepository = new StorageItemRepository();
+                IStorageItemService storageItemService = new StorageItemService(storageItemRepository);
+                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
+                bool isExist = storageItemService.IsProductExistsInStorage(nameOfStorage, nameOfProduct);
+
+
+
                 string response = string.Empty;
-                if (dr.HasRows)
+                if (isExist == true)
                 {
-                    response = "True";
+                    response = "true";
                 }
                 else
                 {
-                    response = "False";
+                    response = "false";
                 }
+                writeResponse(response);
 
-                StreamWriter sw = new StreamWriter(new FileStream(pathForResponse, FileMode.Append, FileAccess.Write));
-                sw.WriteLine(response);
-                sw.Flush();
-                sw.Close();
-                con.Close();
             }
             catch (Exception ex)
             {
@@ -436,29 +417,37 @@ namespace ServerApplication
        
         private void requestForUpdateProduct(Request rq)
         {
-            string nameOfProduct = rq.Args[0];
-            string unitCostString = rq.Args[1];
-            string countString = rq.Args[2];
-            string nameOfStorage = rq.Args[3];
-            string kindOfStorage = rq.Args[4];
-
-            int count = 0;
-            bool isN = int.TryParse(countString, out count);
-            double unitCost = 0;
-
-            isN = double.TryParse(unitCostString, System.Globalization.NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out unitCost);
-
-            string query1 = "UPDATE Products SET Cost = '" + unitCost + "' WHERE NameOfProduct = '" + nameOfProduct + "'";
-            string query2 = "UPDATE StateOfStorages SET CountOfProduct = '" + count + "' WHERE NameOfProduct = '" + nameOfProduct + "' AND NameOfStorage = '" + nameOfStorage + "'";
-
             try
             {
-                con.Open();
-                OleDbCommand com = new OleDbCommand(query1, con);
-                com.ExecuteNonQuery();
-                com = new OleDbCommand(query2, con);
-                com.ExecuteNonQuery();
-                con.Close();               
+                string nameOfProduct = rq.Args[0];
+                string unitCostString = rq.Args[1];
+                string countString = rq.Args[2];
+                string nameOfStorage = rq.Args[3];
+                string kindOfStorage = rq.Args[4];
+
+               
+                IProductRepository productRepository = new ProductRepository();
+                IProductService productService = new ProductService(productRepository);
+                Product product = new Product
+                {
+                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
+                    Cost = new UnitCost
+                    {
+                        Value = Convert.ToDouble(unitCostString),
+                        Currency = new Currency { Content = "EUR" }
+                    }
+                };
+                productService.Update(product);
+
+                IStorageItemRepository storageItemRepository = new StorageItemRepository();
+                IStorageItemService storageItemService = new StorageItemService(storageItemRepository);
+                StorageItem storageItem = new StorageItem
+                {
+                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
+                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
+                    CountOfProduct = Convert.ToInt32(countString)
+                };
+                storageItemService.Update(storageItem);
             }
             catch (Exception ex)
             {
@@ -466,20 +455,19 @@ namespace ServerApplication
             }
         }
 
-        private void requestForDeleteProduct(Request rq)
+        private void requestForDeleteProductFromStorage(Request rq)
         {
-            string nameOfProduct = rq.Args[0];
-            string nameOfStorage = rq.Args[1];
-            string kindOfStorage = rq.Args[2];
-            string query = "DELETE FROM StateOfStorages WHERE NameOfProduct='" + nameOfProduct + "' ";
-
             try
             {
-                con.Open();
-                OleDbCommand com = new OleDbCommand(query, con);
-                com.ExecuteNonQuery();
-                con.Close();
-               
+                string nameOfStorageContent = rq.Args[0];
+                string nameOfProductContent = rq.Args[1];
+
+                IStorageItemRepository storageItemRepository = new StorageItemRepository();
+                IStorageItemService storageItemService = new StorageItemService(storageItemRepository);
+                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
+                storageItemService.Delete(nameOfStorage, nameOfProduct);
+
             }
             catch (Exception ex)
             {
@@ -489,51 +477,20 @@ namespace ServerApplication
 
         private void requestForProductsCostMin(Request rq)
         {
-            string nameOfStorage = rq.Args[0];
-
-            string query = "select Products.NameOfProduct AS ProductName,Cost,CountOfProduct from Products,StateOfStorages where Products.NameOfProduct = StateOfStorages.NameOfProduct AND NameOfStorage = '" + nameOfStorage + "'";
-
             try
             {
-                con.Open();
-                OleDbCommand com = new OleDbCommand(query, con);
-                OleDbDataReader dr = com.ExecuteReader();
-                string response = string.Empty;
-                string nameOfProductTemp = string.Empty;
-                double costTemp = 0.0;
-                int countTemp = 0;
-                double multipleTemp = 0.0;
-                string currentNameOfProductMin = string.Empty;
-                int currentCountMin = 0;
-                double currentCostMin = 0.0;
-                double currentMin = double.MaxValue;
-                bool isN = false;
-                while (dr.Read())
-                {
-                    nameOfProductTemp = dr["ProductName"].ToString();
-                    string costLocal = dr["Cost"].ToString();
-                    costLocal = costLocal.Replace(',', '.');
-                    isN = double.TryParse(costLocal, System.Globalization.NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out costTemp);
+                string nameOfStorageContent = rq.Args[0];
 
-                    isN = int.TryParse(dr["CountOfProduct"].ToString(), out countTemp);
-                    multipleTemp = countTemp * costTemp;
-                    if (multipleTemp < currentMin)
-                    {
-                        currentMin = countTemp * costTemp;
-                        currentNameOfProductMin = nameOfProductTemp;
-                        currentCostMin = costTemp;
-                        currentCountMin = countTemp;
-                    }
-                }
+                IStorageItemRepository storageItemRepository = new StorageItemRepository();
+                IProductRepository productRepository = new ProductRepository();
+                IMoneyItemValueService moneyItemValueService = new MoneyItemValueService(storageItemRepository, productRepository);
+                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
-                response = currentMin + " " + currentNameOfProductMin + " " + currentCostMin + " " + currentCountMin;
 
-                StreamWriter sw = new StreamWriter(new FileStream(pathForResponse, FileMode.Append, FileAccess.Write));
-                sw.WriteLine(response);
-                sw.Flush();
-                sw.Close();
-                con.Close();
+                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
+                writeResponse(response);
             }
             catch (Exception ex)
             {
@@ -544,51 +501,20 @@ namespace ServerApplication
 
         private void requestForProductsCostMax(Request rq)
         {
-            string nameOfStorage = rq.Args[0];
-
-            string query = "select Products.NameOfProduct AS ProductName,Cost,CountOfProduct from Products,StateOfStorages where Products.NameOfProduct = StateOfStorages.NameOfProduct AND NameOfStorage = '" + nameOfStorage + "'";
-
             try
             {
-                con.Open();
-                OleDbCommand com = new OleDbCommand(query, con);
-                OleDbDataReader dr = com.ExecuteReader();
-                string response = string.Empty;
-                string nameOfProductTemp = string.Empty;
-                double costTemp = 0.0;
-                int countTemp = 0;
-                double multipleTemp = 0.0;
-                string currentNameOfProductMax = string.Empty;
-                int currentCountMax = 0;
-                double currentCostMax = 0.0;
-                double currentMax = double.MinValue;
-                bool isN = false;
-                while (dr.Read())
-                {
-                    nameOfProductTemp = dr["ProductName"].ToString();
-                    string costLocal = dr["Cost"].ToString();
-                    costLocal = costLocal.Replace(',', '.');
-                    isN = double.TryParse(costLocal, System.Globalization.NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out costTemp);
+                string nameOfStorageContent = rq.Args[0];
 
-                    isN = int.TryParse(dr["CountOfProduct"].ToString(), out countTemp);
-                    multipleTemp = countTemp * costTemp;
-                    if (multipleTemp > currentMax)
-                    {
-                        currentMax = countTemp * costTemp;
-                        currentNameOfProductMax = nameOfProductTemp;
-                        currentCostMax = costTemp;
-                        currentCountMax = countTemp;
-                    }
-                }
+                IStorageItemRepository storageItemRepository = new StorageItemRepository();
+                IProductRepository productRepository = new ProductRepository();
+                IMoneyItemValueService moneyItemValueService = new MoneyItemValueService(storageItemRepository, productRepository);
+                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                MoneyItemValue moneyItem = moneyItemValueService.Max(nameOfStorage);
 
 
-                response = currentMax + " " + currentNameOfProductMax + " " + currentCostMax + " " + currentCountMax;
 
-                StreamWriter sw = new StreamWriter(new FileStream(pathForResponse, FileMode.Append, FileAccess.Write));
-                sw.WriteLine(response);
-                sw.Flush();
-                sw.Close();
-                con.Close();
+                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
+                writeResponse(response);
             }
             catch (Exception ex)
             {
@@ -599,45 +525,20 @@ namespace ServerApplication
 
         private void requestForProductsCostAvg(Request rq)
         {
-            string nameOfStorage = rq.Args[0];
-
-            string query = "select Products.NameOfProduct AS ProductName,Cost,CountOfProduct from Products,StateOfStorages where Products.NameOfProduct = StateOfStorages.NameOfProduct AND NameOfStorage = '" + nameOfStorage + "'";
-
             try
             {
-                con.Open();
-                OleDbCommand com = new OleDbCommand(query, con);
-                OleDbDataReader dr = com.ExecuteReader();
-                string response = string.Empty;
-                string nameOfProductTemp = string.Empty;
-                double costTemp = 0.0;
-                int countTemp = 0;
-                double multipleTemp = 0.0;
-                bool isN = false;
-                int counter = 0;
-                double sum = 0.0;
-                while (dr.Read())
-                {
-                    nameOfProductTemp = dr["ProductName"].ToString();
-                    string costLocal = dr["Cost"].ToString();
-                    costLocal = costLocal.Replace(',', '.');
-                    isN = double.TryParse(costLocal, System.Globalization.NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out costTemp);
+                string nameOfStorageContent = rq.Args[0];
 
-                    isN = int.TryParse(dr["CountOfProduct"].ToString(), out countTemp);
-                    multipleTemp = countTemp * costTemp;
-                    sum += multipleTemp;
-                    counter++;
-                }
+                IStorageItemRepository storageItemRepository = new StorageItemRepository();
+                IProductRepository productRepository = new ProductRepository();
+                IMoneyItemValueService moneyItemValueService = new MoneyItemValueService(storageItemRepository, productRepository);
+                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                MoneyItemValue moneyItem = moneyItemValueService.Avg(nameOfStorage);
 
-                double average = sum / counter;
 
-                response = average.ToString();
 
-                StreamWriter sw = new StreamWriter(new FileStream(pathForResponse, FileMode.Append, FileAccess.Write));
-                sw.WriteLine(response);
-                sw.Flush();
-                sw.Close();
-                con.Close();
+                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
+                writeResponse(response);
             }
             catch (Exception ex)
             {
@@ -648,42 +549,20 @@ namespace ServerApplication
 
         private void requestForProductsCostSum(Request rq)
         {
-            string nameOfStorage = rq.Args[0];
-
-            string query = "select Products.NameOfProduct AS ProductName,Cost,CountOfProduct from Products,StateOfStorages where Products.NameOfProduct = StateOfStorages.NameOfProduct AND NameOfStorage = '" + nameOfStorage + "'";
-
             try
             {
-                con.Open();
-                OleDbCommand com = new OleDbCommand(query, con);
-                OleDbDataReader dr = com.ExecuteReader();
-                string response = string.Empty;
-                string nameOfProductTemp = string.Empty;
-                double costTemp = 0.0;
-                int countTemp = 0;
-                double multipleTemp = 0.0;
-                bool isN = false;
-                double sum = 0.0;
-                while (dr.Read())
-                {
-                    nameOfProductTemp = dr["ProductName"].ToString();
-                    string costLocal = dr["Cost"].ToString();
-                    costLocal = costLocal.Replace(',', '.');
-                    isN = double.TryParse(costLocal, System.Globalization.NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out costTemp);
+                string nameOfStorageContent = rq.Args[0];
 
-                    isN = int.TryParse(dr["CountOfProduct"].ToString(), out countTemp);
-                    multipleTemp = countTemp * costTemp;
-                    sum += multipleTemp;
-                }
+                IStorageItemRepository storageItemRepository = new StorageItemRepository();
+                IProductRepository productRepository = new ProductRepository();
+                IMoneyItemValueService moneyItemValueService = new MoneyItemValueService(storageItemRepository, productRepository);
+                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                MoneyItemValue moneyItem = moneyItemValueService.Sum(nameOfStorage);
 
 
-                response = sum.ToString();
 
-                StreamWriter sw = new StreamWriter(new FileStream(pathForResponse, FileMode.Append, FileAccess.Write));
-                sw.WriteLine(response);
-                sw.Flush();
-                sw.Close();
-                con.Close();
+                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
+                writeResponse(response);
             }
             catch (Exception ex)
             {
@@ -698,6 +577,15 @@ namespace ServerApplication
             FileStream fs = new FileStream(pathForRequest, FileMode.Truncate);
             fs.Flush();
             fs.Close();
+        }
+
+        private void writeResponse(string response)
+        {
+            StreamWriter sw = new StreamWriter(new FileStream(pathForResponse, FileMode.Append, FileAccess.Write));
+            sw.WriteLine(response);
+            sw.Flush();
+            sw.Close();
+            con.Close();
         }
 
         private void writeExceptionMessage(string message)

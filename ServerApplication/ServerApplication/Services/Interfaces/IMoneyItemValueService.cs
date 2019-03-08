@@ -1,4 +1,5 @@
 ﻿using ServerApplication.Entities;
+using ServerApplication.Entities.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,9 @@ namespace ServerApplication.Services.Interfaces
 {
     public interface IMoneyItemValueService
     {
-        MoneyItemValue Max(string nameOfStorage);
-        MoneyItemValue Min(string nameOfStorage);
-        MoneyItemValue Avg(string nameOfStorage);
-        MoneyItemValue Sum(string nameOfStorage);
+        MoneyItemValue Max(NameOfStorage nameOfStorage);
+        MoneyItemValue Min(NameOfStorage nameOfStorage);
+        MoneyItemValue Avg(NameOfStorage nameOfStorage);
+        MoneyItemValue Sum(NameOfStorage nameOfStorage);
     }
 }

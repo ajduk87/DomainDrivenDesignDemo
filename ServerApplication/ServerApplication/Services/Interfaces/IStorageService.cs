@@ -1,4 +1,5 @@
 ﻿using ServerApplication.Entities;
+using ServerApplication.Entities.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,8 @@ namespace ServerApplication.Services.Interfaces
 {
     public interface IStorageService
     {
-        void Insert(Storage storage);
+        void Create(Storage storage);
         IEnumerable<Storage> GetAll();
-        Storage Enter(string name);
+        Storage Enter(NameOfStorage name);
     }
 }
