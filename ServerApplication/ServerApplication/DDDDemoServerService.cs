@@ -16,6 +16,7 @@ using ServerApplication.Services.Implementations;
 using ServerApplication.Entities;
 using ServerApplication.Entities.ValueObjects;
 using Autofac;
+using ServerApplication.Modules;
 
 namespace ServerApplication
 {
@@ -55,16 +56,11 @@ namespace ServerApplication
 
             objContainer = new ContainerBuilder();
 
-            objContainer.RegisterType<StorageRepository>().As<IStorageRepository>();
-            objContainer.RegisterType<StorageService>().As<IStorageService>();
-
-            objContainer.RegisterType<ProductRepository>().As<IProductRepository>();
-            objContainer.RegisterType<ProductService>().As<IProductService>();
-
-            objContainer.RegisterType<StorageItemRepository>().As<IStorageItemRepository>();
-            objContainer.RegisterType<StorageItemService>().As<IStorageItemService>();
-
-            objContainer.RegisterType<MoneyItemValueService>().As<IMoneyItemValueService>();
+            //Registering Modules
+            objContainer.RegisterModule<StoragesModule>();
+            objContainer.RegisterModule<ProductsModule>();
+            objContainer.RegisterModule<StorageItemModule>();
+            objContainer.RegisterModule<MoneyItemValueModule>();
 
             container = objContainer.Build();
         }
