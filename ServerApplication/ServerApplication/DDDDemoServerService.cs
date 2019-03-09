@@ -354,8 +354,8 @@ namespace ServerApplication
                 };
                 productService.Create(product);
 
-                IStorageItemRepository storageItemRepository = new StorageItemRepository();
-                IStorageItemService storageItemService = new StorageItemService(storageItemRepository);
+                IStorageItemRepository storageItemRepository = container.Resolve<IStorageItemRepository>();
+                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
                 StorageItem storageItem = new StorageItem
                 {
                     NameOfStorage = new NameOfStorage { Content = nameOfStorage },
