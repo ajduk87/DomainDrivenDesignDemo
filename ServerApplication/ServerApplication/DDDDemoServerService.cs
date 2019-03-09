@@ -242,7 +242,6 @@ namespace ServerApplication
         {
             try
             {
-                IStorageRepository storageRepository = container.Resolve<IStorageRepository>();
                 IStorageService storageService = container.Resolve<IStorageService>();
                 List<Storage>  storages = storageService.GetAll().ToList();
 
@@ -266,7 +265,6 @@ namespace ServerApplication
             {
                 string nameOfStorageContent = rq.Args[0];
 
-                IStorageRepository storageRepository = container.Resolve<IStorageRepository>();
                 IStorageService storageService = container.Resolve<IStorageService>();
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 Storage storage = storageService.Enter(nameOfStorage);
@@ -288,7 +286,6 @@ namespace ServerApplication
                 string nameOfStorageContent = rq.Args[0];
                 string kindOfStorage = rq.Args[1];
 
-                IStorageItemRepository storageItemsRepository = container.Resolve<IStorageItemRepository>();
                 IStorageItemService storageItemsService = container.Resolve<IStorageItemService>();
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 List<StorageItem> storageItems = storageItemsService.GetStateOfStorage(nameOfStorage).ToList();
@@ -316,7 +313,6 @@ namespace ServerApplication
                 string name = rq.Args[0];
                 string kind = rq.Args[1];
 
-                IStorageRepository storageRepository = container.Resolve<IStorageRepository>();
                 IStorageService storageService = container.Resolve<IStorageService>();
                 Storage strorage = new Storage
                 {
@@ -341,7 +337,6 @@ namespace ServerApplication
                 string nameOfStorage = rq.Args[3];
 
 
-                IProductRepository productRepository = container.Resolve<IProductRepository>();
                 IProductService productService = container.Resolve<IProductService>();
                 Product product = new Product
                 {
@@ -354,8 +349,7 @@ namespace ServerApplication
                 };
                 productService.Create(product);
 
-                IStorageItemRepository storageItemRepository = new StorageItemRepository();
-                IStorageItemService storageItemService = new StorageItemService(storageItemRepository);
+                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
                 StorageItem storageItem = new StorageItem
                 {
                     NameOfStorage = new NameOfStorage { Content = nameOfStorage },
@@ -377,12 +371,10 @@ namespace ServerApplication
                 string nameOfProductContent = rq.Args[0];
                 string nameOfStorageContent = rq.Args[1];
 
-                IProductRepository productRepository = container.Resolve<IProductRepository>();
                 IProductService productService = container.Resolve<IProductService>();
                 NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
                 Product product = productService.Get(nameOfProduct);
 
-                IStorageItemRepository storageItemRepository = container.Resolve<IStorageItemRepository>();
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 StorageItem storageItem = storageItemService.Get(nameOfStorage, product.NameOfProduct);
@@ -406,7 +398,6 @@ namespace ServerApplication
                 string nameOfProductContent = rq.Args[0];
                 string nameOfStorageContent = rq.Args[1];
 
-                IStorageItemRepository storageItemRepository = container.Resolve<IStorageItemRepository>();
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
@@ -444,7 +435,6 @@ namespace ServerApplication
                 string kindOfStorage = rq.Args[4];
 
 
-                IProductRepository productRepository = container.Resolve<IProductRepository>();
                 IProductService productService = container.Resolve<IProductService>();
                 Product product = new Product
                 {
@@ -457,7 +447,6 @@ namespace ServerApplication
                 };
                 productService.Update(product);
 
-                IStorageItemRepository storageItemRepository = container.Resolve<IStorageItemRepository>();
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
                 StorageItem storageItem = new StorageItem
                 {
@@ -480,7 +469,6 @@ namespace ServerApplication
                 string nameOfStorageContent = rq.Args[0];
                 string nameOfProductContent = rq.Args[1];
 
-                IStorageItemRepository storageItemRepository = container.Resolve<IStorageItemRepository>();
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
@@ -499,8 +487,6 @@ namespace ServerApplication
             {
                 string nameOfStorageContent = rq.Args[0];
 
-                IStorageItemRepository storageItemRepository = container.Resolve<IStorageItemRepository>();
-                IProductRepository productRepository = container.Resolve<IProductRepository>();
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
@@ -523,8 +509,6 @@ namespace ServerApplication
             {
                 string nameOfStorageContent = rq.Args[0];
 
-                IStorageItemRepository storageItemRepository = container.Resolve<IStorageItemRepository>();
-                IProductRepository productRepository = container.Resolve<IProductRepository>();
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 MoneyItemValue moneyItem = moneyItemValueService.Max(nameOfStorage);
@@ -547,8 +531,6 @@ namespace ServerApplication
             {
                 string nameOfStorageContent = rq.Args[0];
 
-                IStorageItemRepository storageItemRepository = container.Resolve<IStorageItemRepository>();
-                IProductRepository productRepository = container.Resolve<IProductRepository>();
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 MoneyItemValue moneyItem = moneyItemValueService.Avg(nameOfStorage);
@@ -571,8 +553,6 @@ namespace ServerApplication
             {
                 string nameOfStorageContent = rq.Args[0];
 
-                IStorageItemRepository storageItemRepository = container.Resolve<IStorageItemRepository>();
-                IProductRepository productRepository = container.Resolve<IProductRepository>();
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 MoneyItemValue moneyItem = moneyItemValueService.Sum(nameOfStorage);
