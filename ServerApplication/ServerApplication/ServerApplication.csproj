@@ -60,6 +60,7 @@
       <DependentUpon>DDDDemoServerService.cs</DependentUpon>
     </Compile>
     <Compile Include="Entities\MoneyItemValue.cs" />
+    <Compile Include="Entities\Products\Entity.cs" />
     <Compile Include="Entities\Products\ProductApple.cs" />
     <Compile Include="Entities\Products\ProductBanana.cs" />
     <Compile Include="Entities\Products\ProductBlueberry.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Entities\ValueObjects\KindOfStorage.cs" />
     <Compile Include="Entities\ValueObjects\NameOfProduct.cs" />
     <Compile Include="Entities\ValueObjects\NameOfStorage.cs" />
+    <Compile Include="FactoryFolder\EntityFactory.cs" />
     <Compile Include="Modules\MoneyItemValueModule.cs" />
     <Compile Include="Modules\ProductsModule.cs" />
     <Compile Include="Modules\ProductsRepositoryModule.cs" />
@@ -131,9 +133,9 @@
     <Compile Include="Repositories\Interfaces\Products\IProductAppleRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStorageItemRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStorageRepository.cs" />
-    <Compile Include="RepositoryFactoryFolder\IRepository.cs" />
-    <Compile Include="RepositoryFactoryFolder\RepositoryFactory.cs" />
-    <Compile Include="RepositoryFactoryFolder\RepositoryTypes.cs" />
+    <Compile Include="FactoryFolder\IRepository.cs" />
+    <Compile Include="FactoryFolder\RepositoryFactory.cs" />
+    <Compile Include="FactoryFolder\EntityTypes.cs" />
     <Compile Include="Request.cs" />
     <Compile Include="Services\Implementations\MoneyItemValueService.cs" />
     <Compile Include="Services\Implementations\ProductService.cs" />

@@ -18,6 +18,7 @@ using ServerApplication.Entities.ValueObjects;
 using Autofac;
 using ServerApplication.Modules;
 using ServerApplication.Entities.Products;
+using ServerApplication.FactoryFolder;
 
 namespace ServerApplication
 {
@@ -335,15 +336,14 @@ namespace ServerApplication
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = new ProductApple
+                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
+                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
+                product.Cost = new UnitCost
                 {
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    Cost = new UnitCost
-                    {
-                        Value = Convert.ToDouble(unitCostString),
-                        Currency = new Currency { Content = "EUR" }
-                    }                    
+                    Value = Convert.ToDouble(unitCostString),
+                    Currency = new Currency { Content = "EUR" }
                 };
+                  
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
@@ -433,14 +433,12 @@ namespace ServerApplication
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = new ProductApple
+                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
+                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
+                product.Cost = new UnitCost
                 {
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    Cost = new UnitCost
-                    {
-                        Value = Convert.ToDouble(unitCostString),
-                        Currency = new Currency { Content = "EUR" }
-                    }
+                    Value = Convert.ToDouble(unitCostString),
+                    Currency = new Currency { Content = "EUR" }
                 };
                 productService.Update(product);
 

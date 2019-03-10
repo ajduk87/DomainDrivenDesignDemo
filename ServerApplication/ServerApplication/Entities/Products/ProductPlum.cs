@@ -2,7 +2,7 @@
 
 namespace ServerApplication.Entities.Products
 {
-    public class ProductPlum
+    public class ProductPlum : Entity
     {
         public NameOfProduct NameOfProduct { get; set; }
         public UnitCost Cost { get; set; }

@@ -1,4 +1,5 @@
-﻿using ServerApplication.Entities.ValueObjects;
+﻿using ServerApplication.Entities.Products;
+using ServerApplication.Entities.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace ServerApplication.Entities
 {
-    public class MoneyItemValue
+    public class MoneyItemValue : Entity
     {
         public double Value { get; set; }
         public Currency Currency { get; set; }

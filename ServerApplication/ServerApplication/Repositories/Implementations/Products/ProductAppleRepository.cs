@@ -1,6 +1,7 @@
 ﻿using ServerApplication.Entities;
 using ServerApplication.Entities.Products;
 using ServerApplication.Entities.ValueObjects;
+using ServerApplication.FactoryFolder;
 using ServerApplication.Repositories.Interfaces.Products;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace ServerApplication.Repositories.Implementations.Products
 
         public ProductApple SelectByName(NameOfProduct name)
         {
-            ProductApple product = new ProductApple();
+            ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
 
             OleDbConnection con = new OleDbConnection(this.connectionString);
 

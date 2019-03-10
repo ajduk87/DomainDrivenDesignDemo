@@ -1,5 +1,6 @@
 ﻿using ServerApplication.Entities;
 using ServerApplication.Entities.ValueObjects;
+using ServerApplication.FactoryFolder;
 using ServerApplication.Repositories.Interfaces;
 using ServerApplication.RepositoryFactoryFolder;
 using ServerApplication.Services.Interfaces;
@@ -16,7 +17,7 @@ namespace ServerApplication.Services.Implementations
 
         public StorageService()
         {
-            this.storageRepository = (IStorageRepository)RepositoryFactory.Create(RepositoryTypes.Storage);
+            this.storageRepository = (IStorageRepository)RepositoryFactory.Create(EntityTypes.Storage);
         }
 
         public void Create(Storage storage)

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ServerApplication.RepositoryFactoryFolder
+namespace ServerApplication.FactoryFolder
 {
-    public enum RepositoryTypes
+    public enum EntityTypes
     {
         ProductApple = 1,
         ProductBanana = 2,
@@ -24,7 +24,8 @@ namespace ServerApplication.RepositoryFactoryFolder
         ProductTomato = 14,
         ProductWaterMelon = 15,
         StorageItem = 16,
-        Storage = 17
+        Storage = 17,
+        MoneyItemValue = 18
 
     }
 }

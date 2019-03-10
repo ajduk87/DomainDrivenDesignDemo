@@ -1,6 +1,7 @@
 ﻿using ServerApplication.Entities;
 using ServerApplication.Entities.Products;
 using ServerApplication.Entities.ValueObjects;
+using ServerApplication.FactoryFolder;
 using ServerApplication.Repositories.Interfaces;
 using ServerApplication.Repositories.Interfaces.Products;
 using ServerApplication.RepositoryFactoryFolder;
@@ -33,23 +34,23 @@ namespace ServerApplication.Services.Implementations
 
         public MoneyItemValueService()
         {
-            this.storageItemRepository = (IStorageItemRepository)RepositoryFactory.Create(RepositoryTypes.Storage);
-            this.productAppleRepository = (IProductAppleRepository)RepositoryFactory.Create(RepositoryTypes.ProductApple);
-            this.productBananaRepository = (IProductBananaRepository)RepositoryFactory.Create(RepositoryTypes.ProductBanana);
-            this.productCabbageRepository = (IProductCabbageRepository)RepositoryFactory.Create(RepositoryTypes.ProductCabbage);
-            this.productOrangeRepository = (IProductOrangeRepository)RepositoryFactory.Create(RepositoryTypes.ProductOrange);
-            this.productTomatoRepository = (IProductTomatoRepository)RepositoryFactory.Create(RepositoryTypes.ProductTomato);
-            this.productWatermelonRepository = (IProductWaterMelonRepository)RepositoryFactory.Create(RepositoryTypes.ProductWaterMelon);
-            this.productPearRepository = (IProductPearRepository)RepositoryFactory.Create(RepositoryTypes.ProductPear);
-            this.productCherryRepository = (IProductCherryRepository)RepositoryFactory.Create(RepositoryTypes.ProductCherry);
-            this.productOrangeRepository = (IProductOrangeRepository)RepositoryFactory.Create(RepositoryTypes.ProductOrange);
-            this.productStrawberryRepository = (IProductStrawberryRepository)RepositoryFactory.Create(RepositoryTypes.ProductStrawberry);
-            this.productGrapeRepository = (IProductGrapeRepository)RepositoryFactory.Create(RepositoryTypes.ProductGrape);
-            this.productMangoRepository = (IProductMangoRepository)RepositoryFactory.Create(RepositoryTypes.ProductMango);
-            this.productBlueberryRepository = (IProductBlueberryRepository)RepositoryFactory.Create(RepositoryTypes.ProductBlueberry);
-            this.productPlumRepository = (IProductPlumRepository)RepositoryFactory.Create(RepositoryTypes.ProductPlum);
-            this.productRaspberryRepository = (IProductRaspberryRepository)RepositoryFactory.Create(RepositoryTypes.ProductRaspberry);
-            this.productMandarinRepository = (IProductMandarinRepository)RepositoryFactory.Create(RepositoryTypes.ProductMandarin);
+            this.storageItemRepository = (IStorageItemRepository)RepositoryFactory.Create(EntityTypes.Storage);
+            this.productAppleRepository = (IProductAppleRepository)RepositoryFactory.Create(EntityTypes.ProductApple);
+            this.productBananaRepository = (IProductBananaRepository)RepositoryFactory.Create(EntityTypes.ProductBanana);
+            this.productCabbageRepository = (IProductCabbageRepository)RepositoryFactory.Create(EntityTypes.ProductCabbage);
+            this.productOrangeRepository = (IProductOrangeRepository)RepositoryFactory.Create(EntityTypes.ProductOrange);
+            this.productTomatoRepository = (IProductTomatoRepository)RepositoryFactory.Create(EntityTypes.ProductTomato);
+            this.productWatermelonRepository = (IProductWaterMelonRepository)RepositoryFactory.Create(EntityTypes.ProductWaterMelon);
+            this.productPearRepository = (IProductPearRepository)RepositoryFactory.Create(EntityTypes.ProductPear);
+            this.productCherryRepository = (IProductCherryRepository)RepositoryFactory.Create(EntityTypes.ProductCherry);
+            this.productOrangeRepository = (IProductOrangeRepository)RepositoryFactory.Create(EntityTypes.ProductOrange);
+            this.productStrawberryRepository = (IProductStrawberryRepository)RepositoryFactory.Create(EntityTypes.ProductStrawberry);
+            this.productGrapeRepository = (IProductGrapeRepository)RepositoryFactory.Create(EntityTypes.ProductGrape);
+            this.productMangoRepository = (IProductMangoRepository)RepositoryFactory.Create(EntityTypes.ProductMango);
+            this.productBlueberryRepository = (IProductBlueberryRepository)RepositoryFactory.Create(EntityTypes.ProductBlueberry);
+            this.productPlumRepository = (IProductPlumRepository)RepositoryFactory.Create(EntityTypes.ProductPlum);
+            this.productRaspberryRepository = (IProductRaspberryRepository)RepositoryFactory.Create(EntityTypes.ProductRaspberry);
+            this.productMandarinRepository = (IProductMandarinRepository)RepositoryFactory.Create(EntityTypes.ProductMandarin);
         }
 
         private List<MoneyItemValue> GetStorageMoneyItemValues(NameOfStorage nameOfStorage)
