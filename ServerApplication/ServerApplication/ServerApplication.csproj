@@ -52,6 +52,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\Callers\CommandMoneyValueCaller.cs" />
+    <Compile Include="Commands\Callers\CommandStorageItemCaller.cs" />
+    <Compile Include="Commands\Callers\CommandTruckCaller.cs" />
+    <Compile Include="Commands\Callers\CommmandStorageCaller.cs" />
+    <Compile Include="Commands\CommandMoneyValue.cs" />
+    <Compile Include="Commands\CommandStorageItem.cs" />
+    <Compile Include="Commands\CommandTruck.cs" />
+    <Compile Include="Commands\CommandTypes.cs" />
+    <Compile Include="Commands\CommmandStorage.cs" />
+    <Compile Include="Commands\ICommand.cs" />
     <Compile Include="ConnectionStrings.cs" />
     <Compile Include="DDDDemoServerService.cs">
       <SubType>Component</SubType>
@@ -99,6 +109,8 @@
     <Compile Include="Entities\ValueObjects\Truck\WheelsId.cs" />
     <Compile Include="Entities\Truck\WheelsSize.cs" />
     <Compile Include="FactoryFolder\EntityFactory.cs" />
+    <Compile Include="HelperClass.cs" />
+    <Compile Include="Modules\CommandModule.cs" />
     <Compile Include="Modules\MoneyItemValueModule.cs" />
     <Compile Include="Modules\ProductsModule.cs" />
     <Compile Include="Modules\ProductsRepositoryModule.cs" />

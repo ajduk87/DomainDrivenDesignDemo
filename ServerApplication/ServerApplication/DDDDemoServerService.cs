@@ -21,6 +21,8 @@ using ServerApplication.Entities.Products;
 using ServerApplication.FactoryFolder;
 using ServerApplication.Entities.ValueObjects.Truck;
 using ServerApplication.Entities.Truck;
+using ServerApplication.Commands.Callers;
+using ServerApplication.Commands;
 
 namespace ServerApplication
 {
@@ -35,7 +37,10 @@ namespace ServerApplication
         private ContainerBuilder objContainer;
         private Autofac.IContainer container;
 
-
+        private CommmandStorageCaller commmandStorageCaller;
+        private CommandTruckCaller commandTruckCaller;
+        private CommandStorageItemCaller commandProductCaller;
+        private CommandMoneyValueCaller commandMoneyValueCaller;
 
         public DDDDemoServerService()
         {
@@ -67,6 +72,11 @@ namespace ServerApplication
             objContainer.RegisterModule<MoneyItemValueModule>();
 
             container = objContainer.Build();
+
+            commmandStorageCaller = new CommmandStorageCaller(container);
+            commandTruckCaller = new CommandTruckCaller(container);
+            commandProductCaller = new CommandStorageItemCaller(container);
+            commandMoneyValueCaller = new CommandMoneyValueCaller(container);
         }
 
         protected override void OnStop()
@@ -106,7 +116,7 @@ namespace ServerApplication
                         if (rq.Args.Count == 2)
                         {
                             this.numberOfClientRequest = 1;
-                            ProcessClientRequest(this.numberOfClientRequest, rq);
+                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Storage);
                         }
 
                     }//if (rq.Noun.Equals("STORAGE"))
@@ -116,7 +126,7 @@ namespace ServerApplication
                         if (rq.Args.Count == 5)
                         {
                             this.numberOfClientRequest = 2;
-                            ProcessClientRequest(this.numberOfClientRequest, rq);                            
+                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Storage);                            
                         }
                     }//if (rq.Noun.Equals("PRODUCT"))
                 }//if (rq.Verb.Equals("INSERT"))
@@ -128,17 +138,17 @@ namespace ServerApplication
                         if (rq.Args.Count == 0)
                         {
                             this.numberOfClientRequest = 3;
-                            ProcessClientRequest(this.numberOfClientRequest, rq);                            
+                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Storage);                            
                         }//end if (rq.Args.Count == 0)
                         if (rq.Args.Count == 1)
                         {
                             this.numberOfClientRequest = 4;
-                            ProcessClientRequest(this.numberOfClientRequest, rq);
+                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Storage);
                         }//end if (rq.Args.Count == 1)
                         if (rq.Args.Count == 2)
                         {
                             this.numberOfClientRequest = 5;
-                            ProcessClientRequest(this.numberOfClientRequest, rq);                            
+                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Storage);                            
                         }//end if (rq.Args.Count == 2)
                     }//if (rq.Noun.Equals("STORAGE"))
 
@@ -147,13 +157,13 @@ namespace ServerApplication
                         if (rq.Args.Count == 2)
                         {
                             this.numberOfClientRequest = 6;
-                            ProcessClientRequest(this.numberOfClientRequest, rq);                            
+                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Product);                            
                         }//if (rq.Args.Count == 2)
 
                         if (rq.Args.Count == 3 && rq.Args[2].Equals("CHECK"))
                         {
                             this.numberOfClientRequest = 7;
-                            ProcessClientRequest(this.numberOfClientRequest, rq);                            
+                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Product);                            
                         }//if (rq.Args.Count == 3)
                     }//if (rq.Noun.Equals("PRODUCT"))
 
@@ -162,27 +172,27 @@ namespace ServerApplication
                         if (rq.Args.Count == 2 && rq.Args[1].Equals("MIN"))
                         {
                             this.numberOfClientRequest = 8;
-                            ProcessClientRequest(this.numberOfClientRequest, rq);                           
+                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.MoneyValue);                           
 
                         }//if (rq.Args.Count == 2 && rq.Args[1].Equals("MIN"))
 
                         if (rq.Args.Count == 2 && rq.Args[1].Equals("MAX"))
                         {
                             this.numberOfClientRequest = 9;
-                            ProcessClientRequest(this.numberOfClientRequest, rq);                            
+                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.MoneyValue);                            
                         }//if (rq.Args.Count == 2 && rq.Args[1].Equals("MAX"))
 
                         if (rq.Args.Count == 2 && rq.Args[1].Equals("AVG"))
                         {
                             this.numberOfClientRequest = 10;
-                            ProcessClientRequest(this.numberOfClientRequest, rq);
+                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.MoneyValue);
                             
                         }//if (rq.Args.Count == 2 && rq.Args[1].Equals("AVG"))
 
                         if (rq.Args.Count == 2 && rq.Args[1].Equals("SUM"))
                         {
                             this.numberOfClientRequest = 11;
-                            ProcessClientRequest(this.numberOfClientRequest, rq);
+                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.MoneyValue);
                         }//if (rq.Args.Count == 2 && rq.Args[1].Equals("SUM"))
                     }//if (rq.Noun.Equals("PRODUCTCOSTS"))
 
@@ -195,7 +205,7 @@ namespace ServerApplication
                         if (rq.Args.Count == 5)
                         {
                             this.numberOfClientRequest = 12;
-                            ProcessClientRequest(this.numberOfClientRequest, rq);                           
+                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Product);                           
                         }//if (rq.Args.Count == 5)
                     }//if (rq.Noun.Equals("PRODUCT"))
                 }//if (rq.Verb.Equals("PUT"))
@@ -207,7 +217,7 @@ namespace ServerApplication
                         if (rq.Args.Count == 3)
                         {
                             this.numberOfClientRequest = 13;
-                            ProcessClientRequest(this.numberOfClientRequest, rq);                           
+                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Product);                           
                         }//if (rq.Args.Count == 3)
                     }//if (rq.Noun.Equals("PRODUCT"))
                 }//if (rq.Verb.Equals("DELETE")) 
@@ -219,7 +229,7 @@ namespace ServerApplication
                         if (rq.Args.Count == 3)
                         {
                             this.numberOfClientRequest = 14;
-                            ProcessClientRequest(this.numberOfClientRequest, rq);
+                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Truck);
                         }
                     }
                 }
@@ -231,7 +241,7 @@ namespace ServerApplication
                         if (rq.Args.Count == 1)
                         {
                             this.numberOfClientRequest = 14;
-                            ProcessClientRequest(this.numberOfClientRequest, rq);
+                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Truck);
                         }
                     }
                 }
@@ -243,7 +253,7 @@ namespace ServerApplication
                         if (rq.Args.Count == 2)
                         {
                             this.numberOfClientRequest = 14;
-                            ProcessClientRequest(this.numberOfClientRequest, rq);
+                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Truck);
                         }
                     }
                 }
@@ -252,9 +262,19 @@ namespace ServerApplication
             truncateRequestFile();
         }
 
-        private void ProcessClientRequest(long numberOfClientRequest, Request rq)
+        private void ProcessClientRequest(long numberOfClientRequest, Request rq, CommandTypes commandType)
         {
-            switch (numberOfClientRequest)
+            switch (commandType)
+            {
+                case CommandTypes.Storage: commmandStorageCaller.HandleRequest(numberOfClientRequest, rq);break;
+                case CommandTypes.Product: commandProductCaller.HandleRequest(numberOfClientRequest, rq); break;
+                case CommandTypes.MoneyValue: commandMoneyValueCaller.HandleRequest(numberOfClientRequest, rq); break;
+                case CommandTypes.Truck: commandTruckCaller.HandleRequest(numberOfClientRequest, rq); break;
+
+            }
+
+
+            /*switch (numberOfClientRequest)
             {
                 case 1: requestForCreateNewStorage1(rq); break;
                 case 2: requestForCreateNewStorage2(rq); break;
@@ -308,1205 +328,8 @@ namespace ServerApplication
                 case 51: requestForInsertNewTruck10(rq); break;
                 case 52: requestForSendingTruck(rq); break;
                 case 53: requestForDeliveredProductsByTruck(rq); break;
-            }
+            }*/
         }    
-
-      
-
-        private void requestForGetAllStoragesInfo()
-        {
-            try
-            {
-                IStorageService storageService = container.Resolve<IStorageService>();
-                List<Storage>  storages = storageService.GetAll().ToList();
-
-
-                string response = string.Empty;
-                storages.ForEach(storage => 
-                {
-                    response += storage.NameOfStorage.Content + " " + storage.KindOfStorage.Content + System.Environment.NewLine;
-                });
-                writeResponse(response);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForEnterInSpecificStorage(Request rq)
-        {
-            try
-            {
-                string nameOfStorageContent = rq.Args[0];
-
-                IStorageService storageService = container.Resolve<IStorageService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                Storage storage = storageService.Enter(nameOfStorage);
-
-
-                string response = storage.NameOfStorage.Content + " " + storage.KindOfStorage.Content;
-                writeResponse(response);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForGetStorageState(Request rq)
-        {
-            try
-            {
-                string nameOfStorageContent = rq.Args[0];
-                string kindOfStorage = rq.Args[1];
-
-                IStorageItemService storageItemsService = container.Resolve<IStorageItemService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                List<StorageItem> storageItems = storageItemsService.GetStateOfStorage(nameOfStorage).ToList();
-
-
-
-                string response = string.Empty;
-                storageItems.ForEach(storageItem =>
-                {
-                    response += storageItem.NameOfProduct.Content + " " + storageItem.CountOfProduct + System.Environment.NewLine;
-                });
-                writeResponse(response);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-
-        }
-
-        private void requestForCreateNewStorage1(Request rq)
-        {
-            try
-            {
-                string name = rq.Args[0];
-                string kind = rq.Args[1];
-
-                IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
-                storageService.Create(strorage);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForCreateNewStorage2(Request rq)
-        {
-            try
-            {
-                string name = rq.Args[0];
-                string kind = rq.Args[1];
-
-                IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
-                storageService.Create(strorage);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForCreateNewStorage3(Request rq)
-        {
-            try
-            {
-                string name = rq.Args[0];
-                string kind = rq.Args[1];
-
-                IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
-                storageService.Create(strorage);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForCreateNewStorage4(Request rq)
-        {
-            try
-            {
-                string name = rq.Args[0];
-                string kind = rq.Args[1];
-
-                IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
-                storageService.Create(strorage);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForCreateNewStorage5(Request rq)
-        {
-            try
-            {
-                string name = rq.Args[0];
-                string kind = rq.Args[1];
-
-                IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
-                storageService.Create(strorage);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForCreateNewStorage6(Request rq)
-        {
-            try
-            {
-                string name = rq.Args[0];
-                string kind = rq.Args[1];
-
-                IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
-                storageService.Create(strorage);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForCreateNewStorage7(Request rq)
-        {
-            try
-            {
-                string name = rq.Args[0];
-                string kind = rq.Args[1];
-
-                IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
-                storageService.Create(strorage);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForCreateNewStorage8(Request rq)
-        {
-            try
-            {
-                string name = rq.Args[0];
-                string kind = rq.Args[1];
-
-                IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
-                storageService.Create(strorage);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForCreateNewStorage9(Request rq)
-        {
-            try
-            {
-                string name = rq.Args[0];
-                string kind = rq.Args[1];
-
-                IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
-                storageService.Create(strorage);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForCreateNewStorage10(Request rq)
-        {
-            try
-            {
-                string name = rq.Args[0];
-                string kind = rq.Args[1];
-
-                IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
-                storageService.Create(strorage);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForCreateNewProduct1(Request rq)
-        {
-            try
-            {
-                string nameOfProduct = rq.Args[0];
-                string unitCostString = rq.Args[1];
-                string countString = rq.Args[2];
-                string nameOfStorage = rq.Args[3];
-
-
-                IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-                  
-                productService.Create(product);
-
-                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
-                storageItemService.Insert(storageItem);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForCreateNewProduct2(Request rq)
-        {
-            try
-            {
-                string nameOfProduct = rq.Args[0];
-                string unitCostString = rq.Args[1];
-                string countString = rq.Args[2];
-                string nameOfStorage = rq.Args[3];
-
-
-                IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
-                productService.Create(product);
-
-                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
-                storageItemService.Insert(storageItem);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForCreateNewProduct3(Request rq)
-        {
-            try
-            {
-                string nameOfProduct = rq.Args[0];
-                string unitCostString = rq.Args[1];
-                string countString = rq.Args[2];
-                string nameOfStorage = rq.Args[3];
-
-
-                IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
-                productService.Create(product);
-
-                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
-                storageItemService.Insert(storageItem);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForCreateNewProduct4(Request rq)
-        {
-            try
-            {
-                string nameOfProduct = rq.Args[0];
-                string unitCostString = rq.Args[1];
-                string countString = rq.Args[2];
-                string nameOfStorage = rq.Args[3];
-
-
-                IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
-                productService.Create(product);
-
-                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
-                storageItemService.Insert(storageItem);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForCreateNewProduct5(Request rq)
-        {
-            try
-            {
-                string nameOfProduct = rq.Args[0];
-                string unitCostString = rq.Args[1];
-                string countString = rq.Args[2];
-                string nameOfStorage = rq.Args[3];
-
-
-                IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
-                productService.Create(product);
-
-                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
-                storageItemService.Insert(storageItem);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForCreateNewProduct6(Request rq)
-        {
-            try
-            {
-                string nameOfProduct = rq.Args[0];
-                string unitCostString = rq.Args[1];
-                string countString = rq.Args[2];
-                string nameOfStorage = rq.Args[3];
-
-
-                IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
-                productService.Create(product);
-
-                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
-                storageItemService.Insert(storageItem);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForCreateNewProduct7(Request rq)
-        {
-            try
-            {
-                string nameOfProduct = rq.Args[0];
-                string unitCostString = rq.Args[1];
-                string countString = rq.Args[2];
-                string nameOfStorage = rq.Args[3];
-
-
-                IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
-                productService.Create(product);
-
-                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
-                storageItemService.Insert(storageItem);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForCreateNewProduct8(Request rq)
-        {
-            try
-            {
-                string nameOfProduct = rq.Args[0];
-                string unitCostString = rq.Args[1];
-                string countString = rq.Args[2];
-                string nameOfStorage = rq.Args[3];
-
-
-                IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
-                productService.Create(product);
-
-                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
-                storageItemService.Insert(storageItem);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForCreateNewProduct9(Request rq)
-        {
-            try
-            {
-                string nameOfProduct = rq.Args[0];
-                string unitCostString = rq.Args[1];
-                string countString = rq.Args[2];
-                string nameOfStorage = rq.Args[3];
-
-
-                IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
-                productService.Create(product);
-
-                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
-                storageItemService.Insert(storageItem);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForCreateNewProduct10(Request rq)
-        {
-            try
-            {
-                string nameOfProduct = rq.Args[0];
-                string unitCostString = rq.Args[1];
-                string countString = rq.Args[2];
-                string nameOfStorage = rq.Args[3];
-
-
-                IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
-                productService.Create(product);
-
-                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
-                storageItemService.Insert(storageItem);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForGetProductInfo(Request rq)
-        {
-            try
-            {
-                string nameOfProductContent = rq.Args[0];
-                string nameOfStorageContent = rq.Args[1];
-
-                IProductService productService = container.Resolve<IProductService>();
-                NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
-                ProductApple product = productService.Get(nameOfProduct);
-
-                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                StorageItem storageItem = storageItemService.Get(nameOfStorage, product.NameOfProduct);
-
-
-                string response = product.NameOfProduct.Content + " " + product.Cost.Value + " " + storageItem.CountOfProduct;
-                writeResponse(response);
-
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-
-            }
-        }
-
-        private void requestForCheckIsProductExists(Request rq)
-        {
-            try
-            {
-                string nameOfProductContent = rq.Args[0];
-                string nameOfStorageContent = rq.Args[1];
-
-                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
-                bool isExist = storageItemService.IsProductExistsInStorage(nameOfStorage, nameOfProduct);
-
-
-
-                string response = string.Empty;
-                if (isExist == true)
-                {
-                    response = "true";
-                }
-                else
-                {
-                    response = "false";
-                }
-                writeResponse(response);
-
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-
-            }
-        }
-       
-        private void requestForUpdateProduct(Request rq)
-        {
-            try
-            {
-                string nameOfProduct = rq.Args[0];
-                string unitCostString = rq.Args[1];
-                string countString = rq.Args[2];
-                string nameOfStorage = rq.Args[3];
-                string kindOfStorage = rq.Args[4];
-
-
-                IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-                productService.Update(product);
-
-                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
-                storageItemService.Update(storageItem);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForDeleteProductFromStorage(Request rq)
-        {
-            try
-            {
-                string nameOfStorageContent = rq.Args[0];
-                string nameOfProductContent = rq.Args[1];
-
-                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
-                storageItemService.Delete(nameOfStorage, nameOfProduct);
-
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-            }
-        }
-
-        private void requestForProductsCostMin1(Request rq)
-        {
-            try
-            {
-                string nameOfStorageContent = rq.Args[0];
-
-                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
-
-
-
-                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
-                writeResponse(response);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-
-            }
-        }
-
-        private void requestForProductsCostMin2(Request rq)
-        {
-            try
-            {
-                string nameOfStorageContent = rq.Args[0];
-
-                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
-
-
-
-                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
-                writeResponse(response);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-
-            }
-        }
-
-        private void requestForProductsCostMin3(Request rq)
-        {
-            try
-            {
-                string nameOfStorageContent = rq.Args[0];
-
-                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
-
-
-
-                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
-                writeResponse(response);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-
-            }
-        }
-
-        private void requestForProductsCostMin4(Request rq)
-        {
-            try
-            {
-                string nameOfStorageContent = rq.Args[0];
-
-                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
-
-
-
-                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
-                writeResponse(response);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-
-            }
-        }
-
-        private void requestForProductsCostMin5(Request rq)
-        {
-            try
-            {
-                string nameOfStorageContent = rq.Args[0];
-
-                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
-
-
-
-                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
-                writeResponse(response);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-
-            }
-        }
-
-        private void requestForProductsCostMin6(Request rq)
-        {
-            try
-            {
-                string nameOfStorageContent = rq.Args[0];
-
-                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
-
-
-
-                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
-                writeResponse(response);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-
-            }
-        }
-
-        private void requestForProductsCostMin7(Request rq)
-        {
-            try
-            {
-                string nameOfStorageContent = rq.Args[0];
-
-                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
-
-
-
-                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
-                writeResponse(response);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-
-            }
-        }
-
-        private void requestForProductsCostMin8(Request rq)
-        {
-            try
-            {
-                string nameOfStorageContent = rq.Args[0];
-
-                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
-
-
-
-                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
-                writeResponse(response);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-
-            }
-        }
-
-        private void requestForProductsCostMin9(Request rq)
-        {
-            try
-            {
-                string nameOfStorageContent = rq.Args[0];
-
-                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
-
-
-
-                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
-                writeResponse(response);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-
-            }
-        }
-
-        private void requestForProductsCostMin10(Request rq)
-        {
-            try
-            {
-                string nameOfStorageContent = rq.Args[0];
-
-                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
-
-
-
-                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
-                writeResponse(response);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-
-            }
-        }
-
-        private void requestForProductsCostMax(Request rq)
-        {
-            try
-            {
-                string nameOfStorageContent = rq.Args[0];
-
-                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                MoneyItemValue moneyItem = moneyItemValueService.Max(nameOfStorage);
-
-
-
-                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
-                writeResponse(response);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-
-            }
-        }
-
-        private void requestForProductsCostAvg(Request rq)
-        {
-            try
-            {
-                string nameOfStorageContent = rq.Args[0];
-
-                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                MoneyItemValue moneyItem = moneyItemValueService.Avg(nameOfStorage);
-
-
-
-                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
-                writeResponse(response);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-
-            }
-        }
-
-        private void requestForProductsCostSum(Request rq)
-        {
-            try
-            {
-                string nameOfStorageContent = rq.Args[0];
-
-                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                MoneyItemValue moneyItem = moneyItemValueService.Sum(nameOfStorage);
-
-                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
-                writeResponse(response);
-            }
-            catch (Exception ex)
-            {
-                writeExceptionMessage(ex.Message);
-
-            }
-        }
-
-        private void requestForInsertNewTruck1(Request rq)
-        {
-            string trailerIdContent = rq.Args[0];
-            string wheelsIdContent = rq.Args[1];
-            string engineIdContent = rq.Args[2];
-
-            ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
-            Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
-            truckService.Insert(truck);
-        }
-
-        private void requestForInsertNewTruck2(Request rq)
-        {
-            string trailerIdContent = rq.Args[0];
-            string wheelsIdContent = rq.Args[1];
-            string engineIdContent = rq.Args[2];
-
-            ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
-            Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
-            truckService.Insert(truck);
-        }
-
-        private void requestForInsertNewTruck3(Request rq)
-        {
-            string trailerIdContent = rq.Args[0];
-            string wheelsIdContent = rq.Args[1];
-            string engineIdContent = rq.Args[2];
-
-            ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
-            Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
-            truckService.Insert(truck);
-        }
-
-        private void requestForInsertNewTruck4(Request rq)
-        {
-            string trailerIdContent = rq.Args[0];
-            string wheelsIdContent = rq.Args[1];
-            string engineIdContent = rq.Args[2];
-
-            ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
-            Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
-            truckService.Insert(truck);
-        }
-
-        private void requestForInsertNewTruck5(Request rq)
-        {
-            string trailerIdContent = rq.Args[0];
-            string wheelsIdContent = rq.Args[1];
-            string engineIdContent = rq.Args[2];
-
-            ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
-            Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
-            truckService.Insert(truck);
-        }
-
-        private void requestForInsertNewTruck6(Request rq)
-        {
-            string trailerIdContent = rq.Args[0];
-            string wheelsIdContent = rq.Args[1];
-            string engineIdContent = rq.Args[2];
-
-            ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
-            Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
-            truckService.Insert(truck);
-        }
-
-        private void requestForInsertNewTruck7(Request rq)
-        {
-            string trailerIdContent = rq.Args[0];
-            string wheelsIdContent = rq.Args[1];
-            string engineIdContent = rq.Args[2];
-
-            ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
-            Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
-            truckService.Insert(truck);
-        }
-
-        private void requestForInsertNewTruck8(Request rq)
-        {
-            string trailerIdContent = rq.Args[0];
-            string wheelsIdContent = rq.Args[1];
-            string engineIdContent = rq.Args[2];
-
-            ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
-            Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
-            truckService.Insert(truck);
-        }
-
-        private void requestForInsertNewTruck9(Request rq)
-        {
-            string trailerIdContent = rq.Args[0];
-            string wheelsIdContent = rq.Args[1];
-            string engineIdContent = rq.Args[2];
-
-            ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
-            Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
-            truckService.Insert(truck);
-        }
-
-        private void requestForInsertNewTruck10(Request rq)
-        {
-            string trailerIdContent = rq.Args[0];
-            string wheelsIdContent = rq.Args[1];
-            string engineIdContent = rq.Args[2];
-
-            ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
-            Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
-            truckService.Insert(truck);
-        }
-
-        private void requestForSendingTruck(Request rq)
-        {
-            string truckIdContent = rq.Args[0];
-
-            ITruckService truckService = container.Resolve<ITruckService>();
-            TruckId truckId = new TruckId { Content = Convert.ToInt32(truckIdContent) };
-            truckService.Send(truckId);
-        }
-
-        private void requestForDeliveredProductsByTruck(Request rq)
-        {
-            string truckIdContent = rq.Args[0];
-
-            ITruckService truckService = container.Resolve<ITruckService>();
-            TruckId truckId = new TruckId { Content = Convert.ToInt32(truckIdContent) };
-            truckService.Delivered(truckId);
-        }
 
         private void truncateRequestFile()
         {
@@ -1514,23 +337,6 @@ namespace ServerApplication
             FileStream fs = new FileStream(pathForRequest, FileMode.Truncate);
             fs.Flush();
             fs.Close();
-        }
-
-        private void writeResponse(string response)
-        {
-            StreamWriter sw = new StreamWriter(new FileStream(pathForResponse, FileMode.Append, FileAccess.Write));
-            sw.WriteLine(response);
-            sw.Flush();
-            sw.Close();
-            con.Close();
-        }
-
-        private void writeExceptionMessage(string message)
-        {
-            StreamWriter sw = new StreamWriter(new FileStream("C:\\DDDDemo\\ExceptionsFromService.db", FileMode.Append, FileAccess.Write));
-            sw.WriteLine(message);
-            sw.Flush();
-            sw.Close();
         }
 
 
