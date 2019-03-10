@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ServerApplication.Repositories.Interfaces
+namespace ServerApplication.Repositories.Interfaces.Products
 {
-    public interface IProductRepository
+    public interface IProductAppleRepository
     {
         void Insert(Product product);
         Product SelectByName(NameOfProduct name);

@@ -80,10 +80,24 @@
       <DependentUpon>ProjectInstaller.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Implementations\ProductRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Products\IProductBananaRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Products\IProductBlueberryRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Products\IProductCabbageRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Products\IProductCherryRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Products\IProductGrapeRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Products\IProductMandarinRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Products\IProductMangoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Products\IProductOrangeRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Products\IProductPearRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Products\IProductPlumRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Products\IProductRaspberryRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Products\IProductStrawberryRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Products\IProductTomatoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Products\IProductWaterMelonRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Products\ProductAppleRepository.cs" />
     <Compile Include="Repositories\Implementations\StorageItemRepository.cs" />
     <Compile Include="Repositories\Implementations\StorageRepository.cs" />
-    <Compile Include="Repositories\Interfaces\IProductRepository.cs" />
+    <Compile Include="Repositories\Interfaces\Products\IProductAppleRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStorageItemRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStorageRepository.cs" />
     <Compile Include="Request.cs" />
@@ -107,6 +121,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositories\Implementations\Products\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

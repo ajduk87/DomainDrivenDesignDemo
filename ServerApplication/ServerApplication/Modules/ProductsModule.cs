@@ -8,6 +8,7 @@ using ServerApplication.Services.Implementations;
 using ServerApplication.Repositories.Implementations;
 using ServerApplication.Services.Interfaces;
 using ServerApplication.Repositories.Interfaces;
+using ServerApplication.Repositories.Interfaces.Products;
 
 namespace ServerApplication.Modules
 {
@@ -15,7 +16,7 @@ namespace ServerApplication.Modules
     {
         protected override void Load(ContainerBuilder objContainer)
         {
-            objContainer.RegisterType<ProductRepository>().As<IProductRepository>();
+            objContainer.RegisterType<ProductRepository>().As<IProductAppleRepository>();
             objContainer.RegisterType<ProductService>().As<IProductService>();
             base.Load(objContainer);
         }

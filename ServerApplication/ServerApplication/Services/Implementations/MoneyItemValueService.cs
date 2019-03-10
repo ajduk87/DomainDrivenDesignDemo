@@ -12,9 +12,9 @@ namespace ServerApplication.Services.Implementations
     public class MoneyItemValueService : IMoneyItemValueService
     {
         private IStorageItemRepository storageItemRepository;
-        private IProductRepository productRepository;
+        private IProductAppleRepository productRepository;
 
-        public MoneyItemValueService(IStorageItemRepository storageItemRepository, IProductRepository productRepository)
+        public MoneyItemValueService(IStorageItemRepository storageItemRepository, IProductAppleRepository productRepository)
         {
             this.storageItemRepository = storageItemRepository;
             this.productRepository = productRepository;

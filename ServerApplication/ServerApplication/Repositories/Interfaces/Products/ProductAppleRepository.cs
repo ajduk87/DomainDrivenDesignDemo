@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using ServerApplication.Entities.ValueObjects;
 
-namespace ServerApplication.Repositories.Implementations
+namespace ServerApplication.Repositories.Implementations.Products
 {
-    public class ProductRepository : IProductRepository
+    public class ProductAppleRepository : IProductAppleRepository
     {
         private OleDbConnection con;
         private string connectionString = string.Empty;
 
-        public ProductRepository()
+        public ProductAppleRepository()
         {
             this.connectionString = ConnectionStrings.conn;
         }
