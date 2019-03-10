@@ -1,4 +1,5 @@
 ﻿using ServerApplication.Entities;
+using ServerApplication.Entities.Products;
 using ServerApplication.Entities.ValueObjects;
 using ServerApplication.Repositories.Interfaces;
 using ServerApplication.Repositories.Interfaces.Products;
@@ -48,17 +49,17 @@ namespace ServerApplication.Services.Implementations
             this.productMandarinRepository = productMandarinRepository;
         }
 
-        public void Create(Product product)
+        public void Create(ProductApple product)
         {
             this.productAppleRepository.Insert(product);
         }
 
-        public Product Get(NameOfProduct name)
+        public ProductApple Get(NameOfProduct name)
         {
             return this.productAppleRepository.SelectByName(name);
         }
 
-        public void Update(Product product)
+        public void Update(ProductApple product)
         {
             this.productAppleRepository.Update(product);
         }

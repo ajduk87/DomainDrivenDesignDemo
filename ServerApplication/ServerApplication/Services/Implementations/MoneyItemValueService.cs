@@ -1,4 +1,5 @@
 ﻿using ServerApplication.Entities;
+using ServerApplication.Entities.Products;
 using ServerApplication.Entities.ValueObjects;
 using ServerApplication.Repositories.Interfaces;
 using ServerApplication.Repositories.Interfaces.Products;
@@ -27,7 +28,7 @@ namespace ServerApplication.Services.Implementations
             List<MoneyItemValue> moneyItemValues = new List<MoneyItemValue>();
             storageItems.ForEach(storageItem =>
             {
-                Product product = this.productRepository.SelectByName(storageItem.NameOfProduct);
+                ProductApple product = this.productRepository.SelectByName(storageItem.NameOfProduct);
                 MoneyItemValue moneyItemValue = new MoneyItemValue
                 {
                     Value = storageItem.CountOfProduct * product.Cost.Value,

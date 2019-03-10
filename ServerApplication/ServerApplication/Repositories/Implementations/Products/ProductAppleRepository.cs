@@ -1,4 +1,5 @@
 ﻿using ServerApplication.Entities;
+using ServerApplication.Entities.Products;
 using ServerApplication.Entities.ValueObjects;
 using ServerApplication.Repositories.Interfaces.Products;
 using System;
@@ -20,7 +21,7 @@ namespace ServerApplication.Repositories.Implementations.Products
             this.connectionString = ConnectionStrings.conn;
         }
 
-        public void Insert(Product product)
+        public void Insert(ProductApple product)
         {
             OleDbConnection con = new OleDbConnection(this.connectionString);
 
@@ -32,9 +33,9 @@ namespace ServerApplication.Repositories.Implementations.Products
             con.Close();
         }
 
-        public Product SelectByName(NameOfProduct name)
+        public ProductApple SelectByName(NameOfProduct name)
         {
-            Product product = new Product();
+            ProductApple product = new ProductApple();
 
             OleDbConnection con = new OleDbConnection(this.connectionString);
 
@@ -57,7 +58,7 @@ namespace ServerApplication.Repositories.Implementations.Products
             return product;
         }
 
-        public void Update(Product product)
+        public void Update(ProductApple product)
         {
             string query = "UPDATE Products SET Cost = '" + product.Cost + "' WHERE NameOfProduct = '" + product.NameOfProduct + "'";
             OleDbConnection con = new OleDbConnection(this.connectionString);

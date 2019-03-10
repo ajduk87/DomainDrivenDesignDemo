@@ -60,7 +60,21 @@
       <DependentUpon>DDDDemoServerService.cs</DependentUpon>
     </Compile>
     <Compile Include="Entities\MoneyItemValue.cs" />
-    <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\Products\ProductApple.cs" />
+    <Compile Include="Entities\Products\ProductBanana.cs" />
+    <Compile Include="Entities\Products\ProductBlueberry.cs" />
+    <Compile Include="Entities\Products\ProductCabbage.cs" />
+    <Compile Include="Entities\Products\ProductCherry.cs" />
+    <Compile Include="Entities\Products\ProductGrape.cs" />
+    <Compile Include="Entities\Products\ProductMandarin.cs" />
+    <Compile Include="Entities\Products\ProductMango.cs" />
+    <Compile Include="Entities\Products\ProductOrange.cs" />
+    <Compile Include="Entities\Products\ProductPear.cs" />
+    <Compile Include="Entities\Products\ProductPlum.cs" />
+    <Compile Include="Entities\Products\ProductRaspberry.cs" />
+    <Compile Include="Entities\Products\ProductStrawberry.cs" />
+    <Compile Include="Entities\Products\ProductTomato.cs" />
+    <Compile Include="Entities\Products\ProductWaterMelon.cs" />
     <Compile Include="Entities\Storage.cs" />
     <Compile Include="Entities\StorageItem.cs" />
     <Compile Include="Entities\UnitCost.cs" />
