@@ -17,6 +17,7 @@ using ServerApplication.Entities;
 using ServerApplication.Entities.ValueObjects;
 using Autofac;
 using ServerApplication.Modules;
+using ServerApplication.Entities.Products;
 
 namespace ServerApplication
 {
@@ -334,7 +335,7 @@ namespace ServerApplication
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                Product product = new Product
+                ProductApple product = new ProductApple
                 {
                     NameOfProduct = new NameOfProduct { Content = nameOfProduct },
                     Cost = new UnitCost
@@ -369,7 +370,7 @@ namespace ServerApplication
 
                 IProductService productService = container.Resolve<IProductService>();
                 NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
-                Product product = productService.Get(nameOfProduct);
+                ProductApple product = productService.Get(nameOfProduct);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
@@ -432,7 +433,7 @@ namespace ServerApplication
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                Product product = new Product
+                ProductApple product = new ProductApple
                 {
                     NameOfProduct = new NameOfProduct { Content = nameOfProduct },
                     Cost = new UnitCost

@@ -1,6 +1,7 @@
 ﻿using ServerApplication.Entities;
 using ServerApplication.Entities.ValueObjects;
 using ServerApplication.Repositories.Interfaces;
+using ServerApplication.RepositoryFactoryFolder;
 using ServerApplication.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,9 @@ namespace ServerApplication.Services.Implementations
     {
         private IStorageItemRepository storageItemRepository;
 
-        public StorageItemService(IStorageItemRepository storageItemRepositoryy)
+        public StorageItemService()
         {
-            this.storageItemRepository = storageItemRepositoryy;
+            this.storageItemRepository = (IStorageItemRepository)RepositoryFactory.Create(RepositoryTypes.Storage);
         }
 
         public void Insert(StorageItem storageItem)

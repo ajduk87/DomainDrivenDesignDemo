@@ -1,4 +1,5 @@
 ﻿using ServerApplication.Entities;
+using ServerApplication.Entities.Products;
 using ServerApplication.Entities.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,9 @@ namespace ServerApplication.Services.Interfaces
 {
     public interface IProductService
     {
-        void Create(Product product);
-        Product Get(NameOfProduct name);
-        void Update(Product product);
+        void Create(ProductApple product);
+        ProductApple Get(NameOfProduct name);
+        void Update(ProductApple product);
         void Delete(NameOfProduct name);
     }
 }

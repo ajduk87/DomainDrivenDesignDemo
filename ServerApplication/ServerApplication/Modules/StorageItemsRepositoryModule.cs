@@ -4,18 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Autofac;
-using ServerApplication.Services.Implementations;
 using ServerApplication.Repositories.Implementations;
-using ServerApplication.Services.Interfaces;
 using ServerApplication.Repositories.Interfaces;
 
 namespace ServerApplication.Modules
 {
-    public class StoragesModule : Module
+    public class StorageItemsRepositoryModule : Module
     {
         protected override void Load(ContainerBuilder objContainer)
         {
-            objContainer.RegisterType<StorageService>().As<IStorageService>();
+            objContainer.RegisterType<StorageItemRepository>().As<IStorageItemRepository>();
             base.Load(objContainer);
         }
     }

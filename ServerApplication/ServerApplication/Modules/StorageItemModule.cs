@@ -15,7 +15,6 @@ namespace ServerApplication.Modules
     {
         protected override void Load(ContainerBuilder objContainer)
         {
-            objContainer.RegisterType<StorageItemRepository>().As<IStorageItemRepository>();
             objContainer.RegisterType<StorageItemService>().As<IStorageItemService>();
             base.Load(objContainer);
         }

@@ -1,12 +1,8 @@
 ﻿using ServerApplication.Entities.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-namespace ServerApplication.Entities
+namespace ServerApplication.Entities.Products
 {
-    public class Product
+    public class ProductMandarin
     {
         public NameOfProduct NameOfProduct { get; set; }
         public UnitCost Cost { get; set; }

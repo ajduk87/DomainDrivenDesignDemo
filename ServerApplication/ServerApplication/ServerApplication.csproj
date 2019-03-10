@@ -60,7 +60,21 @@
       <DependentUpon>DDDDemoServerService.cs</DependentUpon>
     </Compile>
     <Compile Include="Entities\MoneyItemValue.cs" />
-    <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\Products\ProductApple.cs" />
+    <Compile Include="Entities\Products\ProductBanana.cs" />
+    <Compile Include="Entities\Products\ProductBlueberry.cs" />
+    <Compile Include="Entities\Products\ProductCabbage.cs" />
+    <Compile Include="Entities\Products\ProductCherry.cs" />
+    <Compile Include="Entities\Products\ProductGrape.cs" />
+    <Compile Include="Entities\Products\ProductMandarin.cs" />
+    <Compile Include="Entities\Products\ProductMango.cs" />
+    <Compile Include="Entities\Products\ProductOrange.cs" />
+    <Compile Include="Entities\Products\ProductPear.cs" />
+    <Compile Include="Entities\Products\ProductPlum.cs" />
+    <Compile Include="Entities\Products\ProductRaspberry.cs" />
+    <Compile Include="Entities\Products\ProductStrawberry.cs" />
+    <Compile Include="Entities\Products\ProductTomato.cs" />
+    <Compile Include="Entities\Products\ProductWaterMelon.cs" />
     <Compile Include="Entities\Storage.cs" />
     <Compile Include="Entities\StorageItem.cs" />
     <Compile Include="Entities\UnitCost.cs" />
@@ -70,8 +84,11 @@
     <Compile Include="Entities\ValueObjects\NameOfStorage.cs" />
     <Compile Include="Modules\MoneyItemValueModule.cs" />
     <Compile Include="Modules\ProductsModule.cs" />
+    <Compile Include="Modules\ProductsRepositoryModule.cs" />
     <Compile Include="Modules\StorageItemModule.cs" />
+    <Compile Include="Modules\StorageItemsRepositoryModule.cs" />
     <Compile Include="Modules\StoragesModule.cs" />
+    <Compile Include="Modules\StoragesRepositoryModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
@@ -114,6 +131,9 @@
     <Compile Include="Repositories\Interfaces\Products\IProductAppleRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStorageItemRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStorageRepository.cs" />
+    <Compile Include="RepositoryFactoryFolder\IRepository.cs" />
+    <Compile Include="RepositoryFactoryFolder\RepositoryFactory.cs" />
+    <Compile Include="RepositoryFactoryFolder\RepositoryTypes.cs" />
     <Compile Include="Request.cs" />
     <Compile Include="Services\Implementations\MoneyItemValueService.cs" />
     <Compile Include="Services\Implementations\ProductService.cs" />
