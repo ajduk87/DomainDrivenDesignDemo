@@ -19,6 +19,8 @@ using Autofac;
 using ServerApplication.Modules;
 using ServerApplication.Entities.Products;
 using ServerApplication.FactoryFolder;
+using ServerApplication.Entities.ValueObjects.Truck;
+using ServerApplication.Entities.Truck;
 
 namespace ServerApplication
 {
@@ -210,6 +212,42 @@ namespace ServerApplication
                     }//if (rq.Noun.Equals("PRODUCT"))
                 }//if (rq.Verb.Equals("DELETE")) 
 
+                if (rq.Verb.Equals("INSERT"))
+                {
+                    if (rq.Noun.Equals("TRUCK"))
+                    {
+                        if (rq.Args.Count == 3)
+                        {
+                            this.numberOfClientRequest = 14;
+                            ProcessClientRequest(this.numberOfClientRequest, rq);
+                        }
+                    }
+                }
+
+                if (rq.Verb.Equals("PUT"))
+                {
+                    if (rq.Noun.Equals("TRUCK"))
+                    {
+                        if (rq.Args.Count == 1)
+                        {
+                            this.numberOfClientRequest = 14;
+                            ProcessClientRequest(this.numberOfClientRequest, rq);
+                        }
+                    }
+                }
+
+                if (rq.Verb.Equals("PUT"))
+                {
+                    if (rq.Noun.Equals("TRUCK"))
+                    {
+                        if (rq.Args.Count == 2)
+                        {
+                            this.numberOfClientRequest = 14;
+                            ProcessClientRequest(this.numberOfClientRequest, rq);
+                        }
+                    }
+                }
+
             }
             truncateRequestFile();
         }
@@ -231,6 +269,9 @@ namespace ServerApplication
                 case 11: requestForProductsCostSum(rq); break;
                 case 12: requestForUpdateProduct(rq); break;
                 case 13: requestForDeleteProductFromStorage(rq); break;
+                case 14: requestForInsertNewTruck(rq); break;
+                case 15: requestForSendingTruck(rq); break;
+                case 16: requestForDeliveredProductsByTruck(rq); break;
             }
         }    
 
@@ -552,8 +593,6 @@ namespace ServerApplication
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 MoneyItemValue moneyItem = moneyItemValueService.Sum(nameOfStorage);
 
-
-
                 string response = moneyItem.Value + " " + moneyItem.Currency.Content;
                 writeResponse(response);
             }
@@ -563,7 +602,40 @@ namespace ServerApplication
 
             }
         }
-     
+
+        private void requestForInsertNewTruck(Request rq)
+        {
+            string trailerIdContent = rq.Args[0];
+            string wheelsIdContent = rq.Args[1];
+            string engineIdContent = rq.Args[2];
+
+            ITruckService truckService = container.Resolve<ITruckService>();
+            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
+            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
+            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
+            truckService.Insert(truck);
+        }
+
+        private void requestForSendingTruck(Request rq)
+        {
+            string truckIdContent = rq.Args[0];
+
+            ITruckService truckService = container.Resolve<ITruckService>();
+            TruckId truckId = new TruckId { Content = Convert.ToInt32(truckIdContent) };
+            truckService.Send(truckId);
+        }
+
+        private void requestForDeliveredProductsByTruck(Request rq)
+        {
+            string truckIdContent = rq.Args[0];
+
+            ITruckService truckService = container.Resolve<ITruckService>();
+            TruckId truckId = new TruckId { Content = Convert.ToInt32(truckIdContent) };
+            truckService.Delivered(truckId);
+        }
+
+
         private void truncateRequestFile()
         {
             // Delete data from the Transaction.tmp file

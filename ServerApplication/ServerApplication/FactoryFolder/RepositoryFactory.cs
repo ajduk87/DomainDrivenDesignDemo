@@ -50,6 +50,7 @@ namespace ServerApplication.RepositoryFactoryFolder
 
                 case EntityTypes.Storage: { return container.Resolve<IStorageRepository>(); }
                 case EntityTypes.StorageItem: { return container.Resolve<IStorageItemRepository>(); }
+                case EntityTypes.Truck: { return container.Resolve<ITruckRepository>(); }
 
                 default: { return container.Resolve<IProductAppleRepository>(); }
             }

@@ -78,11 +78,26 @@
     <Compile Include="Entities\Products\ProductWaterMelon.cs" />
     <Compile Include="Entities\Storage.cs" />
     <Compile Include="Entities\StorageItem.cs" />
+    <Compile Include="Entities\Truck\Engine.cs" />
+    <Compile Include="Entities\Truck\Trailer.cs" />
+    <Compile Include="Entities\Truck\Truck.cs" />
+    <Compile Include="Entities\Truck\Wheels.cs" />
     <Compile Include="Entities\UnitCost.cs" />
     <Compile Include="Entities\ValueObjects\Currency.cs" />
     <Compile Include="Entities\ValueObjects\KindOfStorage.cs" />
     <Compile Include="Entities\ValueObjects\NameOfProduct.cs" />
     <Compile Include="Entities\ValueObjects\NameOfStorage.cs" />
+    <Compile Include="Entities\ValueObjects\Truck\EngineId.cs" />
+    <Compile Include="Entities\Truck\EnginePower.cs" />
+    <Compile Include="Entities\Truck\TrailerCapacity.cs" />
+    <Compile Include="Entities\ValueObjects\Truck\LengthUnit.cs" />
+    <Compile Include="Entities\ValueObjects\Truck\PowerUnit.cs" />
+    <Compile Include="Entities\ValueObjects\Truck\StatusId.cs" />
+    <Compile Include="Entities\ValueObjects\Truck\TrailerId.cs" />
+    <Compile Include="Entities\ValueObjects\Truck\TruckId.cs" />
+    <Compile Include="Entities\ValueObjects\Truck\WeightUnit.cs" />
+    <Compile Include="Entities\ValueObjects\Truck\WheelsId.cs" />
+    <Compile Include="Entities\Truck\WheelsSize.cs" />
     <Compile Include="FactoryFolder\EntityFactory.cs" />
     <Compile Include="Modules\MoneyItemValueModule.cs" />
     <Compile Include="Modules\ProductsModule.cs" />
@@ -91,6 +106,8 @@
     <Compile Include="Modules\StorageItemsRepositoryModule.cs" />
     <Compile Include="Modules\StoragesModule.cs" />
     <Compile Include="Modules\StoragesRepositoryModule.cs" />
+    <Compile Include="Modules\TruckModule.cs" />
+    <Compile Include="Modules\TruckRepositoryModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>
@@ -114,6 +131,8 @@
     <Compile Include="Repositories\Implementations\Products\ProductStrawberryRepository.cs" />
     <Compile Include="Repositories\Implementations\Products\ProductTomatoRepository.cs" />
     <Compile Include="Repositories\Implementations\Products\ProductWaterMelonRepository.cs" />
+    <Compile Include="Repositories\Implementations\TruckRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ITruckRepository.cs" />
     <Compile Include="Repositories\Interfaces\Products\IProductBananaRepository.cs" />
     <Compile Include="Repositories\Interfaces\Products\IProductBlueberryRepository.cs" />
     <Compile Include="Repositories\Interfaces\Products\IProductCabbageRepository.cs" />
@@ -141,10 +160,13 @@
     <Compile Include="Services\Implementations\ProductService.cs" />
     <Compile Include="Services\Implementations\StorageItemService.cs" />
     <Compile Include="Services\Implementations\StorageService.cs" />
+    <Compile Include="Services\Implementations\TruckService.cs" />
     <Compile Include="Services\Interfaces\IMoneyItemValueService.cs" />
     <Compile Include="Services\Interfaces\IProductService.cs" />
     <Compile Include="Services\Interfaces\IStorageItemService.cs" />
     <Compile Include="Services\Interfaces\IStorageService.cs" />
+    <Compile Include="Services\Interfaces\ITruckService.cs" />
+    <Compile Include="TruckStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="DDDDemoServerService.resx">

@@ -25,7 +25,8 @@ namespace ServerApplication.FactoryFolder
         ProductWaterMelon = 15,
         StorageItem = 16,
         Storage = 17,
-        MoneyItemValue = 18
+        MoneyItemValue = 18,
+        Truck = 19
 
     }
 }
