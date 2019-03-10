@@ -1,11 +1,12 @@
 ﻿using ServerApplication.Entities;
-using ServerApplication.Repositories.Interfaces;
+using ServerApplication.Entities.ValueObjects;
+using ServerApplication.Repositories.Interfaces.Products;
 using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
 using System.Linq;
 using System.Text;
-using ServerApplication.Entities.ValueObjects;
+using System.Threading.Tasks;
 
 namespace ServerApplication.Repositories.Implementations.Products
 {
@@ -30,6 +31,7 @@ namespace ServerApplication.Repositories.Implementations.Products
             com.ExecuteNonQuery();
             con.Close();
         }
+
         public Product SelectByName(NameOfProduct name)
         {
             Product product = new Product();
@@ -50,10 +52,11 @@ namespace ServerApplication.Repositories.Implementations.Products
 
             con.Close();
             product.NameOfProduct = name;
-            product.Cost = new UnitCost { Value = Convert.ToDouble(cost), Currency= new Currency { Content = "eur"} };
+            product.Cost = new UnitCost { Value = Convert.ToDouble(cost), Currency = new Currency { Content = "eur" } };
 
             return product;
         }
+
         public void Update(Product product)
         {
             string query = "UPDATE Products SET Cost = '" + product.Cost + "' WHERE NameOfProduct = '" + product.NameOfProduct + "'";
@@ -63,6 +66,7 @@ namespace ServerApplication.Repositories.Implementations.Products
             com.ExecuteNonQuery();
             con.Close();
         }
+
         public void Delete(NameOfProduct name)
         {
             string query = "DELETE FROM StateOfStorages WHERE NameOfProduct='" + name.Content + "' ";

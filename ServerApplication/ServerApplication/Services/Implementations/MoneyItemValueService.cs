@@ -1,6 +1,7 @@
 ﻿using ServerApplication.Entities;
 using ServerApplication.Entities.ValueObjects;
 using ServerApplication.Repositories.Interfaces;
+using ServerApplication.Repositories.Interfaces.Products;
 using ServerApplication.Services.Interfaces;
 using System;
 using System.Collections.Generic;
