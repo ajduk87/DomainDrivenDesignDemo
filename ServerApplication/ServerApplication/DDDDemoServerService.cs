@@ -256,22 +256,58 @@ namespace ServerApplication
         {
             switch (numberOfClientRequest)
             {
-                case 1: requestForCreateNewStorage(rq); break;
-                case 2: requestForCreateNewProduct(rq); break;
-                case 3: requestForGetAllStoragesInfo(); break;
-                case 4: requestForEnterInSpecificStorage(rq); break;
-                case 5: requestForGetStorageState(rq); break;
-                case 6: requestForGetProductInfo(rq); break;
-                case 7: requestForCheckIsProductExists(rq); break;
-                case 8: requestForProductsCostMin(rq); break;
-                case 9: requestForProductsCostMax(rq); break;
-                case 10: requestForProductsCostAvg(rq); break;
-                case 11: requestForProductsCostSum(rq); break;
-                case 12: requestForUpdateProduct(rq); break;
-                case 13: requestForDeleteProductFromStorage(rq); break;
-                case 14: requestForInsertNewTruck(rq); break;
-                case 15: requestForSendingTruck(rq); break;
-                case 16: requestForDeliveredProductsByTruck(rq); break;
+                case 1: requestForCreateNewStorage1(rq); break;
+                case 2: requestForCreateNewStorage2(rq); break;
+                case 3: requestForCreateNewStorage3(rq); break;
+                case 4: requestForCreateNewStorage4(rq); break;
+                case 5: requestForCreateNewStorage5(rq); break;
+                case 6: requestForCreateNewStorage6(rq); break;
+                case 7: requestForCreateNewStorage7(rq); break;
+                case 8: requestForCreateNewStorage8(rq); break;
+                case 9: requestForCreateNewStorage9(rq); break;
+                case 10: requestForCreateNewStorage10(rq); break;
+                case 11: requestForCreateNewProduct1(rq); break;
+                case 12: requestForCreateNewProduct2(rq); break;
+                case 13: requestForCreateNewProduct3(rq); break;
+                case 14: requestForCreateNewProduct4(rq); break;
+                case 15: requestForCreateNewProduct5(rq); break;
+                case 16: requestForCreateNewProduct6(rq); break;
+                case 17: requestForCreateNewProduct7(rq); break;
+                case 18: requestForCreateNewProduct8(rq); break;
+                case 19: requestForCreateNewProduct9(rq); break;
+                case 20: requestForCreateNewProduct10(rq); break;
+                case 21: requestForGetAllStoragesInfo(); break;
+                case 23: requestForEnterInSpecificStorage(rq); break;
+                case 24: requestForGetStorageState(rq); break;
+                case 25: requestForGetProductInfo(rq); break;
+                case 26: requestForCheckIsProductExists(rq); break;
+                case 27: requestForProductsCostMin1(rq); break;
+                case 28: requestForProductsCostMin2(rq); break;
+                case 29: requestForProductsCostMin3(rq); break;
+                case 30: requestForProductsCostMin4(rq); break;
+                case 31: requestForProductsCostMin5(rq); break;
+                case 32: requestForProductsCostMin6(rq); break;
+                case 33: requestForProductsCostMin7(rq); break;
+                case 34: requestForProductsCostMin8(rq); break;
+                case 35: requestForProductsCostMin9(rq); break;
+                case 36: requestForProductsCostMin10(rq); break;
+                case 37: requestForProductsCostMax(rq); break;
+                case 38: requestForProductsCostAvg(rq); break;
+                case 39: requestForProductsCostSum(rq); break;
+                case 40: requestForUpdateProduct(rq); break;
+                case 41: requestForDeleteProductFromStorage(rq); break;
+                case 42: requestForInsertNewTruck1(rq); break;
+                case 43: requestForInsertNewTruck2(rq); break;
+                case 44: requestForInsertNewTruck3(rq); break;
+                case 45: requestForInsertNewTruck4(rq); break;
+                case 46: requestForInsertNewTruck5(rq); break;
+                case 47: requestForInsertNewTruck6(rq); break;
+                case 48: requestForInsertNewTruck7(rq); break;
+                case 49: requestForInsertNewTruck8(rq); break;
+                case 50: requestForInsertNewTruck9(rq); break;
+                case 51: requestForInsertNewTruck10(rq); break;
+                case 52: requestForSendingTruck(rq); break;
+                case 53: requestForDeliveredProductsByTruck(rq); break;
             }
         }    
 
@@ -345,7 +381,7 @@ namespace ServerApplication
 
         }
 
-        private void requestForCreateNewStorage(Request rq)
+        private void requestForCreateNewStorage1(Request rq)
         {
             try
             {
@@ -366,7 +402,196 @@ namespace ServerApplication
             }
         }
 
-        private void requestForCreateNewProduct(Request rq)
+        private void requestForCreateNewStorage2(Request rq)
+        {
+            try
+            {
+                string name = rq.Args[0];
+                string kind = rq.Args[1];
+
+                IStorageService storageService = container.Resolve<IStorageService>();
+                Storage strorage = new Storage
+                {
+                    NameOfStorage = new NameOfStorage { Content = name },
+                    KindOfStorage = new KindOfStorage { Content = kind }
+                };
+                storageService.Create(strorage);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+            }
+        }
+
+        private void requestForCreateNewStorage3(Request rq)
+        {
+            try
+            {
+                string name = rq.Args[0];
+                string kind = rq.Args[1];
+
+                IStorageService storageService = container.Resolve<IStorageService>();
+                Storage strorage = new Storage
+                {
+                    NameOfStorage = new NameOfStorage { Content = name },
+                    KindOfStorage = new KindOfStorage { Content = kind }
+                };
+                storageService.Create(strorage);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+            }
+        }
+
+        private void requestForCreateNewStorage4(Request rq)
+        {
+            try
+            {
+                string name = rq.Args[0];
+                string kind = rq.Args[1];
+
+                IStorageService storageService = container.Resolve<IStorageService>();
+                Storage strorage = new Storage
+                {
+                    NameOfStorage = new NameOfStorage { Content = name },
+                    KindOfStorage = new KindOfStorage { Content = kind }
+                };
+                storageService.Create(strorage);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+            }
+        }
+
+        private void requestForCreateNewStorage5(Request rq)
+        {
+            try
+            {
+                string name = rq.Args[0];
+                string kind = rq.Args[1];
+
+                IStorageService storageService = container.Resolve<IStorageService>();
+                Storage strorage = new Storage
+                {
+                    NameOfStorage = new NameOfStorage { Content = name },
+                    KindOfStorage = new KindOfStorage { Content = kind }
+                };
+                storageService.Create(strorage);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+            }
+        }
+
+        private void requestForCreateNewStorage6(Request rq)
+        {
+            try
+            {
+                string name = rq.Args[0];
+                string kind = rq.Args[1];
+
+                IStorageService storageService = container.Resolve<IStorageService>();
+                Storage strorage = new Storage
+                {
+                    NameOfStorage = new NameOfStorage { Content = name },
+                    KindOfStorage = new KindOfStorage { Content = kind }
+                };
+                storageService.Create(strorage);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+            }
+        }
+
+        private void requestForCreateNewStorage7(Request rq)
+        {
+            try
+            {
+                string name = rq.Args[0];
+                string kind = rq.Args[1];
+
+                IStorageService storageService = container.Resolve<IStorageService>();
+                Storage strorage = new Storage
+                {
+                    NameOfStorage = new NameOfStorage { Content = name },
+                    KindOfStorage = new KindOfStorage { Content = kind }
+                };
+                storageService.Create(strorage);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+            }
+        }
+
+        private void requestForCreateNewStorage8(Request rq)
+        {
+            try
+            {
+                string name = rq.Args[0];
+                string kind = rq.Args[1];
+
+                IStorageService storageService = container.Resolve<IStorageService>();
+                Storage strorage = new Storage
+                {
+                    NameOfStorage = new NameOfStorage { Content = name },
+                    KindOfStorage = new KindOfStorage { Content = kind }
+                };
+                storageService.Create(strorage);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+            }
+        }
+
+        private void requestForCreateNewStorage9(Request rq)
+        {
+            try
+            {
+                string name = rq.Args[0];
+                string kind = rq.Args[1];
+
+                IStorageService storageService = container.Resolve<IStorageService>();
+                Storage strorage = new Storage
+                {
+                    NameOfStorage = new NameOfStorage { Content = name },
+                    KindOfStorage = new KindOfStorage { Content = kind }
+                };
+                storageService.Create(strorage);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+            }
+        }
+
+        private void requestForCreateNewStorage10(Request rq)
+        {
+            try
+            {
+                string name = rq.Args[0];
+                string kind = rq.Args[1];
+
+                IStorageService storageService = container.Resolve<IStorageService>();
+                Storage strorage = new Storage
+                {
+                    NameOfStorage = new NameOfStorage { Content = name },
+                    KindOfStorage = new KindOfStorage { Content = kind }
+                };
+                storageService.Create(strorage);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+            }
+        }
+
+        private void requestForCreateNewProduct1(Request rq)
         {
             try
             {
@@ -385,6 +610,330 @@ namespace ServerApplication
                     Currency = new Currency { Content = "EUR" }
                 };
                   
+                productService.Create(product);
+
+                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
+                StorageItem storageItem = new StorageItem
+                {
+                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
+                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
+                    CountOfProduct = Convert.ToInt32(countString)
+                };
+                storageItemService.Insert(storageItem);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+            }
+        }
+
+        private void requestForCreateNewProduct2(Request rq)
+        {
+            try
+            {
+                string nameOfProduct = rq.Args[0];
+                string unitCostString = rq.Args[1];
+                string countString = rq.Args[2];
+                string nameOfStorage = rq.Args[3];
+
+
+                IProductService productService = container.Resolve<IProductService>();
+                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
+                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
+                product.Cost = new UnitCost
+                {
+                    Value = Convert.ToDouble(unitCostString),
+                    Currency = new Currency { Content = "EUR" }
+                };
+
+                productService.Create(product);
+
+                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
+                StorageItem storageItem = new StorageItem
+                {
+                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
+                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
+                    CountOfProduct = Convert.ToInt32(countString)
+                };
+                storageItemService.Insert(storageItem);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+            }
+        }
+
+        private void requestForCreateNewProduct3(Request rq)
+        {
+            try
+            {
+                string nameOfProduct = rq.Args[0];
+                string unitCostString = rq.Args[1];
+                string countString = rq.Args[2];
+                string nameOfStorage = rq.Args[3];
+
+
+                IProductService productService = container.Resolve<IProductService>();
+                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
+                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
+                product.Cost = new UnitCost
+                {
+                    Value = Convert.ToDouble(unitCostString),
+                    Currency = new Currency { Content = "EUR" }
+                };
+
+                productService.Create(product);
+
+                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
+                StorageItem storageItem = new StorageItem
+                {
+                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
+                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
+                    CountOfProduct = Convert.ToInt32(countString)
+                };
+                storageItemService.Insert(storageItem);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+            }
+        }
+
+        private void requestForCreateNewProduct4(Request rq)
+        {
+            try
+            {
+                string nameOfProduct = rq.Args[0];
+                string unitCostString = rq.Args[1];
+                string countString = rq.Args[2];
+                string nameOfStorage = rq.Args[3];
+
+
+                IProductService productService = container.Resolve<IProductService>();
+                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
+                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
+                product.Cost = new UnitCost
+                {
+                    Value = Convert.ToDouble(unitCostString),
+                    Currency = new Currency { Content = "EUR" }
+                };
+
+                productService.Create(product);
+
+                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
+                StorageItem storageItem = new StorageItem
+                {
+                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
+                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
+                    CountOfProduct = Convert.ToInt32(countString)
+                };
+                storageItemService.Insert(storageItem);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+            }
+        }
+
+        private void requestForCreateNewProduct5(Request rq)
+        {
+            try
+            {
+                string nameOfProduct = rq.Args[0];
+                string unitCostString = rq.Args[1];
+                string countString = rq.Args[2];
+                string nameOfStorage = rq.Args[3];
+
+
+                IProductService productService = container.Resolve<IProductService>();
+                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
+                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
+                product.Cost = new UnitCost
+                {
+                    Value = Convert.ToDouble(unitCostString),
+                    Currency = new Currency { Content = "EUR" }
+                };
+
+                productService.Create(product);
+
+                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
+                StorageItem storageItem = new StorageItem
+                {
+                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
+                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
+                    CountOfProduct = Convert.ToInt32(countString)
+                };
+                storageItemService.Insert(storageItem);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+            }
+        }
+
+        private void requestForCreateNewProduct6(Request rq)
+        {
+            try
+            {
+                string nameOfProduct = rq.Args[0];
+                string unitCostString = rq.Args[1];
+                string countString = rq.Args[2];
+                string nameOfStorage = rq.Args[3];
+
+
+                IProductService productService = container.Resolve<IProductService>();
+                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
+                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
+                product.Cost = new UnitCost
+                {
+                    Value = Convert.ToDouble(unitCostString),
+                    Currency = new Currency { Content = "EUR" }
+                };
+
+                productService.Create(product);
+
+                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
+                StorageItem storageItem = new StorageItem
+                {
+                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
+                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
+                    CountOfProduct = Convert.ToInt32(countString)
+                };
+                storageItemService.Insert(storageItem);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+            }
+        }
+
+        private void requestForCreateNewProduct7(Request rq)
+        {
+            try
+            {
+                string nameOfProduct = rq.Args[0];
+                string unitCostString = rq.Args[1];
+                string countString = rq.Args[2];
+                string nameOfStorage = rq.Args[3];
+
+
+                IProductService productService = container.Resolve<IProductService>();
+                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
+                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
+                product.Cost = new UnitCost
+                {
+                    Value = Convert.ToDouble(unitCostString),
+                    Currency = new Currency { Content = "EUR" }
+                };
+
+                productService.Create(product);
+
+                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
+                StorageItem storageItem = new StorageItem
+                {
+                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
+                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
+                    CountOfProduct = Convert.ToInt32(countString)
+                };
+                storageItemService.Insert(storageItem);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+            }
+        }
+
+        private void requestForCreateNewProduct8(Request rq)
+        {
+            try
+            {
+                string nameOfProduct = rq.Args[0];
+                string unitCostString = rq.Args[1];
+                string countString = rq.Args[2];
+                string nameOfStorage = rq.Args[3];
+
+
+                IProductService productService = container.Resolve<IProductService>();
+                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
+                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
+                product.Cost = new UnitCost
+                {
+                    Value = Convert.ToDouble(unitCostString),
+                    Currency = new Currency { Content = "EUR" }
+                };
+
+                productService.Create(product);
+
+                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
+                StorageItem storageItem = new StorageItem
+                {
+                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
+                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
+                    CountOfProduct = Convert.ToInt32(countString)
+                };
+                storageItemService.Insert(storageItem);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+            }
+        }
+
+        private void requestForCreateNewProduct9(Request rq)
+        {
+            try
+            {
+                string nameOfProduct = rq.Args[0];
+                string unitCostString = rq.Args[1];
+                string countString = rq.Args[2];
+                string nameOfStorage = rq.Args[3];
+
+
+                IProductService productService = container.Resolve<IProductService>();
+                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
+                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
+                product.Cost = new UnitCost
+                {
+                    Value = Convert.ToDouble(unitCostString),
+                    Currency = new Currency { Content = "EUR" }
+                };
+
+                productService.Create(product);
+
+                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
+                StorageItem storageItem = new StorageItem
+                {
+                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
+                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
+                    CountOfProduct = Convert.ToInt32(countString)
+                };
+                storageItemService.Insert(storageItem);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+            }
+        }
+
+        private void requestForCreateNewProduct10(Request rq)
+        {
+            try
+            {
+                string nameOfProduct = rq.Args[0];
+                string unitCostString = rq.Args[1];
+                string countString = rq.Args[2];
+                string nameOfStorage = rq.Args[3];
+
+
+                IProductService productService = container.Resolve<IProductService>();
+                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
+                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
+                product.Cost = new UnitCost
+                {
+                    Value = Convert.ToDouble(unitCostString),
+                    Currency = new Currency { Content = "EUR" }
+                };
+
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
@@ -517,7 +1066,205 @@ namespace ServerApplication
             }
         }
 
-        private void requestForProductsCostMin(Request rq)
+        private void requestForProductsCostMin1(Request rq)
+        {
+            try
+            {
+                string nameOfStorageContent = rq.Args[0];
+
+                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
+                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
+
+
+
+                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
+                writeResponse(response);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+
+            }
+        }
+
+        private void requestForProductsCostMin2(Request rq)
+        {
+            try
+            {
+                string nameOfStorageContent = rq.Args[0];
+
+                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
+                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
+
+
+
+                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
+                writeResponse(response);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+
+            }
+        }
+
+        private void requestForProductsCostMin3(Request rq)
+        {
+            try
+            {
+                string nameOfStorageContent = rq.Args[0];
+
+                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
+                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
+
+
+
+                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
+                writeResponse(response);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+
+            }
+        }
+
+        private void requestForProductsCostMin4(Request rq)
+        {
+            try
+            {
+                string nameOfStorageContent = rq.Args[0];
+
+                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
+                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
+
+
+
+                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
+                writeResponse(response);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+
+            }
+        }
+
+        private void requestForProductsCostMin5(Request rq)
+        {
+            try
+            {
+                string nameOfStorageContent = rq.Args[0];
+
+                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
+                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
+
+
+
+                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
+                writeResponse(response);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+
+            }
+        }
+
+        private void requestForProductsCostMin6(Request rq)
+        {
+            try
+            {
+                string nameOfStorageContent = rq.Args[0];
+
+                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
+                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
+
+
+
+                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
+                writeResponse(response);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+
+            }
+        }
+
+        private void requestForProductsCostMin7(Request rq)
+        {
+            try
+            {
+                string nameOfStorageContent = rq.Args[0];
+
+                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
+                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
+
+
+
+                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
+                writeResponse(response);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+
+            }
+        }
+
+        private void requestForProductsCostMin8(Request rq)
+        {
+            try
+            {
+                string nameOfStorageContent = rq.Args[0];
+
+                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
+                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
+
+
+
+                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
+                writeResponse(response);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+
+            }
+        }
+
+        private void requestForProductsCostMin9(Request rq)
+        {
+            try
+            {
+                string nameOfStorageContent = rq.Args[0];
+
+                IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
+                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
+
+
+
+                string response = moneyItem.Value + " " + moneyItem.Currency.Content;
+                writeResponse(response);
+            }
+            catch (Exception ex)
+            {
+                writeExceptionMessage(ex.Message);
+
+            }
+        }
+
+        private void requestForProductsCostMin10(Request rq)
         {
             try
             {
@@ -603,7 +1350,133 @@ namespace ServerApplication
             }
         }
 
-        private void requestForInsertNewTruck(Request rq)
+        private void requestForInsertNewTruck1(Request rq)
+        {
+            string trailerIdContent = rq.Args[0];
+            string wheelsIdContent = rq.Args[1];
+            string engineIdContent = rq.Args[2];
+
+            ITruckService truckService = container.Resolve<ITruckService>();
+            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
+            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
+            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
+            truckService.Insert(truck);
+        }
+
+        private void requestForInsertNewTruck2(Request rq)
+        {
+            string trailerIdContent = rq.Args[0];
+            string wheelsIdContent = rq.Args[1];
+            string engineIdContent = rq.Args[2];
+
+            ITruckService truckService = container.Resolve<ITruckService>();
+            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
+            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
+            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
+            truckService.Insert(truck);
+        }
+
+        private void requestForInsertNewTruck3(Request rq)
+        {
+            string trailerIdContent = rq.Args[0];
+            string wheelsIdContent = rq.Args[1];
+            string engineIdContent = rq.Args[2];
+
+            ITruckService truckService = container.Resolve<ITruckService>();
+            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
+            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
+            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
+            truckService.Insert(truck);
+        }
+
+        private void requestForInsertNewTruck4(Request rq)
+        {
+            string trailerIdContent = rq.Args[0];
+            string wheelsIdContent = rq.Args[1];
+            string engineIdContent = rq.Args[2];
+
+            ITruckService truckService = container.Resolve<ITruckService>();
+            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
+            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
+            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
+            truckService.Insert(truck);
+        }
+
+        private void requestForInsertNewTruck5(Request rq)
+        {
+            string trailerIdContent = rq.Args[0];
+            string wheelsIdContent = rq.Args[1];
+            string engineIdContent = rq.Args[2];
+
+            ITruckService truckService = container.Resolve<ITruckService>();
+            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
+            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
+            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
+            truckService.Insert(truck);
+        }
+
+        private void requestForInsertNewTruck6(Request rq)
+        {
+            string trailerIdContent = rq.Args[0];
+            string wheelsIdContent = rq.Args[1];
+            string engineIdContent = rq.Args[2];
+
+            ITruckService truckService = container.Resolve<ITruckService>();
+            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
+            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
+            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
+            truckService.Insert(truck);
+        }
+
+        private void requestForInsertNewTruck7(Request rq)
+        {
+            string trailerIdContent = rq.Args[0];
+            string wheelsIdContent = rq.Args[1];
+            string engineIdContent = rq.Args[2];
+
+            ITruckService truckService = container.Resolve<ITruckService>();
+            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
+            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
+            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
+            truckService.Insert(truck);
+        }
+
+        private void requestForInsertNewTruck8(Request rq)
+        {
+            string trailerIdContent = rq.Args[0];
+            string wheelsIdContent = rq.Args[1];
+            string engineIdContent = rq.Args[2];
+
+            ITruckService truckService = container.Resolve<ITruckService>();
+            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
+            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
+            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
+            truckService.Insert(truck);
+        }
+
+        private void requestForInsertNewTruck9(Request rq)
+        {
+            string trailerIdContent = rq.Args[0];
+            string wheelsIdContent = rq.Args[1];
+            string engineIdContent = rq.Args[2];
+
+            ITruckService truckService = container.Resolve<ITruckService>();
+            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
+            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
+            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
+            truckService.Insert(truck);
+        }
+
+        private void requestForInsertNewTruck10(Request rq)
         {
             string trailerIdContent = rq.Args[0];
             string wheelsIdContent = rq.Args[1];
@@ -634,7 +1507,6 @@ namespace ServerApplication
             TruckId truckId = new TruckId { Content = Convert.ToInt32(truckIdContent) };
             truckService.Delivered(truckId);
         }
-
 
         private void truncateRequestFile()
         {
