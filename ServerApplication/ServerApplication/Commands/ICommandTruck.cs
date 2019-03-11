@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServerApplication.Commands
 {
-    public interface ICommand
+    public interface ICommandTruck : ICommand
     {
-        void Execute(Request rq);
     }
 }

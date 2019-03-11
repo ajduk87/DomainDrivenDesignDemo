@@ -23,6 +23,7 @@ using ServerApplication.Entities.ValueObjects.Truck;
 using ServerApplication.Entities.Truck;
 using ServerApplication.Commands.Callers;
 using ServerApplication.Commands;
+using ServerApplication.Modules.Commands;
 
 namespace ServerApplication
 {
@@ -70,6 +71,11 @@ namespace ServerApplication
             objContainer.RegisterModule<ProductsModule>();
             objContainer.RegisterModule<StorageItemModule>();
             objContainer.RegisterModule<MoneyItemValueModule>();
+
+            objContainer.RegisterModule<CommandStorageModule>();
+            objContainer.RegisterModule<CommandTruckModule>();
+            objContainer.RegisterModule<CommandStorageItemModule>();
+            objContainer.RegisterModule<CommandMoneyValueModule>();
 
             container = objContainer.Build();
 

@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServerApplication.Commands
 {
-    public interface ICommand
+    public interface ICommandMoneyValue : ICommand
     {
-        void Execute(Request rq);
     }
 }
