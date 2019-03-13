@@ -15,7 +15,7 @@ namespace ServerApplication.Repositories.Implementations
         private OleDbConnection con;
         private string connectionString = string.Empty;
 
-        public StorageItemRepository()
+        public StorageItemRepository(Discount discount)
         {
             this.connectionString = ConnectionStrings.conn;
         }

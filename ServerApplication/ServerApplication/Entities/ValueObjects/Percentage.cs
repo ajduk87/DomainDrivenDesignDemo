@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ServerApplication.Entities.ValueObjects
 {
-    public class KindOfStorage : ValueObject<KindOfStorage>
+    public class Percentage : ValueObject<Percentage>
     {
         public string Content { get; set; }
     }

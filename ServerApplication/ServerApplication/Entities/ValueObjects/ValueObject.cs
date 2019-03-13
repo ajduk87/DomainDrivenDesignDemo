@@ -5,8 +5,7 @@ using System.Text;
 
 namespace ServerApplication.Entities.ValueObjects
 {
-    public class KindOfStorage : ValueObject<KindOfStorage>
+    public abstract class ValueObject<T>
     {
-        public string Content { get; set; }
     }
 }

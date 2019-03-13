@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ServerApplication.Entities
 {
-    public class UnitCost
+    public class UnitCost : Entity
     {
         public double Value { get; set; }
         public Currency Currency { get; set; }

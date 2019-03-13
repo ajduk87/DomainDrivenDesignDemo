@@ -6,9 +6,9 @@ using System.Text;
 
 namespace ServerApplication.Entities
 {
-    public class Storage : Entity
+    public class Discount : Entity
     {
-        public NameOfStorage NameOfStorage { get; set; }
-        public KindOfStorage KindOfStorage { get; set; }
+        public double Value { get; set; }
+        public Percentage Percentage { get; set; }
     }
 }

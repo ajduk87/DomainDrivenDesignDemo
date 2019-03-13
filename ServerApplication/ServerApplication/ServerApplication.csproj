@@ -53,6 +53,8 @@
     <Compile Include="DDDDemoServerService.Designer.cs">
       <DependentUpon>DDDDemoServerService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Discount.cs" />
+    <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\MoneyItemValue.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\Storage.cs" />
@@ -62,6 +64,8 @@
     <Compile Include="Entities\ValueObjects\KindOfStorage.cs" />
     <Compile Include="Entities\ValueObjects\NameOfProduct.cs" />
     <Compile Include="Entities\ValueObjects\NameOfStorage.cs" />
+    <Compile Include="Entities\ValueObjects\Percentage.cs" />
+    <Compile Include="Entities\ValueObjects\ValueObject.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectInstaller.cs">
       <SubType>Component</SubType>

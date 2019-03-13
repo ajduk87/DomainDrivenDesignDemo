@@ -26,6 +26,7 @@ namespace ServerApplication
         private OleDbConnection con;
         private FileStream fs;
         private long numberOfClientRequest = 0;
+        private Discount discount;
 
 
 
@@ -202,25 +203,25 @@ namespace ServerApplication
         {
             switch (numberOfClientRequest)
             {
-                case 1: requestForCreateNewStorage(rq); break;
-                case 2: requestForCreateNewProduct(rq); break;
-                case 3: requestForGetAllStoragesInfo(); break;
-                case 4: requestForEnterInSpecificStorage(rq); break;
-                case 5: requestForGetStorageState(rq); break;
-                case 6: requestForGetProductInfo(rq); break;
-                case 7: requestForCheckIsProductExists(rq); break;
-                case 8: requestForProductsCostMin(rq); break;
-                case 9: requestForProductsCostMax(rq); break;
-                case 10: requestForProductsCostAvg(rq); break;
-                case 11: requestForProductsCostSum(rq); break;
-                case 12: requestForUpdateProduct(rq); break;
-                case 13: requestForDeleteProductFromStorage(rq); break;
+                case 1: RequestForCreateNewStorage(rq); break;
+                case 2: RequestForCreateNewProduct(rq); break;
+                case 3: RequestForGetAllStoragesInfo(); break;
+                case 4: RequestForEnterInSpecificStorage(rq); break;
+                case 5: RequestForGetStorageState(rq); break;
+                case 6: RequestForGetProductInfo(rq); break;
+                case 7: RequestForCheckIsProductExists(rq); break;
+                case 8: RequestForProductsCostMin(rq); break;
+                case 9: RequestForProductsCostMax(rq); break;
+                case 10: RequestForProductsCostAvg(rq); break;
+                case 11: RequestForProductsCostSum(rq); break;
+                case 12: RequestForUpdateProduct(rq); break;
+                case 13: RequestForDeleteProductFromStorage(rq); break;
             }
         }    
 
       
 
-        private void requestForGetAllStoragesInfo()
+        private void RequestForGetAllStoragesInfo()
         {
             try
             {
@@ -242,7 +243,7 @@ namespace ServerApplication
             }
         }
 
-        private void requestForEnterInSpecificStorage(Request rq)
+        private void RequestForEnterInSpecificStorage(Request rq)
         {
             try
             {
@@ -263,15 +264,21 @@ namespace ServerApplication
             }
         }
 
-        private void requestForGetStorageState(Request rq)
+        private void RequestForGetStorageState(Request rq)
         {
             try
             {
                 string nameOfStorageContent = rq.Args[0];
                 string kindOfStorage = rq.Args[1];
+                string discountContent = rq.Args[2];
 
-                IStorageItemRepository storageItemRepository = new StorageItemRepository();
-                IStorageItemService storageItemsService = new StorageItemService(storageItemRepository);
+                this.discount = new Discount
+                {
+                    Value = Convert.ToDouble(discountContent),
+                    Percentage = new Percentage { Content = "%" }
+                };
+                IStorageItemRepository storageItemRepository = new StorageItemRepository(this.discount);
+                IStorageItemService storageItemsService = new StorageItemService(storageItemRepository, this.discount);
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 List<StorageItem> storageItems = storageItemsService.GetStateOfStorage(nameOfStorage).ToList();
 
@@ -291,7 +298,7 @@ namespace ServerApplication
 
         }
 
-        private void requestForCreateNewStorage(Request rq)
+        private void RequestForCreateNewStorage(Request rq)
         {
             try
             {
@@ -313,7 +320,7 @@ namespace ServerApplication
             }
         }
 
-        private void requestForCreateNewProduct(Request rq)
+        private void RequestForCreateNewProduct(Request rq)
         {
             try
             {
@@ -321,6 +328,7 @@ namespace ServerApplication
                 string unitCostString = rq.Args[1];
                 string countString = rq.Args[2];
                 string nameOfStorage = rq.Args[3];
+                string discountContent = rq.Args[4];
 
 
                 IProductRepository productRepository = new ProductRepository();
@@ -336,8 +344,8 @@ namespace ServerApplication
                 };
                 productService.Create(product);
 
-                IStorageItemRepository storageItemRepository = new StorageItemRepository();
-                IStorageItemService storageItemService = new StorageItemService(storageItemRepository);
+                IStorageItemRepository storageItemRepository = new StorageItemRepository(this.discount);
+                IStorageItemService storageItemService = new StorageItemService(storageItemRepository, this.discount);
                 StorageItem storageItem = new StorageItem
                 {
                     NameOfStorage = new NameOfStorage { Content = nameOfStorage },
@@ -352,20 +360,26 @@ namespace ServerApplication
             }
         }
 
-        private void requestForGetProductInfo(Request rq)
+        private void RequestForGetProductInfo(Request rq)
         {
             try
             {
                 string nameOfProductContent = rq.Args[0];
                 string nameOfStorageContent = rq.Args[1];
+                string discountContent = rq.Args[2];
 
                 IProductRepository productRepository = new ProductRepository();
                 IProductService productService = new ProductService(productRepository);
                 NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
                 Product product = productService.Get(nameOfProduct);
 
-                IStorageItemRepository storageItemRepository = new StorageItemRepository();
-                IStorageItemService storageItemService = new StorageItemService(storageItemRepository);
+                this.discount = new Discount
+                {
+                    Value = Convert.ToDouble(discountContent),
+                    Percentage = new Percentage { Content = "%" }
+                };
+                IStorageItemRepository storageItemRepository = new StorageItemRepository(this.discount);
+                IStorageItemService storageItemService = new StorageItemService(storageItemRepository, this.discount);
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 StorageItem storageItem = storageItemService.Get(nameOfStorage, product.NameOfProduct);
 
@@ -381,15 +395,16 @@ namespace ServerApplication
             }
         }
 
-        private void requestForCheckIsProductExists(Request rq)
+        private void RequestForCheckIsProductExists(Request rq)
         {
             try
             {
                 string nameOfProductContent = rq.Args[0];
                 string nameOfStorageContent = rq.Args[1];
+                string discountContent = rq.Args[2];
 
-                IStorageItemRepository storageItemRepository = new StorageItemRepository();
-                IStorageItemService storageItemService = new StorageItemService(storageItemRepository);
+                IStorageItemRepository storageItemRepository = new StorageItemRepository(this.discount);
+                IStorageItemService storageItemService = new StorageItemService(storageItemRepository, this.discount);
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
                 bool isExist = storageItemService.IsProductExistsInStorage(nameOfStorage, nameOfProduct);
@@ -415,7 +430,7 @@ namespace ServerApplication
             }
         }
        
-        private void requestForUpdateProduct(Request rq)
+        private void RequestForUpdateProduct(Request rq)
         {
             try
             {
@@ -424,8 +439,9 @@ namespace ServerApplication
                 string countString = rq.Args[2];
                 string nameOfStorage = rq.Args[3];
                 string kindOfStorage = rq.Args[4];
+                string discountContent = rq.Args[5];
 
-               
+
                 IProductRepository productRepository = new ProductRepository();
                 IProductService productService = new ProductService(productRepository);
                 Product product = new Product
@@ -439,8 +455,8 @@ namespace ServerApplication
                 };
                 productService.Update(product);
 
-                IStorageItemRepository storageItemRepository = new StorageItemRepository();
-                IStorageItemService storageItemService = new StorageItemService(storageItemRepository);
+                IStorageItemRepository storageItemRepository = new StorageItemRepository(this.discount);
+                IStorageItemService storageItemService = new StorageItemService(storageItemRepository, this.discount);
                 StorageItem storageItem = new StorageItem
                 {
                     NameOfStorage = new NameOfStorage { Content = nameOfStorage },
@@ -455,15 +471,16 @@ namespace ServerApplication
             }
         }
 
-        private void requestForDeleteProductFromStorage(Request rq)
+        private void RequestForDeleteProductFromStorage(Request rq)
         {
             try
             {
                 string nameOfStorageContent = rq.Args[0];
                 string nameOfProductContent = rq.Args[1];
+                string discountContent = rq.Args[2];
 
-                IStorageItemRepository storageItemRepository = new StorageItemRepository();
-                IStorageItemService storageItemService = new StorageItemService(storageItemRepository);
+                IStorageItemRepository storageItemRepository = new StorageItemRepository(this.discount);
+                IStorageItemService storageItemService = new StorageItemService(storageItemRepository, this.discount);
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
                 storageItemService.Delete(nameOfStorage, nameOfProduct);
@@ -475,13 +492,14 @@ namespace ServerApplication
             }
         }
 
-        private void requestForProductsCostMin(Request rq)
+        private void RequestForProductsCostMin(Request rq)
         {
             try
             {
                 string nameOfStorageContent = rq.Args[0];
+                string discountContent = rq.Args[1];
 
-                IStorageItemRepository storageItemRepository = new StorageItemRepository();
+                IStorageItemRepository storageItemRepository = new StorageItemRepository(this.discount);
                 IProductRepository productRepository = new ProductRepository();
                 IMoneyItemValueService moneyItemValueService = new MoneyItemValueService(storageItemRepository, productRepository);
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
@@ -499,13 +517,14 @@ namespace ServerApplication
             }
         }
 
-        private void requestForProductsCostMax(Request rq)
+        private void RequestForProductsCostMax(Request rq)
         {
             try
             {
                 string nameOfStorageContent = rq.Args[0];
+                string discountContent = rq.Args[1];
 
-                IStorageItemRepository storageItemRepository = new StorageItemRepository();
+                IStorageItemRepository storageItemRepository = new StorageItemRepository(this.discount);
                 IProductRepository productRepository = new ProductRepository();
                 IMoneyItemValueService moneyItemValueService = new MoneyItemValueService(storageItemRepository, productRepository);
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
@@ -523,13 +542,14 @@ namespace ServerApplication
             }
         }
 
-        private void requestForProductsCostAvg(Request rq)
+        private void RequestForProductsCostAvg(Request rq)
         {
             try
             {
                 string nameOfStorageContent = rq.Args[0];
+                string discountContent = rq.Args[1];
 
-                IStorageItemRepository storageItemRepository = new StorageItemRepository();
+                IStorageItemRepository storageItemRepository = new StorageItemRepository(this.discount);
                 IProductRepository productRepository = new ProductRepository();
                 IMoneyItemValueService moneyItemValueService = new MoneyItemValueService(storageItemRepository, productRepository);
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
@@ -547,13 +567,14 @@ namespace ServerApplication
             }
         }
 
-        private void requestForProductsCostSum(Request rq)
+        private void RequestForProductsCostSum(Request rq)
         {
             try
             {
                 string nameOfStorageContent = rq.Args[0];
+                string discountContent = rq.Args[1];
 
-                IStorageItemRepository storageItemRepository = new StorageItemRepository();
+                IStorageItemRepository storageItemRepository = new StorageItemRepository(this.discount);
                 IProductRepository productRepository = new ProductRepository();
                 IMoneyItemValueService moneyItemValueService = new MoneyItemValueService(storageItemRepository, productRepository);
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
