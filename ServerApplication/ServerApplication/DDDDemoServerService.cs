@@ -32,6 +32,8 @@ namespace ServerApplication
         private ContainerBuilder objContainer;
         private Autofac.IContainer container;
 
+        private Discount discount;
+
 
 
         public DDDDemoServerService()
@@ -60,7 +62,10 @@ namespace ServerApplication
             //Registering Modules
             objContainer.RegisterModule<StoragesModule>();
             objContainer.RegisterModule<ProductsModule>();
-            objContainer.RegisterModule<StorageItemModule>();
+            objContainer.RegisterModule(new StorageItemModule
+            {
+                Discount = this.discount
+            });
             objContainer.RegisterModule<MoneyItemValueModule>();
 
             container = objContainer.Build();
