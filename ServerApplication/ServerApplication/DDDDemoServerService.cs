@@ -218,25 +218,25 @@ namespace ServerApplication
         {
             switch (numberOfClientRequest)
             {
-                case 1: requestForCreateNewStorage(rq); break;
-                case 2: requestForCreateNewProduct(rq); break;
-                case 3: requestForGetAllStoragesInfo(); break;
-                case 4: requestForEnterInSpecificStorage(rq); break;
-                case 5: requestForGetStorageState(rq); break;
-                case 6: requestForGetProductInfo(rq); break;
-                case 7: requestForCheckIsProductExists(rq); break;
-                case 8: requestForProductsCostMin(rq); break;
-                case 9: requestForProductsCostMax(rq); break;
-                case 10: requestForProductsCostAvg(rq); break;
-                case 11: requestForProductsCostSum(rq); break;
-                case 12: requestForUpdateProduct(rq); break;
-                case 13: requestForDeleteProductFromStorage(rq); break;
+                case 1: RequestForCreateNewStorage(rq); break;
+                case 2: RequestForCreateNewProduct(rq); break;
+                case 3: RequestForGetAllStoragesInfo(); break;
+                case 4: RequestForEnterInSpecificStorage(rq); break;
+                case 5: RequestForGetStorageState(rq); break;
+                case 6: RequestForGetProductInfo(rq); break;
+                case 7: RequestForCheckIsProductExists(rq); break;
+                case 8: RequestForProductsCostMin(rq); break;
+                case 9: RequestForProductsCostMax(rq); break;
+                case 10: RequestForProductsCostAvg(rq); break;
+                case 11: RequestForProductsCostSum(rq); break;
+                case 12: RequestForUpdateProduct(rq); break;
+                case 13: RequestForDeleteProduct(rq); break;
             }
         }    
 
       
 
-        private void requestForGetAllStoragesInfo()
+        private void RequestForGetAllStoragesInfo()
         {
             try
             {
@@ -257,7 +257,7 @@ namespace ServerApplication
             }
         }
 
-        private void requestForEnterInSpecificStorage(Request rq)
+        private void RequestForEnterInSpecificStorage(Request rq)
         {
             try
             {
@@ -277,7 +277,7 @@ namespace ServerApplication
             }
         }
 
-        private void requestForGetStorageState(Request rq)
+        private void RequestForGetStorageState(Request rq)
         {
             try
             {
@@ -304,7 +304,7 @@ namespace ServerApplication
 
         }
 
-        private void requestForCreateNewStorage(Request rq)
+        private void RequestForCreateNewStorage(Request rq)
         {
             try
             {
@@ -325,7 +325,7 @@ namespace ServerApplication
             }
         }
 
-        private void requestForCreateNewProduct(Request rq)
+        private void RequestForCreateNewProduct(Request rq)
         {
             try
             {
@@ -361,7 +361,7 @@ namespace ServerApplication
             }
         }
 
-        private void requestForGetProductInfo(Request rq)
+        private void RequestForGetProductInfo(Request rq)
         {
             try
             {
@@ -388,7 +388,7 @@ namespace ServerApplication
             }
         }
 
-        private void requestForCheckIsProductExists(Request rq)
+        private void RequestForCheckIsProductExists(Request rq)
         {
             try
             {
@@ -421,7 +421,7 @@ namespace ServerApplication
             }
         }
        
-        private void requestForUpdateProduct(Request rq)
+        private void RequestForUpdateProduct(Request rq)
         {
             try
             {
@@ -457,7 +457,7 @@ namespace ServerApplication
             }
         }
 
-        private void requestForDeleteProductFromStorage(Request rq)
+        private void RequestForDeleteProduct(Request rq)
         {
             try
             {
@@ -476,7 +476,7 @@ namespace ServerApplication
             }
         }
 
-        private void requestForProductsCostMin(Request rq)
+        private void RequestForProductsCostMin(Request rq)
         {
             try
             {
@@ -498,7 +498,7 @@ namespace ServerApplication
             }
         }
 
-        private void requestForProductsCostMax(Request rq)
+        private void RequestForProductsCostMax(Request rq)
         {
             try
             {
@@ -520,7 +520,7 @@ namespace ServerApplication
             }
         }
 
-        private void requestForProductsCostAvg(Request rq)
+        private void RequestForProductsCostAvg(Request rq)
         {
             try
             {
@@ -542,7 +542,7 @@ namespace ServerApplication
             }
         }
 
-        private void requestForProductsCostSum(Request rq)
+        private void RequestForProductsCostSum(Request rq)
         {
             try
             {
