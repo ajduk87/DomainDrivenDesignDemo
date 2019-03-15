@@ -62,8 +62,8 @@ namespace ServerApplication
             objContainer.RegisterType<ProductRepository>().As<IProductRepository>();
             objContainer.RegisterType<ProductService>().As<IProductService>();
 
-            objContainer.RegisterType<StorageItemRepository>().As<IStorageItemRepository>();
-            objContainer.RegisterType<StorageItemService>().As<IStorageItemService>();
+            objContainer.RegisterType<StorageItemRepository>().As<IStorageItemRepository>().WithParameter(new TypedParameter(typeof(Discount), this.discount));
+            objContainer.RegisterType<StorageItemService>().As<IStorageItemService>().WithParameter(new TypedParameter(typeof(Discount), this.discount));
 
             objContainer.RegisterType<MoneyItemValueService>().As<IMoneyItemValueService>();
 
@@ -299,8 +299,8 @@ namespace ServerApplication
                     Percentage = new Percentage { Content = "%" }
                 };
 
-                IStorageItemRepository storageItemsRepository = container.Resolve<IStorageItemRepository>(new TypedParameter(typeof(Discount), this.discount));
-                IStorageItemService storageItemsService = container.Resolve<IStorageItemService>(new TypedParameter(typeof(Discount), this.discount));
+                IStorageItemRepository storageItemsRepository = container.Resolve<IStorageItemRepository>();
+                IStorageItemService storageItemsService = container.Resolve<IStorageItemService>();
 
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 List<StorageItem> storageItems = storageItemsService.GetStateOfStorage(nameOfStorage).ToList();
@@ -402,8 +402,8 @@ namespace ServerApplication
                     Value = Convert.ToDouble(discountContent),
                     Percentage = new Percentage { Content = "%" }
                 };
-                IStorageItemRepository storageItemRepository = container.Resolve<IStorageItemRepository>(new TypedParameter(typeof(Discount), this.discount));
-                IStorageItemService storageItemService = container.Resolve<IStorageItemService>(new TypedParameter(typeof(Discount), this.discount));
+                IStorageItemRepository storageItemRepository = container.Resolve<IStorageItemRepository>();
+                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
 
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 StorageItem storageItem = storageItemService.Get(nameOfStorage, product.NameOfProduct);
