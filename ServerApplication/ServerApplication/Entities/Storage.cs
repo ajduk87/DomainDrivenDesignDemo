@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ServerApplication.Entities
 {
-    public class Storage
+    public class Storage : Entity
     {
         public NameOfStorage NameOfStorage { get; set; }
         public KindOfStorage KindOfStorage { get; set; }
