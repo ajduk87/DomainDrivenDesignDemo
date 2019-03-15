@@ -98,16 +98,16 @@ namespace ServerApplication
 
         private void Commit()
         {
-            string[] requests = File.ReadAllLines(pathForRequest);
-            foreach (string request in requests)
+            string[] Requests = File.ReadAllLines(pathForRequest);
+            foreach (string Request in Requests)
             {
-                string[] requestParts = request.Split(' ');
+                string[] RequestParts = Request.Split(' ');
                 List<string> args = new List<string>();
-                for (int i = 2; i < requestParts.Length; i++)
+                for (int i = 2; i < RequestParts.Length; i++)
                 {
-                    args.Add(requestParts[i]);
+                    args.Add(RequestParts[i]);
                 }
-                Request rq = new Request(requestParts[0], requestParts[1], args);
+                Request rq = new Request(RequestParts[0], RequestParts[1], args);
 
                 if (rq.Verb.Equals("INSERT"))
                 {
@@ -180,6 +180,7 @@ namespace ServerApplication
                         {
                             this.numberOfClientRequest = 9;
                             ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.MoneyValue);                            
+
                         }//if (rq.Args.Count == 2 && rq.Args[1].Equals("MAX"))
 
                         if (rq.Args.Count == 2 && rq.Args[1].Equals("AVG"))
@@ -259,7 +260,6 @@ namespace ServerApplication
                 }
 
             }
-            truncateRequestFile();
         }
 
         private void ProcessClientRequest(long numberOfClientRequest, Request rq, CommandTypes commandType)
@@ -274,7 +274,7 @@ namespace ServerApplication
             }
 
 
-            /* switch (numberOfClientRequest)
+            /*switch (numberOfClientRequest)
             {
                 case 1: RequestForCreateNewStorage1(rq); break;
                 case 2: RequestForCreateNewStorage2(rq); break;
@@ -329,14 +329,8 @@ namespace ServerApplication
                 case 52: RequestForSendingTruck(rq); break;
                 case 53: RequestForDeliveredProductsByTruck(rq); break;
             }*/
-        }
 
-        private void truncateRequestFile()
-        {
-            // Delete data from the Transaction.tmp file
-            FileStream fs = new FileStream(pathForRequest, FileMode.Truncate);
-            fs.Flush();
-            fs.Close();
+     
         }
 
 
