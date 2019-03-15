@@ -28,24 +28,24 @@ namespace ServerApplication.Commands
         {
             switch (numberOfRequest)
             {
-                case 11: requestForCreateNewProduct1(rq); break;
-                case 12: requestForCreateNewProduct2(rq); break;
-                case 13: requestForCreateNewProduct3(rq); break;
-                case 14: requestForCreateNewProduct4(rq); break;
-                case 15: requestForCreateNewProduct5(rq); break;
-                case 16: requestForCreateNewProduct6(rq); break;
-                case 17: requestForCreateNewProduct7(rq); break;
-                case 18: requestForCreateNewProduct8(rq); break;
-                case 19: requestForCreateNewProduct9(rq); break;
-                case 20: requestForCreateNewProduct10(rq); break;
-                case 25: requestForGetProductInfo(rq); break;
-                case 26: requestForCheckIsProductExists(rq); break;
-                case 40: requestForUpdateProduct(rq); break;
-                case 41: requestForDeleteProductFromStorage(rq); break;
+                case 11: RequestForCreateNewProduct1(rq); break;
+                case 12: RequestForCreateNewProduct2(rq); break;
+                case 13: RequestForCreateNewProduct3(rq); break;
+                case 14: RequestForCreateNewProduct4(rq); break;
+                case 15: RequestForCreateNewProduct5(rq); break;
+                case 16: RequestForCreateNewProduct6(rq); break;
+                case 17: RequestForCreateNewProduct7(rq); break;
+                case 18: RequestForCreateNewProduct8(rq); break;
+                case 19: RequestForCreateNewProduct9(rq); break;
+                case 20: RequestForCreateNewProduct10(rq); break;
+                case 25: RequestForGetProductInfo(rq); break;
+                case 26: RequestForCheckIsProductExists(rq); break;
+                case 40: RequestForUpdateProduct(rq); break;
+                case 41: RequestForDeleteProductFromStorage(rq); break;
             }
         }
 
-        private void requestForCreateNewProduct1(Request rq)
+        private void RequestForCreateNewProduct1(Request rq)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForCreateNewProduct2(Request rq)
+        private void RequestForCreateNewProduct2(Request rq)
         {
             try
             {
@@ -117,7 +117,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForCreateNewProduct3(Request rq)
+        private void RequestForCreateNewProduct3(Request rq)
         {
             try
             {
@@ -153,7 +153,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForCreateNewProduct4(Request rq)
+        private void RequestForCreateNewProduct4(Request rq)
         {
             try
             {
@@ -189,7 +189,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForCreateNewProduct5(Request rq)
+        private void RequestForCreateNewProduct5(Request rq)
         {
             try
             {
@@ -225,7 +225,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForCreateNewProduct6(Request rq)
+        private void RequestForCreateNewProduct6(Request rq)
         {
             try
             {
@@ -261,7 +261,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForCreateNewProduct7(Request rq)
+        private void RequestForCreateNewProduct7(Request rq)
         {
             try
             {
@@ -297,7 +297,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForCreateNewProduct8(Request rq)
+        private void RequestForCreateNewProduct8(Request rq)
         {
             try
             {
@@ -333,7 +333,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForCreateNewProduct9(Request rq)
+        private void RequestForCreateNewProduct9(Request rq)
         {
             try
             {
@@ -369,7 +369,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForCreateNewProduct10(Request rq)
+        private void RequestForCreateNewProduct10(Request rq)
         {
             try
             {
@@ -405,7 +405,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForGetProductInfo(Request rq)
+        private void RequestForGetProductInfo(Request rq)
         {
             try
             {
@@ -432,7 +432,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForCheckIsProductExists(Request rq)
+        private void RequestForCheckIsProductExists(Request rq)
         {
             try
             {
@@ -465,7 +465,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForUpdateProduct(Request rq)
+        private void RequestForUpdateProduct(Request rq)
         {
             try
             {
@@ -501,7 +501,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForDeleteProductFromStorage(Request rq)
+        private void RequestForDeleteProductFromStorage(Request rq)
         {
             try
             {

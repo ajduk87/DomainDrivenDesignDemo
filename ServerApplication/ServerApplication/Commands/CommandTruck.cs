@@ -26,22 +26,22 @@ namespace ServerApplication.Commands
         {
             switch (numberOfRequest)
             {
-                case 42: requestForInsertNewTruck1(rq); break;
-                case 43: requestForInsertNewTruck2(rq); break;
-                case 44: requestForInsertNewTruck3(rq); break;
-                case 45: requestForInsertNewTruck4(rq); break;
-                case 46: requestForInsertNewTruck5(rq); break;
-                case 47: requestForInsertNewTruck6(rq); break;
-                case 48: requestForInsertNewTruck7(rq); break;
-                case 49: requestForInsertNewTruck8(rq); break;
-                case 50: requestForInsertNewTruck9(rq); break;
-                case 51: requestForInsertNewTruck10(rq); break;
-                case 52: requestForSendingTruck(rq); break;
-                case 53: requestForDeliveredProductsByTruck(rq); break;
+                case 42: RequestForInsertNewTruck1(rq); break;
+                case 43: RequestForInsertNewTruck2(rq); break;
+                case 44: RequestForInsertNewTruck3(rq); break;
+                case 45: RequestForInsertNewTruck4(rq); break;
+                case 46: RequestForInsertNewTruck5(rq); break;
+                case 47: RequestForInsertNewTruck6(rq); break;
+                case 48: RequestForInsertNewTruck7(rq); break;
+                case 49: RequestForInsertNewTruck8(rq); break;
+                case 50: RequestForInsertNewTruck9(rq); break;
+                case 51: RequestForInsertNewTruck10(rq); break;
+                case 52: RequestForSendingTruck(rq); break;
+                case 53: RequestForDeliveredProductsByTruck(rq); break;
             }
         }
 
-        private void requestForInsertNewTruck1(Request rq)
+        private void RequestForInsertNewTruck1(Request rq)
         {
             string trailerIdContent = rq.Args[0];
             string wheelsIdContent = rq.Args[1];
@@ -55,7 +55,7 @@ namespace ServerApplication.Commands
             truckService.Insert(truck);
         }
 
-        private void requestForInsertNewTruck2(Request rq)
+        private void RequestForInsertNewTruck2(Request rq)
         {
             string trailerIdContent = rq.Args[0];
             string wheelsIdContent = rq.Args[1];
@@ -69,7 +69,7 @@ namespace ServerApplication.Commands
             truckService.Insert(truck);
         }
 
-        private void requestForInsertNewTruck3(Request rq)
+        private void RequestForInsertNewTruck3(Request rq)
         {
             string trailerIdContent = rq.Args[0];
             string wheelsIdContent = rq.Args[1];
@@ -83,7 +83,7 @@ namespace ServerApplication.Commands
             truckService.Insert(truck);
         }
 
-        private void requestForInsertNewTruck4(Request rq)
+        private void RequestForInsertNewTruck4(Request rq)
         {
             string trailerIdContent = rq.Args[0];
             string wheelsIdContent = rq.Args[1];
@@ -97,7 +97,7 @@ namespace ServerApplication.Commands
             truckService.Insert(truck);
         }
 
-        private void requestForInsertNewTruck5(Request rq)
+        private void RequestForInsertNewTruck5(Request rq)
         {
             string trailerIdContent = rq.Args[0];
             string wheelsIdContent = rq.Args[1];
@@ -111,7 +111,7 @@ namespace ServerApplication.Commands
             truckService.Insert(truck);
         }
 
-        private void requestForInsertNewTruck6(Request rq)
+        private void RequestForInsertNewTruck6(Request rq)
         {
             string trailerIdContent = rq.Args[0];
             string wheelsIdContent = rq.Args[1];
@@ -125,7 +125,7 @@ namespace ServerApplication.Commands
             truckService.Insert(truck);
         }
 
-        private void requestForInsertNewTruck7(Request rq)
+        private void RequestForInsertNewTruck7(Request rq)
         {
             string trailerIdContent = rq.Args[0];
             string wheelsIdContent = rq.Args[1];
@@ -139,7 +139,7 @@ namespace ServerApplication.Commands
             truckService.Insert(truck);
         }
 
-        private void requestForInsertNewTruck8(Request rq)
+        private void RequestForInsertNewTruck8(Request rq)
         {
             string trailerIdContent = rq.Args[0];
             string wheelsIdContent = rq.Args[1];
@@ -153,7 +153,7 @@ namespace ServerApplication.Commands
             truckService.Insert(truck);
         }
 
-        private void requestForInsertNewTruck9(Request rq)
+        private void RequestForInsertNewTruck9(Request rq)
         {
             string trailerIdContent = rq.Args[0];
             string wheelsIdContent = rq.Args[1];
@@ -167,7 +167,7 @@ namespace ServerApplication.Commands
             truckService.Insert(truck);
         }
 
-        private void requestForInsertNewTruck10(Request rq)
+        private void RequestForInsertNewTruck10(Request rq)
         {
             string trailerIdContent = rq.Args[0];
             string wheelsIdContent = rq.Args[1];
@@ -181,7 +181,7 @@ namespace ServerApplication.Commands
             truckService.Insert(truck);
         }
 
-        private void requestForSendingTruck(Request rq)
+        private void RequestForSendingTruck(Request rq)
         {
             string truckIdContent = rq.Args[0];
 
@@ -190,7 +190,7 @@ namespace ServerApplication.Commands
             truckService.Send(truckId);
         }
 
-        private void requestForDeliveredProductsByTruck(Request rq)
+        private void RequestForDeliveredProductsByTruck(Request rq)
         {
             string truckIdContent = rq.Args[0];
 

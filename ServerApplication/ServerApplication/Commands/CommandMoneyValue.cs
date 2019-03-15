@@ -25,23 +25,23 @@ namespace ServerApplication.Commands
         {
             switch (numberOfRequest)
             {
-                case 27: requestForProductsCostMin1(rq); break;
-                case 28: requestForProductsCostMin2(rq); break;
-                case 29: requestForProductsCostMin3(rq); break;
-                case 30: requestForProductsCostMin4(rq); break;
-                case 31: requestForProductsCostMin5(rq); break;
-                case 32: requestForProductsCostMin6(rq); break;
-                case 33: requestForProductsCostMin7(rq); break;
-                case 34: requestForProductsCostMin8(rq); break;
-                case 35: requestForProductsCostMin9(rq); break;
-                case 36: requestForProductsCostMin10(rq); break;
-                case 37: requestForProductsCostMax(rq); break;
-                case 38: requestForProductsCostAvg(rq); break;
-                case 39: requestForProductsCostSum(rq); break;
+                case 27: RequestForProductsCostMin1(rq); break;
+                case 28: RequestForProductsCostMin2(rq); break;
+                case 29: RequestForProductsCostMin3(rq); break;
+                case 30: RequestForProductsCostMin4(rq); break;
+                case 31: RequestForProductsCostMin5(rq); break;
+                case 32: RequestForProductsCostMin6(rq); break;
+                case 33: RequestForProductsCostMin7(rq); break;
+                case 34: RequestForProductsCostMin8(rq); break;
+                case 35: RequestForProductsCostMin9(rq); break;
+                case 36: RequestForProductsCostMin10(rq); break;
+                case 37: RequestForProductsCostMax(rq); break;
+                case 38: RequestForProductsCostAvg(rq); break;
+                case 39: RequestForProductsCostSum(rq); break;
             }
         }
 
-        private void requestForProductsCostMin1(Request rq)
+        private void RequestForProductsCostMin1(Request rq)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForProductsCostMin2(Request rq)
+        private void RequestForProductsCostMin2(Request rq)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForProductsCostMin3(Request rq)
+        private void RequestForProductsCostMin3(Request rq)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForProductsCostMin4(Request rq)
+        private void RequestForProductsCostMin4(Request rq)
         {
             try
             {
@@ -129,7 +129,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForProductsCostMin5(Request rq)
+        private void RequestForProductsCostMin5(Request rq)
         {
             try
             {
@@ -151,7 +151,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForProductsCostMin6(Request rq)
+        private void RequestForProductsCostMin6(Request rq)
         {
             try
             {
@@ -173,7 +173,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForProductsCostMin7(Request rq)
+        private void RequestForProductsCostMin7(Request rq)
         {
             try
             {
@@ -195,7 +195,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForProductsCostMin8(Request rq)
+        private void RequestForProductsCostMin8(Request rq)
         {
             try
             {
@@ -217,7 +217,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForProductsCostMin9(Request rq)
+        private void RequestForProductsCostMin9(Request rq)
         {
             try
             {
@@ -239,7 +239,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForProductsCostMin10(Request rq)
+        private void RequestForProductsCostMin10(Request rq)
         {
             try
             {
@@ -261,7 +261,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForProductsCostMax(Request rq)
+        private void RequestForProductsCostMax(Request rq)
         {
             try
             {
@@ -283,7 +283,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForProductsCostAvg(Request rq)
+        private void RequestForProductsCostAvg(Request rq)
         {
             try
             {
@@ -305,7 +305,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForProductsCostSum(Request rq)
+        private void RequestForProductsCostSum(Request rq)
         {
             try
             {

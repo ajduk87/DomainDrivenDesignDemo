@@ -27,23 +27,23 @@ namespace ServerApplication.Commands
         {
             switch (numberOfRequest)
             {
-                case 1: requestForCreateNewStorage1(rq); break;
-                case 2: requestForCreateNewStorage2(rq); break;
-                case 3: requestForCreateNewStorage3(rq); break;
-                case 4: requestForCreateNewStorage4(rq); break;
-                case 5: requestForCreateNewStorage5(rq); break;
-                case 6: requestForCreateNewStorage6(rq); break;
-                case 7: requestForCreateNewStorage7(rq); break;
-                case 8: requestForCreateNewStorage8(rq); break;
-                case 9: requestForCreateNewStorage9(rq); break;
-                case 10: requestForCreateNewStorage10(rq); break;
-                case 21: requestForGetAllStoragesInfo(); break;
-                case 23: requestForEnterInSpecificStorage(rq); break;
-                case 24: requestForGetStorageState(rq); break;
+                case 1: RequestForCreateNewStorage1(rq); break;
+                case 2: RequestForCreateNewStorage2(rq); break;
+                case 3: RequestForCreateNewStorage3(rq); break;
+                case 4: RequestForCreateNewStorage4(rq); break;
+                case 5: RequestForCreateNewStorage5(rq); break;
+                case 6: RequestForCreateNewStorage6(rq); break;
+                case 7: RequestForCreateNewStorage7(rq); break;
+                case 8: RequestForCreateNewStorage8(rq); break;
+                case 9: RequestForCreateNewStorage9(rq); break;
+                case 10: RequestForCreateNewStorage10(rq); break;
+                case 21: RequestForGetAllStoragesInfo(); break;
+                case 23: RequestForEnterInSpecificStorage(rq); break;
+                case 24: RequestForGetStorageState(rq); break;
             }
         }
 
-        private void requestForGetAllStoragesInfo()
+        private void RequestForGetAllStoragesInfo()
         {
             try
             {
@@ -64,7 +64,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForEnterInSpecificStorage(Request rq)
+        private void RequestForEnterInSpecificStorage(Request rq)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForGetStorageState(Request rq)
+        private void RequestForGetStorageState(Request rq)
         {
             try
             {
@@ -111,7 +111,7 @@ namespace ServerApplication.Commands
 
         }
 
-        private void requestForCreateNewStorage1(Request rq)
+        private void RequestForCreateNewStorage1(Request rq)
         {
             try
             {
@@ -132,7 +132,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForCreateNewStorage2(Request rq)
+        private void RequestForCreateNewStorage2(Request rq)
         {
             try
             {
@@ -153,7 +153,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForCreateNewStorage3(Request rq)
+        private void RequestForCreateNewStorage3(Request rq)
         {
             try
             {
@@ -174,7 +174,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForCreateNewStorage4(Request rq)
+        private void RequestForCreateNewStorage4(Request rq)
         {
             try
             {
@@ -195,7 +195,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForCreateNewStorage5(Request rq)
+        private void RequestForCreateNewStorage5(Request rq)
         {
             try
             {
@@ -216,7 +216,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForCreateNewStorage6(Request rq)
+        private void RequestForCreateNewStorage6(Request rq)
         {
             try
             {
@@ -237,7 +237,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForCreateNewStorage7(Request rq)
+        private void RequestForCreateNewStorage7(Request rq)
         {
             try
             {
@@ -258,7 +258,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForCreateNewStorage8(Request rq)
+        private void RequestForCreateNewStorage8(Request rq)
         {
             try
             {
@@ -279,7 +279,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForCreateNewStorage9(Request rq)
+        private void RequestForCreateNewStorage9(Request rq)
         {
             try
             {
@@ -300,7 +300,7 @@ namespace ServerApplication.Commands
             }
         }
 
-        private void requestForCreateNewStorage10(Request rq)
+        private void RequestForCreateNewStorage10(Request rq)
         {
             try
             {
