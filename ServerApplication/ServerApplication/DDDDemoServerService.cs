@@ -29,6 +29,7 @@ namespace ServerApplication
         private long numberOfClientRequest = 0;
         private ContainerBuilder objContainer;
         private Autofac.IContainer container;
+        private Discount discount;
 
 
 
@@ -285,8 +286,18 @@ namespace ServerApplication
             {
                 string nameOfStorageContent = rq.Args[0];
                 string kindOfStorage = rq.Args[1];
+                string discountContent = rq.Args[2];
+
+              
+
+                this.discount = new Discount
+                {
+                    Value = Convert.ToDouble(discountContent),
+                    Percentage = new Percentage { Content = "%" }
+                };
 
                 IStorageItemService storageItemsService = container.Resolve<IStorageItemService>();
+
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 List<StorageItem> storageItems = storageItemsService.GetStateOfStorage(nameOfStorage).ToList();
 
@@ -335,6 +346,7 @@ namespace ServerApplication
                 string unitCostString = rq.Args[1];
                 string countString = rq.Args[2];
                 string nameOfStorage = rq.Args[3];
+                string discountContent = rq.Args[4];
 
 
                 IProductService productService = container.Resolve<IProductService>();
@@ -350,6 +362,8 @@ namespace ServerApplication
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
+
+
                 StorageItem storageItem = new StorageItem
                 {
                     NameOfStorage = new NameOfStorage { Content = nameOfStorage },
@@ -370,12 +384,21 @@ namespace ServerApplication
             {
                 string nameOfProductContent = rq.Args[0];
                 string nameOfStorageContent = rq.Args[1];
+                string discountContent = rq.Args[2];
 
                 IProductService productService = container.Resolve<IProductService>();
                 NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
                 Product product = productService.Get(nameOfProduct);
 
+
+                this.discount = new Discount
+                {
+                    Value = Convert.ToDouble(discountContent),
+                    Percentage = new Percentage { Content = "%" }
+                };
+
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
+
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 StorageItem storageItem = storageItemService.Get(nameOfStorage, product.NameOfProduct);
 
@@ -397,8 +420,10 @@ namespace ServerApplication
             {
                 string nameOfProductContent = rq.Args[0];
                 string nameOfStorageContent = rq.Args[1];
+                string discountContent = rq.Args[2];
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
+
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
                 bool isExist = storageItemService.IsProductExistsInStorage(nameOfStorage, nameOfProduct);
@@ -433,9 +458,11 @@ namespace ServerApplication
                 string countString = rq.Args[2];
                 string nameOfStorage = rq.Args[3];
                 string kindOfStorage = rq.Args[4];
+                string discountContent = rq.Args[5];
 
 
                 IProductService productService = container.Resolve<IProductService>();
+
                 Product product = new Product
                 {
                     NameOfProduct = new NameOfProduct { Content = nameOfProduct },
@@ -447,7 +474,9 @@ namespace ServerApplication
                 };
                 productService.Update(product);
 
+
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
+
                 StorageItem storageItem = new StorageItem
                 {
                     NameOfStorage = new NameOfStorage { Content = nameOfStorage },
@@ -462,14 +491,17 @@ namespace ServerApplication
             }
         }
 
+
         private void RequestForDeleteProduct(Request rq)
-        {
+        { 
             try
             {
                 string nameOfStorageContent = rq.Args[0];
                 string nameOfProductContent = rq.Args[1];
+                string discountContent = rq.Args[2];
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
+
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
                 storageItemService.Delete(nameOfStorage, nameOfProduct);
@@ -486,8 +518,10 @@ namespace ServerApplication
             try
             {
                 string nameOfStorageContent = rq.Args[0];
+                string discountContent = rq.Args[1];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
+
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
@@ -508,8 +542,10 @@ namespace ServerApplication
             try
             {
                 string nameOfStorageContent = rq.Args[0];
+                string discountContent = rq.Args[1];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
+
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 MoneyItemValue moneyItem = moneyItemValueService.Max(nameOfStorage);
 
@@ -530,8 +566,10 @@ namespace ServerApplication
             try
             {
                 string nameOfStorageContent = rq.Args[0];
+                string discountContent = rq.Args[1];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
+
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 MoneyItemValue moneyItem = moneyItemValueService.Avg(nameOfStorage);
 
@@ -552,8 +590,10 @@ namespace ServerApplication
             try
             {
                 string nameOfStorageContent = rq.Args[0];
+                string discountContent = rq.Args[1];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
+
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 MoneyItemValue moneyItem = moneyItemValueService.Sum(nameOfStorage);
 
