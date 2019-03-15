@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ServerApplication.Entities.ValueObjects
 {
-    public class NameOfProduct
+    public class NameOfProduct : ValueObject<NameOfProduct>
     {
         public string Content { get; set; }
     }
