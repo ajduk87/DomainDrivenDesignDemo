@@ -14,12 +14,42 @@ namespace ServerApplication.Services.Implementations
     public class MoneyItemValueService : IMoneyItemValueService
     {
         private IStorageItemRepository storageItemRepository;
-        private IProductAppleRepository productRepository;
+        private IProductAppleRepository productAppleRepository;
+        private IProductBananaRepository productBananaRepository;
+        private IProductCabbageRepository productCabbageRepository;
+        private IProductOrangeRepository productOrangeRepository;
+        private IProductTomatoRepository productTomatoRepository;
+        private IProductWaterMelonRepository productWatermelonRepository;
+        private IProductPearRepository productPearRepository;
+        private IProductCherryRepository productCherryRepository;
+        private IProductStrawberryRepository productStrawberryRepository;
+        private IProductGrapeRepository productGrapeRepository;
+        private IProductMangoRepository productMangoRepository;
+        private IProductBlueberryRepository productBlueberryRepository;
+        private IProductPlumRepository productPlumRepository;
+        private IProductRaspberryRepository productRaspberryRepository;
+        private IProductMandarinRepository productMandarinRepository;
 
-        public MoneyItemValueService(IStorageItemRepository storageItemRepository, IProductAppleRepository productRepository)
+
+        public MoneyItemValueService(IStorageItemRepository storageItemRepository, IProductAppleRepository productAppleRepository, IProductBananaRepository productBananaRepository, IProductCabbageRepository productCabbageRepository, IProductOrangeRepository productOrangeRepository, IProductTomatoRepository productTomatoRepository, IProductWaterMelonRepository productWatermelonRepository, IProductPearRepository productPearRepository, IProductCherryRepository productCherryRepository, IProductStrawberryRepository productStrawberryRepository, IProductGrapeRepository productGrapeRepository, IProductMangoRepository productMangoRepository, IProductBlueberryRepository productBlueberryRepository, IProductPlumRepository productPlumRepository, IProductRaspberryRepository productRaspberryRepository, IProductMandarinRepository productMandarinRepository)
         {
             this.storageItemRepository = storageItemRepository;
-            this.productRepository = productRepository;
+            this.productAppleRepository = productAppleRepository;
+            this.productBananaRepository = productBananaRepository;
+            this.productCabbageRepository = productCabbageRepository;
+            this.productOrangeRepository = productOrangeRepository;
+            this.productTomatoRepository = productTomatoRepository;
+            this.productWatermelonRepository = productWatermelonRepository;
+            this.productPearRepository = productPearRepository;
+            this.productCherryRepository = productCherryRepository;
+            this.productOrangeRepository = productOrangeRepository;
+            this.productStrawberryRepository = productStrawberryRepository;
+            this.productGrapeRepository = productGrapeRepository;
+            this.productMangoRepository = productMangoRepository;
+            this.productBlueberryRepository = productBlueberryRepository;
+            this.productPlumRepository = productPlumRepository;
+            this.productRaspberryRepository = productRaspberryRepository;
+            this.productMandarinRepository = productMandarinRepository;
         }
 
         private List<MoneyItemValue> GetStorageMoneyItemValues(NameOfStorage nameOfStorage)
@@ -28,7 +58,7 @@ namespace ServerApplication.Services.Implementations
             List<MoneyItemValue> moneyItemValues = new List<MoneyItemValue>();
             storageItems.ForEach(storageItem =>
             {
-                ProductApple product = this.productRepository.SelectByName(storageItem.NameOfProduct);
+                ProductApple product = this.productAppleRepository.SelectByName(storageItem.NameOfProduct);
                 MoneyItemValue moneyItemValue = new MoneyItemValue
                 {
                     Value = storageItem.CountOfProduct * product.Cost.Value,
