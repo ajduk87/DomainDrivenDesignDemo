@@ -62,8 +62,8 @@ namespace ServerApplication
             objContainer.RegisterType<ProductRepository>().As<IProductRepository>();
             objContainer.RegisterType<ProductService>().As<IProductService>();
 
-            objContainer.RegisterType<StorageItemRepository>().As<IStorageItemRepository>();
-            objContainer.RegisterType<StorageItemService>().As<IStorageItemService>();
+            objContainer.RegisterType<StorageItemRepository>().As<IStorageItemRepository>().WithParameter(new TypedParameter(typeof(Discount), this.discount)); 
+            objContainer.RegisterType<StorageItemService>().As<IStorageItemService>().WithParameter(new TypedParameter(typeof(Discount), this.discount));
 
             objContainer.RegisterType<MoneyItemValueService>().As<IMoneyItemValueService>();
 
