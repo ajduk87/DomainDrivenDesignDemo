@@ -70,6 +70,7 @@ namespace ServerApplication
             container = objContainer.Build();
         }
 
+
         protected override void OnStop()
         {
             if (con != null)
@@ -298,8 +299,8 @@ namespace ServerApplication
                     Percentage = new Percentage { Content = "%" }
                 };
 
-                IStorageItemRepository storageItemsRepository = container.Resolve<IStorageItemRepository>();
-                IStorageItemService storageItemsService = container.Resolve<IStorageItemService>();
+                IStorageItemRepository storageItemsRepository = container.Resolve<IStorageItemRepository>(new TypedParameter(typeof(Discount), this.discount));
+                IStorageItemService storageItemsService = container.Resolve<IStorageItemService>(new TypedParameter(typeof(Discount), this.discount));
 
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 List<StorageItem> storageItems = storageItemsService.GetStateOfStorage(nameOfStorage).ToList();
@@ -401,8 +402,8 @@ namespace ServerApplication
                     Value = Convert.ToDouble(discountContent),
                     Percentage = new Percentage { Content = "%" }
                 };
-                IStorageItemRepository storageItemRepository = container.Resolve<IStorageItemRepository>();
-                IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
+                IStorageItemRepository storageItemRepository = container.Resolve<IStorageItemRepository>(new TypedParameter(typeof(Discount), this.discount));
+                IStorageItemService storageItemService = container.Resolve<IStorageItemService>(new TypedParameter(typeof(Discount), this.discount));
 
                 NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
                 StorageItem storageItem = storageItemService.Get(nameOfStorage, product.NameOfProduct);
