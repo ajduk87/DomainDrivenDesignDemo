@@ -104,16 +104,16 @@ namespace ServerApplication
 
         private void Commit()
         {
-            string[] requests = File.ReadAllLines(pathForRequest);
-            foreach (string request in requests)
+            string[] Requests = File.ReadAllLines(pathForRequest);
+            foreach (string Request in Requests)
             {
-                string[] requestParts = request.Split(' ');
+                string[] RequestParts = Request.Split(' ');
                 List<string> args = new List<string>();
-                for (int i = 2; i < requestParts.Length; i++)
+                for (int i = 2; i < RequestParts.Length; i++)
                 {
-                    args.Add(requestParts[i]);
+                    args.Add(RequestParts[i]);
                 }
-                Request rq = new Request(requestParts[0], requestParts[1], args);
+                Request rq = new Request(RequestParts[0], RequestParts[1], args);
 
                 if (rq.Verb.Equals("INSERT"))
                 {
@@ -186,6 +186,7 @@ namespace ServerApplication
                         {
                             this.numberOfClientRequest = 9;
                             ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.MoneyValue);                            
+
                         }//if (rq.Args.Count == 2 && rq.Args[1].Equals("MAX"))
 
                         if (rq.Args.Count == 2 && rq.Args[1].Equals("AVG"))
@@ -265,7 +266,6 @@ namespace ServerApplication
                 }
 
             }
-            truncateRequestFile();
         }
 
         private void ProcessClientRequest(long numberOfClientRequest, Request rq, CommandTypes commandType)
@@ -282,67 +282,61 @@ namespace ServerApplication
 
             /*switch (numberOfClientRequest)
             {
-                case 1: requestForCreateNewStorage1(rq); break;
-                case 2: requestForCreateNewStorage2(rq); break;
-                case 3: requestForCreateNewStorage3(rq); break;
-                case 4: requestForCreateNewStorage4(rq); break;
-                case 5: requestForCreateNewStorage5(rq); break;
-                case 6: requestForCreateNewStorage6(rq); break;
-                case 7: requestForCreateNewStorage7(rq); break;
-                case 8: requestForCreateNewStorage8(rq); break;
-                case 9: requestForCreateNewStorage9(rq); break;
-                case 10: requestForCreateNewStorage10(rq); break;
-                case 11: requestForCreateNewProduct1(rq); break;
-                case 12: requestForCreateNewProduct2(rq); break;
-                case 13: requestForCreateNewProduct3(rq); break;
-                case 14: requestForCreateNewProduct4(rq); break;
-                case 15: requestForCreateNewProduct5(rq); break;
-                case 16: requestForCreateNewProduct6(rq); break;
-                case 17: requestForCreateNewProduct7(rq); break;
-                case 18: requestForCreateNewProduct8(rq); break;
-                case 19: requestForCreateNewProduct9(rq); break;
-                case 20: requestForCreateNewProduct10(rq); break;
-                case 21: requestForGetAllStoragesInfo(); break;
-                case 23: requestForEnterInSpecificStorage(rq); break;
-                case 24: requestForGetStorageState(rq); break;
-                case 25: requestForGetProductInfo(rq); break;
-                case 26: requestForCheckIsProductExists(rq); break;
-                case 27: requestForProductsCostMin1(rq); break;
-                case 28: requestForProductsCostMin2(rq); break;
-                case 29: requestForProductsCostMin3(rq); break;
-                case 30: requestForProductsCostMin4(rq); break;
-                case 31: requestForProductsCostMin5(rq); break;
-                case 32: requestForProductsCostMin6(rq); break;
-                case 33: requestForProductsCostMin7(rq); break;
-                case 34: requestForProductsCostMin8(rq); break;
-                case 35: requestForProductsCostMin9(rq); break;
-                case 36: requestForProductsCostMin10(rq); break;
-                case 37: requestForProductsCostMax(rq); break;
-                case 38: requestForProductsCostAvg(rq); break;
-                case 39: requestForProductsCostSum(rq); break;
-                case 40: requestForUpdateProduct(rq); break;
-                case 41: requestForDeleteProductFromStorage(rq); break;
-                case 42: requestForInsertNewTruck1(rq); break;
-                case 43: requestForInsertNewTruck2(rq); break;
-                case 44: requestForInsertNewTruck3(rq); break;
-                case 45: requestForInsertNewTruck4(rq); break;
-                case 46: requestForInsertNewTruck5(rq); break;
-                case 47: requestForInsertNewTruck6(rq); break;
-                case 48: requestForInsertNewTruck7(rq); break;
-                case 49: requestForInsertNewTruck8(rq); break;
-                case 50: requestForInsertNewTruck9(rq); break;
-                case 51: requestForInsertNewTruck10(rq); break;
-                case 52: requestForSendingTruck(rq); break;
-                case 53: requestForDeliveredProductsByTruck(rq); break;
+                case 1: RequestForCreateNewStorage1(rq); break;
+                case 2: RequestForCreateNewStorage2(rq); break;
+                case 3: RequestForCreateNewStorage3(rq); break;
+                case 4: RequestForCreateNewStorage4(rq); break;
+                case 5: RequestForCreateNewStorage5(rq); break;
+                case 6: RequestForCreateNewStorage6(rq); break;
+                case 7: RequestForCreateNewStorage7(rq); break;
+                case 8: RequestForCreateNewStorage8(rq); break;
+                case 9: RequestForCreateNewStorage9(rq); break;
+                case 10: RequestForCreateNewStorage10(rq); break;
+                case 11: RequestForCreateNewProduct1(rq); break;
+                case 12: RequestForCreateNewProduct2(rq); break;
+                case 13: RequestForCreateNewProduct3(rq); break;
+                case 14: RequestForCreateNewProduct4(rq); break;
+                case 15: RequestForCreateNewProduct5(rq); break;
+                case 16: RequestForCreateNewProduct6(rq); break;
+                case 17: RequestForCreateNewProduct7(rq); break;
+                case 18: RequestForCreateNewProduct8(rq); break;
+                case 19: RequestForCreateNewProduct9(rq); break;
+                case 20: RequestForCreateNewProduct10(rq); break;
+                case 21: RequestForGetAllStoragesInfo(); break;
+                case 23: RequestForEnterInSpecificStorage(rq); break;
+                case 24: RequestForGetStorageState(rq); break;
+                case 25: RequestForGetProductInfo(rq); break;
+                case 26: RequestForCheckIsProductExists(rq); break;
+                case 27: RequestForProductsCostMin1(rq); break;
+                case 28: RequestForProductsCostMin2(rq); break;
+                case 29: RequestForProductsCostMin3(rq); break;
+                case 30: RequestForProductsCostMin4(rq); break;
+                case 31: RequestForProductsCostMin5(rq); break;
+                case 32: RequestForProductsCostMin6(rq); break;
+                case 33: RequestForProductsCostMin7(rq); break;
+                case 34: RequestForProductsCostMin8(rq); break;
+                case 35: RequestForProductsCostMin9(rq); break;
+                case 36: RequestForProductsCostMin10(rq); break;
+                case 37: RequestForProductsCostMax(rq); break;
+                case 38: RequestForProductsCostAvg(rq); break;
+                case 39: RequestForProductsCostSum(rq); break;
+                case 40: RequestForUpdateProduct(rq); break;
+                case 41: RequestForDeleteProductFromStorage(rq); break;
+                case 42: RequestForInsertNewTruck1(rq); break;
+                case 43: RequestForInsertNewTruck2(rq); break;
+                case 44: RequestForInsertNewTruck3(rq); break;
+                case 45: RequestForInsertNewTruck4(rq); break;
+                case 46: RequestForInsertNewTruck5(rq); break;
+                case 47: RequestForInsertNewTruck6(rq); break;
+                case 48: RequestForInsertNewTruck7(rq); break;
+                case 49: RequestForInsertNewTruck8(rq); break;
+                case 50: RequestForInsertNewTruck9(rq); break;
+                case 51: RequestForInsertNewTruck10(rq); break;
+                case 52: RequestForSendingTruck(rq); break;
+                case 53: RequestForDeliveredProductsByTruck(rq); break;
             }*/
-        }    
 
-        private void truncateRequestFile()
-        {
-            // Delete data from the Transaction.tmp file
-            FileStream fs = new FileStream(pathForRequest, FileMode.Truncate);
-            fs.Flush();
-            fs.Close();
+     
         }
 
 
