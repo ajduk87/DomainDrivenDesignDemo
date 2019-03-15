@@ -21,9 +21,9 @@ namespace ServerApplication.Commands.StorageItems
             this.container = container;
         }
 
-        public void Execute(Request rq) => requestForDeleteProductFromStorage(rq);
+        public void Execute(Request rq) => RequestForDeleteProductFromStorage(rq);
 
-        private void requestForDeleteProductFromStorage(Request rq)
+        private void RequestForDeleteProductFromStorage(Request rq)
         {
             try
             {

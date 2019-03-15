@@ -18,9 +18,9 @@ namespace ServerApplication.Commands.Trucks
             this.container = container;
         }
 
-        public void Execute(Request rq) => requestForInsertNewTruck2(rq);
+        public void Execute(Request rq) => RequestForInsertNewTruck2(rq);
 
-        private void requestForInsertNewTruck2(Request rq)
+        private void RequestForInsertNewTruck2(Request rq)
         {
             string trailerIdContent = rq.Args[0];
             string wheelsIdContent = rq.Args[1];

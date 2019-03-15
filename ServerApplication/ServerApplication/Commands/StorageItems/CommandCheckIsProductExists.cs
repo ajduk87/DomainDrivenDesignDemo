@@ -21,9 +21,9 @@ namespace ServerApplication.Commands.StorageItems
             this.container = container;
         }
 
-        public void Execute(Request rq) => requestForCheckIsProductExists(rq);
+        public void Execute(Request rq) => RequestForCheckIsProductExists(rq);
 
-        private void requestForCheckIsProductExists(Request rq)
+        private void RequestForCheckIsProductExists(Request rq)
         {
             try
             {

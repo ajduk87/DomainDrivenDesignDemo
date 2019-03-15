@@ -21,9 +21,9 @@ namespace ServerApplication.Commands.Storages
             this.container = container;
         }
 
-        public void Execute(Request rq) => requestForGetAllStoragesInfo();
+        public void Execute(Request rq) => RequestForGetAllStoragesInfo();
 
-        private void requestForGetAllStoragesInfo()
+        private void RequestForGetAllStoragesInfo()
         {
             try
             {

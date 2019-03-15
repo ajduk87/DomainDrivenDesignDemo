@@ -22,9 +22,9 @@ namespace ServerApplication.Commands.Storages
             this.container = container;
         }
 
-        public void Execute(Request rq) => requestForCreateNewStorage5(rq);
+        public void Execute(Request rq) => RequestForCreateNewStorage5(rq);
 
-        private void requestForCreateNewStorage5(Request rq)
+        private void RequestForCreateNewStorage5(Request rq)
         {
             try
             {

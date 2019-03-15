@@ -20,9 +20,9 @@ namespace ServerApplication.Commands.StorageItems
             this.container = container;
         }
 
-        public void Execute(Request rq) => requestForCreateNewProduct5(rq);
+        public void Execute(Request rq) => RequestForCreateNewProduct5(rq);
 
-        private void requestForCreateNewProduct5(Request rq)
+        private void RequestForCreateNewProduct5(Request rq)
         {
             try
             {

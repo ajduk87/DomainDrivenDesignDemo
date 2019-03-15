@@ -17,9 +17,9 @@ namespace ServerApplication.Commands.MoneyValue
             this.container = container;
         }
 
-        public void Execute(Request rq) => requestForProductsCostSum(rq);
+        public void Execute(Request rq) => RequestForProductsCostSum(rq);
 
-        private void requestForProductsCostSum(Request rq)
+        private void RequestForProductsCostSum(Request rq)
         {
             try
             {

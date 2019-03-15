@@ -22,9 +22,9 @@ namespace ServerApplication.Commands.Storages
             this.container = container;
         }
 
-        public void Execute(Request rq) => requestForEnterInSpecificStorage(rq);
+        public void Execute(Request rq) => RequestForEnterInSpecificStorage(rq);
 
-        private void requestForEnterInSpecificStorage(Request rq)
+        private void RequestForEnterInSpecificStorage(Request rq)
         {
             try
             {

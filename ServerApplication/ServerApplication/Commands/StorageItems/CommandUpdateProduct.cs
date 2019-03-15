@@ -24,9 +24,9 @@ namespace ServerApplication.Commands.StorageItems
             this.container = container;
         }
 
-        public void Execute(Request rq) => requestForUpdateProduct(rq);
+        public void Execute(Request rq) => RequestForUpdateProduct(rq);
 
-        private void requestForUpdateProduct(Request rq)
+        private void RequestForUpdateProduct(Request rq)
         {
             try
             {

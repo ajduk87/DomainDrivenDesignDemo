@@ -23,9 +23,9 @@ namespace ServerApplication.Commands.StorageItems
             this.container = container;
         }
 
-        public void Execute(Request rq) => requestForGetProductInfo(rq);
+        public void Execute(Request rq) => RequestForGetProductInfo(rq);
 
-        private void requestForGetProductInfo(Request rq)
+        private void RequestForGetProductInfo(Request rq)
         {
             try
             {

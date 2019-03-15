@@ -18,9 +18,9 @@ namespace ServerApplication.Commands.Trucks
             this.container = container;
         }
 
-        public void Execute(Request rq) => requestForSendingTruck(rq);
+        public void Execute(Request rq) => RequestForSendingTruck(rq);
 
-        private void requestForSendingTruck(Request rq)
+        private void RequestForSendingTruck(Request rq)
         {
             string truckIdContent = rq.Args[0];
 

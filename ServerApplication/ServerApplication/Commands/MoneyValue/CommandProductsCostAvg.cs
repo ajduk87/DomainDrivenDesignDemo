@@ -22,9 +22,9 @@ namespace ServerApplication.Commands.MoneyValue
             this.container = container;
         }
 
-        public void Execute(Request rq) => requestForProductsCostAvg(rq);
+        public void Execute(Request rq) => RequestForProductsCostAvg(rq);
 
-        private void requestForProductsCostAvg(Request rq)
+        private void RequestForProductsCostAvg(Request rq)
         {
             try
             {

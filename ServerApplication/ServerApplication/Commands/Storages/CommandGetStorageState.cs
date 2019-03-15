@@ -22,9 +22,9 @@ namespace ServerApplication.Commands.Storages
             this.container = container;
         }
 
-        public void Execute(Request rq) => requestForGetStorageState(rq);
+        public void Execute(Request rq) => RequestForGetStorageState(rq);
 
-        private void requestForGetStorageState(Request rq)
+        private void RequestForGetStorageState(Request rq)
         {
             try
             {
