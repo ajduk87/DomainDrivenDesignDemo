@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ServerApplication.Entities.ValueObjects
 {
-    public class Currency
+    public class Currency : ValueObject<Currency>
     {
         public string Content { get; set; }
     }
