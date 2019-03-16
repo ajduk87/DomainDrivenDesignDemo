@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServerApplication.Entities.ValueObjects.Truck
 {
-    public class EngineId
+    public class EngineId : ValueObject<EngineId>
     {
         public int Content { get; set; }
     }

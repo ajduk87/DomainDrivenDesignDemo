@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServerApplication.Entities.ValueObjects.Truck
 {
-    public class PowerUnit
+    public class PowerUnit : ValueObject<PowerUnit>
     {
         public string Content { get; set; }
     }

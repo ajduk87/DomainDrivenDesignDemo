@@ -2,7 +2,7 @@
 
 namespace ServerApplication.Entities.Truck
 {
-    public class EnginePower
+    public class EnginePower : Entity
     {
         public int Value { get; set; }
         public PowerUnit PowerUnit { get; set; }

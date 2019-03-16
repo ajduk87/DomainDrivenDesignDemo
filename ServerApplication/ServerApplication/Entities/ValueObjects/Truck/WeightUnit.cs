@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServerApplication.Entities.ValueObjects.Truck
 {
-    public class WeightUnit
+    public class WeightUnit : ValueObject<WeightUnit>
     {
         public string Content { get; set; }
     }
