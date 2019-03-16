@@ -33,6 +33,8 @@ namespace ServerApplication
         private ContainerBuilder objContainer;
         private Autofac.IContainer container;
 
+        private Discount discount;
+
 
 
         public DDDDemoServerService()
@@ -61,7 +63,10 @@ namespace ServerApplication
             //Registering Modules
             objContainer.RegisterModule<StoragesModule>();
             objContainer.RegisterModule<ProductsModule>();
-            objContainer.RegisterModule<StorageItemModule>();
+            objContainer.RegisterModule(new StorageItemModule
+            {
+                Discount = this.discount
+            });
             objContainer.RegisterModule<MoneyItemValueModule>();
 
             container = objContainer.Build();
@@ -336,6 +341,7 @@ namespace ServerApplication
 
 
                 IProductService productService = container.Resolve<IProductService>();
+
                 ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
                 product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
                 product.Cost = new UnitCost
@@ -343,7 +349,7 @@ namespace ServerApplication
                     Value = Convert.ToDouble(unitCostString),
                     Currency = new Currency { Content = "EUR" }
                 };
-                  
+
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
@@ -433,6 +439,7 @@ namespace ServerApplication
 
 
                 IProductService productService = container.Resolve<IProductService>();
+
                 ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
                 product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
                 product.Cost = new UnitCost

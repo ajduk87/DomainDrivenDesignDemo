@@ -38,6 +38,7 @@ namespace ServerApplication.Repositories.Implementations.Products
         {
             ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
 
+
             OleDbConnection con = new OleDbConnection(this.connectionString);
 
             string query1 = "SELECT Cost FROM Products WHERE NameOfProduct = '" + name.Content + "'";
