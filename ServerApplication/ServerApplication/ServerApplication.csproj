@@ -86,6 +86,7 @@
     <Compile Include="Entities\ValueObjects\NameOfStorage.cs" />
     <Compile Include="FactoryFolder\EntityFactory.cs" />
     <Compile Include="Entities\ValueObjects\Percentage.cs" />
+    <Compile Include="FactoryFolder\ProductFactory.cs" />
     <Compile Include="Modules\MoneyItemValueModule.cs" />
     <Compile Include="Modules\ProductsModule.cs" />
     <Compile Include="Modules\ProductsRepositoryModule.cs" />
