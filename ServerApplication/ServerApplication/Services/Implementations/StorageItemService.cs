@@ -13,7 +13,7 @@ namespace ServerApplication.Services.Implementations
     {
         private IStorageItemRepository storageItemRepository;
 
-        public StorageItemService(IStorageItemRepository storageItemRepositoryy, Discount discount)
+        public StorageItemService(IStorageItemRepository storageItemRepositoryy, Discount discount = null)
         {
             this.storageItemRepository = storageItemRepositoryy;
         }
