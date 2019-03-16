@@ -19,15 +19,15 @@ namespace ServerApplication.Commands.Callers
 
             dictCommands = new Dictionary<long, ICommandStorageItem>();
             dictCommands.Add(11, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandCreateNewProduct1)));
-            dictCommands.Add(11, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandCreateNewProduct2)));
-            dictCommands.Add(11, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandCreateNewProduct3)));
-            dictCommands.Add(11, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandCreateNewProduct4)));
-            dictCommands.Add(11, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandCreateNewProduct5)));
-            dictCommands.Add(11, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandCreateNewProduct6)));
-            dictCommands.Add(11, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandCreateNewProduct7)));
-            dictCommands.Add(11, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandCreateNewProduct8)));
-            dictCommands.Add(11, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandCreateNewProduct9)));
-            dictCommands.Add(11, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandCreateNewProduct10)));
+            dictCommands.Add(12, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandCreateNewProduct2)));
+            dictCommands.Add(13, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandCreateNewProduct3)));
+            dictCommands.Add(14, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandCreateNewProduct4)));
+            dictCommands.Add(15, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandCreateNewProduct5)));
+            dictCommands.Add(16, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandCreateNewProduct6)));
+            dictCommands.Add(17, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandCreateNewProduct7)));
+            dictCommands.Add(18, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandCreateNewProduct8)));
+            dictCommands.Add(19, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandCreateNewProduct9)));
+            dictCommands.Add(20, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandCreateNewProduct10)));
             dictCommands.Add(25, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandGetProductInfo)));
             dictCommands.Add(26, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandCheckIsProductExists)));
             dictCommands.Add(40, container.ResolveKeyed<ICommandStorageItem>(typeof(CommandUpdateProduct)));
