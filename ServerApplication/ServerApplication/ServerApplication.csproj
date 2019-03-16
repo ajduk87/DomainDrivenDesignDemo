@@ -136,7 +136,7 @@
     <Compile Include="Repositories\Interfaces\Products\IProductAppleRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStorageItemRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStorageRepository.cs" />
-    <Compile Include="FactoryFolder\IRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="FactoryFolder\RepositoryFactory.cs" />
     <Compile Include="FactoryFolder\EntityTypes.cs" />
     <Compile Include="Request.cs" />
