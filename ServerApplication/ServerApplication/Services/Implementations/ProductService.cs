@@ -1,4 +1,5 @@
 ﻿using ServerApplication.Entities;
+using ServerApplication.Entities.Products;
 using ServerApplication.Entities.ValueObjects;
 using ServerApplication.Repositories.Interfaces;
 using ServerApplication.Repositories.Interfaces.Products;

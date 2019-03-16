@@ -35,6 +35,8 @@ namespace ServerApplication
         private ContainerBuilder objContainer;
         private Autofac.IContainer container;
 
+        private Discount discount;
+
 
 
         public DDDDemoServerService()
@@ -63,7 +65,10 @@ namespace ServerApplication
             //Registering Modules
             objContainer.RegisterModule<StoragesModule>();
             objContainer.RegisterModule<ProductsModule>();
-            objContainer.RegisterModule<StorageItemModule>();
+            objContainer.RegisterModule(new StorageItemModule
+            {
+                Discount = this.discount
+            });
             objContainer.RegisterModule<MoneyItemValueModule>();
 
             container = objContainer.Build();
@@ -367,29 +372,25 @@ namespace ServerApplication
         {
             try
             {
-                string nameOfProduct = rq.Args[0];
-                string unitCostString = rq.Args[1];
-                string countString = rq.Args[2];
-                string nameOfStorage = rq.Args[3];
+                string nameOfProductContent = rq.Args[0];
+                string unitCostContent = rq.Args[1];
+                string countContent = rq.Args[2];
+                string nameOfStorageContent = rq.Args[3];
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-                  
+
+               
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProductContent, unitCostContent, "EUR");
+
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
                 StorageItem storageItem = new StorageItem
                 {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
+                    NameOfStorage = new NameOfStorage { Content = nameOfStorageContent },
+                    NameOfProduct = new NameOfProduct { Content = nameOfProductContent },
+                    CountOfProduct = Convert.ToInt32(countContent)
                 };
                 storageItemService.Insert(storageItem);
             }
@@ -463,29 +464,25 @@ namespace ServerApplication
         {
             try
             {
-                string nameOfProduct = rq.Args[0];
-                string unitCostString = rq.Args[1];
-                string countString = rq.Args[2];
-                string nameOfStorage = rq.Args[3];
-                string kindOfStorage = rq.Args[4];
+                string nameOfProductContent = rq.Args[0];
+                string unitCostContent = rq.Args[1];
+                string countStringContent = rq.Args[2];
+                string nameOfStorageContent = rq.Args[3];
+                string kindOfStorageContent = rq.Args[4];
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
+
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProductContent, unitCostContent, "EUR");
+
                 productService.Update(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
                 StorageItem storageItem = new StorageItem
                 {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
+                    NameOfStorage = new NameOfStorage { Content = nameOfStorageContent },
+                    NameOfProduct = new NameOfProduct { Content = nameOfProductContent },
+                    CountOfProduct = Convert.ToInt32(countStringContent)
                 };
                 storageItemService.Update(storageItem);
             }

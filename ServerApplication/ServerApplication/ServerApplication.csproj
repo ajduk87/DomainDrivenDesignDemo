@@ -59,6 +59,7 @@
     <Compile Include="DDDDemoServerService.Designer.cs">
       <DependentUpon>DDDDemoServerService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Discount.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\MoneyItemValue.cs" />
     <Compile Include="Entities\Products\ProductApple.cs" />
@@ -100,6 +101,8 @@
     <Compile Include="Entities\Truck\WheelsSize.cs" />
     <Compile Include="Entities\ValueObjects\ValueObject.cs" />
     <Compile Include="FactoryFolder\EntityFactory.cs" />
+    <Compile Include="Entities\ValueObjects\Percentage.cs" />
+    <Compile Include="FactoryFolder\ProductFactory.cs" />
     <Compile Include="Modules\MoneyItemValueModule.cs" />
     <Compile Include="Modules\ProductsModule.cs" />
     <Compile Include="Modules\ProductsRepositoryModule.cs" />

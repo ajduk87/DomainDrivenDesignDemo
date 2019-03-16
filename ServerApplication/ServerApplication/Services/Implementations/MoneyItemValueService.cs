@@ -32,6 +32,7 @@ namespace ServerApplication.Services.Implementations
         private IProductRaspberryRepository productRaspberryRepository;
         private IProductMandarinRepository productMandarinRepository;
 
+
         public MoneyItemValueService()
         {
             this.storageItemRepository = (IStorageItemRepository)RepositoryFactory.Create(EntityTypes.Storage);
@@ -52,7 +53,6 @@ namespace ServerApplication.Services.Implementations
             this.productRaspberryRepository = (IProductRaspberryRepository)RepositoryFactory.Create(EntityTypes.ProductRaspberry);
             this.productMandarinRepository = (IProductMandarinRepository)RepositoryFactory.Create(EntityTypes.ProductMandarin);
         }
-
         private List<MoneyItemValue> GetStorageMoneyItemValues(NameOfStorage nameOfStorage)
         {
             List<StorageItem> storageItems = this.storageItemRepository.Select(nameOfStorage).ToList();
