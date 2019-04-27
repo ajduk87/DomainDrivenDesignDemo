@@ -8,5 +8,10 @@ namespace ServerApplication.Entities.ValueObjects
     public class KindOfStorage
     {
         public string Content { get; }
+
+        public KindOfStorage(string Content)
+        {
+            this.Content = Content;
+        }
     }
 }

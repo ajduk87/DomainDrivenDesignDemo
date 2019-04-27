@@ -8,5 +8,10 @@ namespace ServerApplication.Entities.ValueObjects
     public class Currency
     {
         public string Content { get; }
+
+        public Currency(string Content)
+        {
+            this.Content = Content;
+        }
     }
 }

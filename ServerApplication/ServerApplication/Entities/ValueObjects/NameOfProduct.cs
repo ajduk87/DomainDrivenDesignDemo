@@ -8,5 +8,10 @@ namespace ServerApplication.Entities.ValueObjects
     public class NameOfProduct
     {
         public string Content { get; }
+
+        public NameOfProduct(string Content)
+        {
+            this.Content = Content;
+        }
     }
 }
