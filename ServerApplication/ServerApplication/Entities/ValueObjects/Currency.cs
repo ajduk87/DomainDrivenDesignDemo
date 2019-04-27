@@ -7,6 +7,6 @@ namespace ServerApplication.Entities.ValueObjects
 {
     public class Currency
     {
-        public string Content { get; set; }
+        public string Content { get; }
     }
 }

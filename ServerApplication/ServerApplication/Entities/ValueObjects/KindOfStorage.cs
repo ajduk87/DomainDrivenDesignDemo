@@ -7,6 +7,6 @@ namespace ServerApplication.Entities.ValueObjects
 {
     public class KindOfStorage
     {
-        public string Content { get; set; }
+        public string Content { get; }
     }
 }
