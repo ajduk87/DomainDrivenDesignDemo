@@ -24,7 +24,6 @@ namespace ServerApplication
         private string pathForResponse = "C:\\DomainDrivenDesignDemo\\Buffers\\bufferForResponse.txt";
         private static string pathForDatabase = "C:\\DomainDrivenDesignDemo\\InfrastructureLayer\\Database\\Storages.accdb";
         private OleDbConnection con;
-        private FileStream fs;
         private long numberOfClientRequest = 0;
         private Discount discount;
 
@@ -251,7 +250,7 @@ namespace ServerApplication
 
                 IStorageRepository storageRepository = new StorageRepository();
                 IStorageService storageService = new StorageService(storageRepository);
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 Storage storage = storageService.Enter(nameOfStorage);
 
 
@@ -275,11 +274,11 @@ namespace ServerApplication
                 this.discount = new Discount
                 {
                     Value = Convert.ToDouble(discountContent),
-                    Percentage = new Percentage { Content = "%" }
+                    Percentage = new Percentage("%")
                 };
                 IStorageItemRepository storageItemRepository = new StorageItemRepository(this.discount);
                 IStorageItemService storageItemsService = new StorageItemService(storageItemRepository, this.discount);
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 List<StorageItem> storageItems = storageItemsService.GetStateOfStorage(nameOfStorage).ToList();
 
 
@@ -309,8 +308,8 @@ namespace ServerApplication
                 IStorageService storageService = new StorageService(storageRepository);
                 Storage strorage = new Storage
                 {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
+                    NameOfStorage = new NameOfStorage(name),
+                    KindOfStorage = new KindOfStorage(kind)
                 };
                 storageService.Create(strorage);
             }
@@ -335,11 +334,11 @@ namespace ServerApplication
                 IProductService productService = new ProductService(productRepository);
                 Product product = new Product
                 {
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
+                    NameOfProduct = new NameOfProduct(nameOfProduct),
                     Cost = new UnitCost
                     {
                         Value = Convert.ToDouble(unitCostString),
-                        Currency = new Currency { Content = "EUR" }
+                        Currency = new Currency("EUR")
                     }                    
                 };
                 productService.Create(product);
@@ -348,8 +347,8 @@ namespace ServerApplication
                 IStorageItemService storageItemService = new StorageItemService(storageItemRepository, this.discount);
                 StorageItem storageItem = new StorageItem
                 {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
+                    NameOfStorage = new NameOfStorage(nameOfStorage),
+                    NameOfProduct = new NameOfProduct(nameOfProduct),
                     CountOfProduct = Convert.ToInt32(countString)
                 };
                 storageItemService.Insert(storageItem);
@@ -370,17 +369,17 @@ namespace ServerApplication
 
                 IProductRepository productRepository = new ProductRepository();
                 IProductService productService = new ProductService(productRepository);
-                NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
+                NameOfProduct nameOfProduct = new NameOfProduct(nameOfProductContent);
                 Product product = productService.Get(nameOfProduct);
 
                 this.discount = new Discount
                 {
                     Value = Convert.ToDouble(discountContent),
-                    Percentage = new Percentage { Content = "%" }
+                    Percentage = new Percentage("%")
                 };
                 IStorageItemRepository storageItemRepository = new StorageItemRepository(this.discount);
                 IStorageItemService storageItemService = new StorageItemService(storageItemRepository, this.discount);
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 StorageItem storageItem = storageItemService.Get(nameOfStorage, product.NameOfProduct);
 
 
@@ -405,8 +404,8 @@ namespace ServerApplication
 
                 IStorageItemRepository storageItemRepository = new StorageItemRepository(this.discount);
                 IStorageItemService storageItemService = new StorageItemService(storageItemRepository, this.discount);
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
+                NameOfProduct nameOfProduct = new NameOfProduct(nameOfProductContent);
                 bool isExist = storageItemService.IsProductExistsInStorage(nameOfStorage, nameOfProduct);
 
 
@@ -446,11 +445,11 @@ namespace ServerApplication
                 IProductService productService = new ProductService(productRepository);
                 Product product = new Product
                 {
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
+                    NameOfProduct = new NameOfProduct(nameOfProduct),
                     Cost = new UnitCost
                     {
                         Value = Convert.ToDouble(unitCostString),
-                        Currency = new Currency { Content = "EUR" }
+                        Currency = new Currency("EUR")
                     }
                 };
                 productService.Update(product);
@@ -459,8 +458,8 @@ namespace ServerApplication
                 IStorageItemService storageItemService = new StorageItemService(storageItemRepository, this.discount);
                 StorageItem storageItem = new StorageItem
                 {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
+                    NameOfStorage = new NameOfStorage(nameOfStorage),
+                    NameOfProduct = new NameOfProduct(nameOfProduct),
                     CountOfProduct = Convert.ToInt32(countString)
                 };
                 storageItemService.Update(storageItem);
@@ -481,8 +480,8 @@ namespace ServerApplication
 
                 IStorageItemRepository storageItemRepository = new StorageItemRepository(this.discount);
                 IStorageItemService storageItemService = new StorageItemService(storageItemRepository, this.discount);
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
+                NameOfProduct nameOfProduct = new NameOfProduct(nameOfProductContent);
                 storageItemService.Delete(nameOfStorage, nameOfProduct);
 
             }
@@ -502,7 +501,7 @@ namespace ServerApplication
                 IStorageItemRepository storageItemRepository = new StorageItemRepository(this.discount);
                 IProductRepository productRepository = new ProductRepository();
                 IMoneyItemValueService moneyItemValueService = new MoneyItemValueService(storageItemRepository, productRepository);
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -527,7 +526,7 @@ namespace ServerApplication
                 IStorageItemRepository storageItemRepository = new StorageItemRepository(this.discount);
                 IProductRepository productRepository = new ProductRepository();
                 IMoneyItemValueService moneyItemValueService = new MoneyItemValueService(storageItemRepository, productRepository);
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Max(nameOfStorage);
 
 
@@ -552,7 +551,7 @@ namespace ServerApplication
                 IStorageItemRepository storageItemRepository = new StorageItemRepository(this.discount);
                 IProductRepository productRepository = new ProductRepository();
                 IMoneyItemValueService moneyItemValueService = new MoneyItemValueService(storageItemRepository, productRepository);
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Avg(nameOfStorage);
 
 
@@ -577,7 +576,7 @@ namespace ServerApplication
                 IStorageItemRepository storageItemRepository = new StorageItemRepository(this.discount);
                 IProductRepository productRepository = new ProductRepository();
                 IMoneyItemValueService moneyItemValueService = new MoneyItemValueService(storageItemRepository, productRepository);
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Sum(nameOfStorage);
 
 
