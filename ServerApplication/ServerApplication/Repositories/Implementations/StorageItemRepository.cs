@@ -6,13 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data.OleDb;
-using ServerApplication.Entities.ValueObjects;
 
 namespace ServerApplication.Repositories.Implementations
 {
     public class StorageItemRepository : IStorageItemRepository
     {
-        private OleDbConnection con;
         private string connectionString = string.Empty;
 
         public StorageItemRepository(Discount discount)
@@ -62,6 +60,7 @@ namespace ServerApplication.Repositories.Implementations
         public void Delete(NameOfStorage nameOfStorage, NameOfProduct nameOfProduct)
         {
             string query = "DELETE FROM StateOfStorages WHERE NameOfProduct='" + nameOfProduct.Content + "' AND NameOfStorage = '" + nameOfStorage.Content +"'";
+            OleDbConnection con = new OleDbConnection(this.connectionString);
             con.Open();
             OleDbCommand com = new OleDbCommand(query, con);
             com.ExecuteNonQuery();
@@ -81,8 +80,8 @@ namespace ServerApplication.Repositories.Implementations
                 count = dr["CountOfProduct"].ToString();
                 StorageItem storageItem = new StorageItem
                 {
-                    NameOfStorage = new NameOfStorage { Content = dr["NameOfStorage"].ToString() },
-                    NameOfProduct = new NameOfProduct { Content = dr["NameOfProduct"].ToString() },
+                    NameOfStorage = new NameOfStorage(dr["NameOfStorage"].ToString()),
+                    NameOfProduct = new NameOfProduct(dr["NameOfProduct"].ToString()),
                     CountOfProduct = Convert.ToInt32(count)
                 };
                 storageItems.Add(storageItem);

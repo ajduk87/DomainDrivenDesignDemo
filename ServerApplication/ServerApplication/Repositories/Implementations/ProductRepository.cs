@@ -11,7 +11,6 @@ namespace ServerApplication.Repositories.Implementations
 {
     public class ProductRepository : IProductRepository
     {
-        private OleDbConnection con;
         private string connectionString = string.Empty;
 
         public ProductRepository()
@@ -50,7 +49,7 @@ namespace ServerApplication.Repositories.Implementations
 
             con.Close();
             product.NameOfProduct = name;
-            product.Cost = new UnitCost { Value = Convert.ToDouble(cost), Currency= new Currency { Content = "eur"} };
+            product.Cost = new UnitCost { Value = Convert.ToDouble(cost), Currency= new Currency("eur") };
 
             return product;
         }
