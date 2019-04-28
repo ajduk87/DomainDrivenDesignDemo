@@ -8,6 +8,11 @@ namespace ServerApplication.Entities.ValueObjects.Truck
 {
     public class WheelsId : ValueObject<WheelsId>
     {
-        public int Content { get; set; }
+        public int Content { get; }
+
+        public WheelsId(int Content)
+        {
+            this.Content = Content;
+        }
     }
 }

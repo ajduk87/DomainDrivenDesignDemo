@@ -8,6 +8,11 @@ namespace ServerApplication.Entities.ValueObjects.Truck
 {
     public class WeightUnit : ValueObject<WeightUnit>
     {
-        public string Content { get; set; }
+        public string Content { get; }
+
+        public WeightUnit(string Content)
+        {
+            this.Content = Content;
+        }
     }
 }

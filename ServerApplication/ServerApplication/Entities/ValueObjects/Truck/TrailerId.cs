@@ -8,6 +8,11 @@ namespace ServerApplication.Entities.ValueObjects.Truck
 {
     public class TrailerId : ValueObject<TrailerId>
     {
-        public int Content { get; set; }
+        public int Content { get; }
+
+        public TrailerId(int Content)
+        {
+            this.Content = Content;
+        }
     }
 }

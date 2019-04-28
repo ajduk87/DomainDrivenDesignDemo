@@ -13,11 +13,11 @@ namespace ServerApplication.FactoryFolder
     {
         public static Entity Create(EntityTypes entityType, string nameOfProductContent, string unitCostContent, string currency)
         {
-            NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
+            NameOfProduct nameOfProduct = new NameOfProduct(nameOfProductContent);
             UnitCost cost = new UnitCost
             {
                 Value = Convert.ToDouble(unitCostContent),
-                Currency = new Currency { Content = "EUR" }
+                Currency = new Currency("EUR")
             };
 
 
