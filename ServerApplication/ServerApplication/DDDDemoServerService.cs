@@ -360,11 +360,7 @@ namespace ServerApplication
                 string kind = rq.Args[1];
 
                 IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage(name),
-                    KindOfStorage = new KindOfStorage(kind)
-                };
+                Storage strorage = (Storage)StorageFactory.Create(EntityTypes.Storage, name, kind);
                 storageService.Create(strorage);
             }
             catch (Exception ex)
