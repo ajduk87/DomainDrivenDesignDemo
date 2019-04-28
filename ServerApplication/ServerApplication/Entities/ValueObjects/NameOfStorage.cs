@@ -7,6 +7,11 @@ namespace ServerApplication.Entities.ValueObjects
 {
     public class NameOfStorage : ValueObject<NameOfStorage>
     {
-        public string Content { get; set; }
+        public string Content { get; }
+
+        public NameOfStorage(string Content)
+        {
+            this.Content = Content;
+        }
     }
 }
