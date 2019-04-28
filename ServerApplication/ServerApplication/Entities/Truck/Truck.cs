@@ -21,11 +21,11 @@ namespace ServerApplication.Entities.Truck
             Trailer = this.truckRepository.SelectTrailerByTrailerId(trailerId);
             Wheels = this.truckRepository.SelectWheelsByWheelsId(wheelsId);
             Engine = this.truckRepository.SelectEnginesByEngineId(engineId);
-            StatusId = new StatusId { Content = (int)truckStatus };
+            StatusId = new StatusId((int)truckStatus);
         }
 
 
-        public TruckId Id { get; set; }
+        public TruckId TruckId { get; set; }
         public Trailer Trailer { get; set; }
         public Wheels Wheels { get; set; }
         public Engine Engine { get; set; }

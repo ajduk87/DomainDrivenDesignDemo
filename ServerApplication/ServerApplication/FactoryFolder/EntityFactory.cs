@@ -6,36 +6,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ServerApplication.Entities.ValueObjects;
 
 namespace ServerApplication.FactoryFolder
 {
     public static class EntityFactory
     {
-        public static Entity Create(EntityTypes entityType)
+        public static Entity Create(EntityTypes entityType, string nameOfStorage = null, string kindOfStorage = null)
         {
             switch (entityType)
             {
-                case EntityTypes.ProductApple: { return new ProductApple(); }
-                case EntityTypes.ProductBanana: { return new ProductBanana(); }
-                case EntityTypes.ProductBlueberry: { return new ProductBlueberry(); }
-                case EntityTypes.ProductCabbage: { return new ProductCabbage(); }
-                case EntityTypes.ProductCherry: { return new ProductCherry(); }
-                case EntityTypes.ProductGrape: { return new ProductGrape(); }
-                case EntityTypes.ProductMandarin: { return new ProductMandarin(); }
-                case EntityTypes.ProductMango: { return new ProductMango(); }
-                case EntityTypes.ProductOrange: { return new ProductOrange(); }
-                case EntityTypes.ProductPear: { return new ProductPear(); }
-                case EntityTypes.ProductPlum: { return new ProductPlum(); }
-                case EntityTypes.ProductRaspberry: { return new ProductRaspberry(); }
-                case EntityTypes.ProductStrawberry: { return new ProductStrawberry(); }
-                case EntityTypes.ProductTomato: { return new ProductTomato(); }
-                case EntityTypes.ProductWaterMelon: { return new ProductWaterMelon(); }
-
-                case EntityTypes.Storage: { return new Storage(); }
+                case EntityTypes.Storage:
+                {
+                        return new Storage
+                        {
+                            NameOfStorage = new NameOfStorage(nameOfStorage),
+                            KindOfStorage = new KindOfStorage(kindOfStorage)
+                        };
+                }
                 case EntityTypes.StorageItem: { return new StorageItem(); }
                 case EntityTypes.MoneyItemValue: { return new MoneyItemValue(); }
 
-                default: { return new ProductApple(); }
+                default: { return new MoneyItemValue(); }
             }
         }
     }

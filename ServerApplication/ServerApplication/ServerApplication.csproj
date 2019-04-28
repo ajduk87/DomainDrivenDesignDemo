@@ -109,6 +109,8 @@
     <Compile Include="Entities\ValueObjects\Truck\WheelsId.cs" />
     <Compile Include="Entities\Truck\WheelsSize.cs" />
     <Compile Include="FactoryFolder\EntityFactory.cs" />
+    <Compile Include="FactoryFolder\ProductFactory.cs" />
+    <Compile Include="FactoryFolder\StorageItemFactory.cs" />
     <Compile Include="HelperClass.cs" />
     <Compile Include="Modules\CommandModule.cs" />
     <Compile Include="Modules\MoneyItemValueModule.cs" />

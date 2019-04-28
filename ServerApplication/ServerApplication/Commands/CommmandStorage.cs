@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using ServerApplication.Entities;
 using ServerApplication.Entities.ValueObjects;
+using ServerApplication.FactoryFolder;
 using ServerApplication.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -71,7 +72,7 @@ namespace ServerApplication.Commands
                 string nameOfStorageContent = rq.Args[0];
 
                 IStorageService storageService = container.Resolve<IStorageService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 Storage storage = storageService.Enter(nameOfStorage);
 
 
@@ -92,7 +93,7 @@ namespace ServerApplication.Commands
                 string kindOfStorage = rq.Args[1];
 
                 IStorageItemService storageItemsService = container.Resolve<IStorageItemService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 List<StorageItem> storageItems = storageItemsService.GetStateOfStorage(nameOfStorage).ToList();
 
 
@@ -119,11 +120,7 @@ namespace ServerApplication.Commands
                 string kind = rq.Args[1];
 
                 IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
+                Storage strorage = (Storage)EntityFactory.Create(EntityTypes.Storage, name, kind);
                 storageService.Create(strorage);
             }
             catch (Exception ex)
@@ -140,11 +137,7 @@ namespace ServerApplication.Commands
                 string kind = rq.Args[1];
 
                 IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
+                Storage strorage = (Storage)EntityFactory.Create(EntityTypes.Storage, name, kind);
                 storageService.Create(strorage);
             }
             catch (Exception ex)
@@ -161,11 +154,7 @@ namespace ServerApplication.Commands
                 string kind = rq.Args[1];
 
                 IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
+                Storage strorage = (Storage)EntityFactory.Create(EntityTypes.Storage, name, kind);
                 storageService.Create(strorage);
             }
             catch (Exception ex)
@@ -182,11 +171,7 @@ namespace ServerApplication.Commands
                 string kind = rq.Args[1];
 
                 IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
+                Storage strorage = (Storage)EntityFactory.Create(EntityTypes.Storage, name, kind);
                 storageService.Create(strorage);
             }
             catch (Exception ex)
@@ -203,11 +188,7 @@ namespace ServerApplication.Commands
                 string kind = rq.Args[1];
 
                 IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
+                Storage strorage = (Storage)EntityFactory.Create(EntityTypes.Storage, name, kind);
                 storageService.Create(strorage);
             }
             catch (Exception ex)
@@ -224,11 +205,7 @@ namespace ServerApplication.Commands
                 string kind = rq.Args[1];
 
                 IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
+                Storage strorage = (Storage)EntityFactory.Create(EntityTypes.Storage, name, kind);
                 storageService.Create(strorage);
             }
             catch (Exception ex)
@@ -245,11 +222,7 @@ namespace ServerApplication.Commands
                 string kind = rq.Args[1];
 
                 IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
+                Storage strorage = (Storage)EntityFactory.Create(EntityTypes.Storage, name, kind);
                 storageService.Create(strorage);
             }
             catch (Exception ex)
@@ -266,11 +239,7 @@ namespace ServerApplication.Commands
                 string kind = rq.Args[1];
 
                 IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
+                Storage strorage = (Storage)EntityFactory.Create(EntityTypes.Storage, name, kind);
                 storageService.Create(strorage);
             }
             catch (Exception ex)
@@ -287,11 +256,7 @@ namespace ServerApplication.Commands
                 string kind = rq.Args[1];
 
                 IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
+                Storage strorage = (Storage)EntityFactory.Create(EntityTypes.Storage, name, kind);
                 storageService.Create(strorage);
             }
             catch (Exception ex)
@@ -308,11 +273,7 @@ namespace ServerApplication.Commands
                 string kind = rq.Args[1];
 
                 IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
+                Storage strorage = (Storage)EntityFactory.Create(EntityTypes.Storage, name, kind);
                 storageService.Create(strorage);
             }
             catch (Exception ex)

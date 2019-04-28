@@ -48,7 +48,7 @@ namespace ServerApplication.Commands
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -70,7 +70,7 @@ namespace ServerApplication.Commands
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -92,7 +92,7 @@ namespace ServerApplication.Commands
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -114,7 +114,7 @@ namespace ServerApplication.Commands
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -136,7 +136,7 @@ namespace ServerApplication.Commands
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -158,7 +158,7 @@ namespace ServerApplication.Commands
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -180,7 +180,7 @@ namespace ServerApplication.Commands
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -202,7 +202,7 @@ namespace ServerApplication.Commands
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -224,7 +224,7 @@ namespace ServerApplication.Commands
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -246,7 +246,7 @@ namespace ServerApplication.Commands
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -268,7 +268,7 @@ namespace ServerApplication.Commands
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Max(nameOfStorage);
 
 
@@ -290,7 +290,7 @@ namespace ServerApplication.Commands
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Avg(nameOfStorage);
 
 
@@ -312,7 +312,7 @@ namespace ServerApplication.Commands
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Sum(nameOfStorage);
 
                 string response = moneyItem.Value + " " + moneyItem.Currency.Content;

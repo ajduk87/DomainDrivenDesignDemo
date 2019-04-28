@@ -10,7 +10,7 @@ namespace ServerApplication.Entities.Truck
 {
     public class Wheels : Entity
     {
-        public WheelsId Id { get; set; }
+        public WheelsId WheelsId { get; set; }
         public WheelsSize Size { get; set; }
     }
 }

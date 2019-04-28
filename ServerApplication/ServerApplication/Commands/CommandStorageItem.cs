@@ -56,23 +56,11 @@ namespace ServerApplication.Commands
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)StorageItemFactory.Create(EntityTypes.StorageItem, nameOfProduct, nameOfStorage, countString);
                 storageItemService.Insert(storageItem);
             }
             catch (Exception ex)
@@ -92,23 +80,11 @@ namespace ServerApplication.Commands
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)StorageItemFactory.Create(EntityTypes.StorageItem, nameOfProduct, nameOfStorage, countString);
                 storageItemService.Insert(storageItem);
             }
             catch (Exception ex)
@@ -128,23 +104,11 @@ namespace ServerApplication.Commands
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)StorageItemFactory.Create(EntityTypes.StorageItem, nameOfProduct, nameOfStorage, countString);
                 storageItemService.Insert(storageItem);
             }
             catch (Exception ex)
@@ -164,23 +128,11 @@ namespace ServerApplication.Commands
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)StorageItemFactory.Create(EntityTypes.StorageItem, nameOfProduct, nameOfStorage, countString);
                 storageItemService.Insert(storageItem);
             }
             catch (Exception ex)
@@ -200,23 +152,11 @@ namespace ServerApplication.Commands
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)StorageItemFactory.Create(EntityTypes.StorageItem, nameOfProduct, nameOfStorage, countString);
                 storageItemService.Insert(storageItem);
             }
             catch (Exception ex)
@@ -236,23 +176,11 @@ namespace ServerApplication.Commands
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)StorageItemFactory.Create(EntityTypes.StorageItem, nameOfProduct, nameOfStorage, countString);
                 storageItemService.Insert(storageItem);
             }
             catch (Exception ex)
@@ -272,23 +200,11 @@ namespace ServerApplication.Commands
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)StorageItemFactory.Create(EntityTypes.StorageItem, nameOfProduct, nameOfStorage, countString);
                 storageItemService.Insert(storageItem);
             }
             catch (Exception ex)
@@ -308,23 +224,11 @@ namespace ServerApplication.Commands
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)StorageItemFactory.Create(EntityTypes.StorageItem, nameOfProduct, nameOfStorage, countString);
                 storageItemService.Insert(storageItem);
             }
             catch (Exception ex)
@@ -344,23 +248,11 @@ namespace ServerApplication.Commands
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)StorageItemFactory.Create(EntityTypes.StorageItem, nameOfProduct, nameOfStorage, countString);
                 storageItemService.Insert(storageItem);
             }
             catch (Exception ex)
@@ -380,23 +272,11 @@ namespace ServerApplication.Commands
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)StorageItemFactory.Create(EntityTypes.StorageItem, nameOfProduct, nameOfStorage, countString);
                 storageItemService.Insert(storageItem);
             }
             catch (Exception ex)
@@ -413,11 +293,11 @@ namespace ServerApplication.Commands
                 string nameOfStorageContent = rq.Args[1];
 
                 IProductService productService = container.Resolve<IProductService>();
-                NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
+                NameOfProduct nameOfProduct = new NameOfProduct(nameOfProductContent);
                 ProductApple product = productService.Get(nameOfProduct);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 StorageItem storageItem = storageItemService.Get(nameOfStorage, product.NameOfProduct);
 
 
@@ -440,8 +320,8 @@ namespace ServerApplication.Commands
                 string nameOfStorageContent = rq.Args[1];
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
+                NameOfProduct nameOfProduct = new NameOfProduct(nameOfProductContent);
                 bool isExist = storageItemService.IsProductExistsInStorage(nameOfStorage, nameOfProduct);
 
 
@@ -477,22 +357,11 @@ namespace ServerApplication.Commands
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
                 productService.Update(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)StorageItemFactory.Create(EntityTypes.StorageItem, nameOfProduct, nameOfStorage, countString);
                 storageItemService.Update(storageItem);
             }
             catch (Exception ex)
@@ -509,8 +378,8 @@ namespace ServerApplication.Commands
                 string nameOfProductContent = rq.Args[1];
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
+                NameOfProduct nameOfProduct = new NameOfProduct(nameOfProductContent);
                 storageItemService.Delete(nameOfStorage, nameOfProduct);
 
             }

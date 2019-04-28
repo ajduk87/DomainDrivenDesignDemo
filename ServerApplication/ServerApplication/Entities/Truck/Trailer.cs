@@ -10,7 +10,7 @@ namespace ServerApplication.Entities.Truck
 {
     public class Trailer : Entity
     {
-        public TrailerId  Id { get; set; }
+        public TrailerId TrailerId { get; set; }
         public TrailerCapacity Capacity { get; set; }
     }
 }
