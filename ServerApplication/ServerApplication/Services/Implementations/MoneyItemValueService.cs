@@ -63,7 +63,7 @@ namespace ServerApplication.Services.Implementations
                 MoneyItemValue moneyItemValue = new MoneyItemValue
                 {
                     Value = storageItem.CountOfProduct * product.Cost.Value,
-                    Currency = new Currency { Content = "EUR" }
+                    Currency = new Currency("EUR")
                 };
                 moneyItemValues.Add(moneyItemValue);
             });
