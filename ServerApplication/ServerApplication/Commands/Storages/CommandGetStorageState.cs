@@ -32,7 +32,7 @@ namespace ServerApplication.Commands.Storages
                 string kindOfStorage = rq.Args[1];
 
                 IStorageItemService storageItemsService = container.Resolve<IStorageItemService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 List<StorageItem> storageItems = storageItemsService.GetStateOfStorage(nameOfStorage).ToList();
 
 

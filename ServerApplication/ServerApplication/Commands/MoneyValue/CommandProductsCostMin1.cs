@@ -27,7 +27,7 @@ namespace ServerApplication.Commands.MoneyValue
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 

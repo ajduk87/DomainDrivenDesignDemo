@@ -31,8 +31,8 @@ namespace ServerApplication.Commands.StorageItems
                 string nameOfProductContent = rq.Args[1];
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
+                NameOfProduct nameOfProduct = new NameOfProduct(nameOfProductContent);
                 storageItemService.Delete(nameOfStorage, nameOfProduct);
 
             }

@@ -31,9 +31,9 @@ namespace ServerApplication.Commands.Trucks
             string engineIdContent = rq.Args[2];
 
             ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            TrailerId trailerId = new TrailerId(Convert.ToInt32(trailerIdContent));
+            WheelsId wheelsId = new WheelsId(Convert.ToInt32(wheelsIdContent));
+            EngineId engineId = new EngineId(Convert.ToInt32(engineIdContent));
             Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
             truckService.Insert(truck);
         }

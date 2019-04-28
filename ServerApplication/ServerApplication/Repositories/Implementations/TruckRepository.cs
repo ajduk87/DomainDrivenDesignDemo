@@ -12,7 +12,6 @@ namespace ServerApplication.Repositories.Implementations
 {
     public class TruckRepository : ITruckRepository
     {
-        private OleDbConnection con;
         private string connectionString = string.Empty;
 
         public TruckRepository()
@@ -24,7 +23,7 @@ namespace ServerApplication.Repositories.Implementations
         {
             OleDbConnection con = new OleDbConnection(this.connectionString);
 
-            string query = "INSERT INTO Truck(TrailerId,WheelsId,EngineId,StatusId) VALUES('" + truck.Trailer.Id.Content + "','" + truck.Wheels.Id.Content + "'" + "','" + truck.Engine.Id.Content + "'" + "','" + TruckStatus.Available + "')";
+            string query = "INSERT INTO Truck(TrailerId,WheelsId,EngineId,StatusId) VALUES('" + truck.Trailer.TrailerId.Content + "','" + truck.Wheels.WheelsId.Content + "'" + "','" + truck.Engine.EngineId.Content + "'" + "','" + TruckStatus.Available + "')";
 
             con.Open();
             OleDbCommand com = new OleDbCommand(query, con);
@@ -44,7 +43,7 @@ namespace ServerApplication.Repositories.Implementations
 
         public Trailer SelectTrailerByTrailerId(TrailerId trailerId)
         {
-            Trailer trailer = new Trailer { Id = trailerId };
+            Trailer trailer = new Trailer { TrailerId = trailerId };
             string query = "SELECT Id, Capacity FROM Trailer WHERE Id = '" + trailerId.Content + "'";
             OleDbConnection con = new OleDbConnection(this.connectionString);
 
@@ -57,10 +56,7 @@ namespace ServerApplication.Repositories.Implementations
                 trailer.Capacity = new TrailerCapacity
                 {
                     Value = Convert.ToDouble(dr["Capacity"].ToString()),
-                    WeightUnit = new WeightUnit
-                    {
-                        Content = "kg"
-                    }
+                    WeightUnit = new WeightUnit("kg")
                 };
             }
 ;
@@ -71,7 +67,7 @@ namespace ServerApplication.Repositories.Implementations
 
         public Wheels SelectWheelsByWheelsId(WheelsId wheelsId)
         {
-            Wheels wheels = new Wheels { Id = wheelsId };
+            Wheels wheels = new Wheels { WheelsId = wheelsId };
             string query = "SELECT Size FROM Wheels WHERE Id = '" + wheelsId.Content + "'";
             OleDbConnection con = new OleDbConnection(this.connectionString);
 
@@ -84,10 +80,7 @@ namespace ServerApplication.Repositories.Implementations
                 wheels.Size = new WheelsSize
                 {
                     Value = Convert.ToInt32(dr["Size"].ToString()),
-                    LengthUnit = new LengthUnit
-                    {
-                        Content = "cm"
-                    }
+                    LengthUnit = new LengthUnit("cm")
                 };
             }
 ;
@@ -98,7 +91,7 @@ namespace ServerApplication.Repositories.Implementations
 
         public Engine SelectEnginesByEngineId(EngineId engineId)
         {
-            Engine engine = new Engine { Id = engineId };
+            Engine engine = new Engine { EngineId = engineId };
             string query = "SELECT Power FROM Engine WHERE Id = '" + engineId.Content + "'";
             OleDbConnection con = new OleDbConnection(this.connectionString);
 
@@ -111,10 +104,7 @@ namespace ServerApplication.Repositories.Implementations
                 engine.Power = new EnginePower
                 {
                     Value = Convert.ToInt32(dr["Power"].ToString()),
-                    PowerUnit = new PowerUnit
-                    {
-                        Content = "W"
-                    }
+                    PowerUnit = new PowerUnit("W")
                 };
             }
 ;

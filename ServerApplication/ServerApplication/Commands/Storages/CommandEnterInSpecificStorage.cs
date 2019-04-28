@@ -31,7 +31,7 @@ namespace ServerApplication.Commands.Storages
                 string nameOfStorageContent = rq.Args[0];
 
                 IStorageService storageService = container.Resolve<IStorageService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 Storage storage = storageService.Enter(nameOfStorage);
 
 

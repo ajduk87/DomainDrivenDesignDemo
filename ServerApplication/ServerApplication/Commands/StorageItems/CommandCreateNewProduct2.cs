@@ -33,23 +33,11 @@ namespace ServerApplication.Commands.StorageItems
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)StorageItemFactory.Create(EntityTypes.StorageItem, nameOfProduct, nameOfStorage, countString);
                 storageItemService.Insert(storageItem);
             }
             catch (Exception ex)

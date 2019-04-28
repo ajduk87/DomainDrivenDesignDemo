@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using ServerApplication.Entities;
 using ServerApplication.Entities.ValueObjects;
+using ServerApplication.FactoryFolder;
 using ServerApplication.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -32,11 +33,7 @@ namespace ServerApplication.Commands.Storages
                 string kind = rq.Args[1];
 
                 IStorageService storageService = container.Resolve<IStorageService>();
-                Storage strorage = new Storage
-                {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
-                };
+                Storage strorage = (Storage)EntityFactory.Create(EntityTypes.Storage, name, kind);
                 storageService.Create(strorage);
             }
             catch (Exception ex)

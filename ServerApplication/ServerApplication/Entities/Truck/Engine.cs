@@ -10,7 +10,7 @@ namespace ServerApplication.Entities.Truck
 {
     public class Engine : Entity
     {
-        public EngineId Id { get; set; }
+        public EngineId EngineId { get; set; }
         public EnginePower Power { get; set; }
     }
 }

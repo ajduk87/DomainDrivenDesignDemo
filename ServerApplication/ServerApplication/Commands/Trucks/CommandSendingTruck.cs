@@ -25,7 +25,7 @@ namespace ServerApplication.Commands.Trucks
             string truckIdContent = rq.Args[0];
 
             ITruckService truckService = container.Resolve<ITruckService>();
-            TruckId truckId = new TruckId { Content = Convert.ToInt32(truckIdContent) };
+            TruckId truckId = new TruckId(Convert.ToInt32(truckIdContent));
             truckService.Send(truckId);
         }
     }

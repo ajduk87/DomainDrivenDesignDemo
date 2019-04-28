@@ -33,11 +33,11 @@ namespace ServerApplication.Commands.StorageItems
                 string nameOfStorageContent = rq.Args[1];
 
                 IProductService productService = container.Resolve<IProductService>();
-                NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
+                NameOfProduct nameOfProduct = new NameOfProduct(nameOfProductContent);
                 ProductApple product = productService.Get(nameOfProduct);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 StorageItem storageItem = storageItemService.Get(nameOfStorage, product.NameOfProduct);
 
 

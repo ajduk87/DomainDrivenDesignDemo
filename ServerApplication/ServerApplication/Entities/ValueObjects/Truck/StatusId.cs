@@ -8,6 +8,11 @@ namespace ServerApplication.Entities.ValueObjects.Truck
 {
     public class StatusId
     {
-        public int Content { get; set; }
+        public int Content { get; }
+
+        public StatusId(int Content)
+        {
+            this.Content = Content;
+        }
     }
 }

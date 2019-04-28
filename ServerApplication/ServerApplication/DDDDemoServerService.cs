@@ -33,7 +33,6 @@ namespace ServerApplication
         private string pathForResponse = "C:\\DomainDrivenDesignDemo\\Buffers\\bufferForResponse.txt";
         private static string pathForDatabase = "C:\\DomainDrivenDesignDemo\\InfrastructureLayer\\Database\\Storages.accdb";
         private OleDbConnection con;
-        private FileStream fs;
         private long numberOfClientRequest = 0;
         private ContainerBuilder objContainer;
         private Autofac.IContainer container;
