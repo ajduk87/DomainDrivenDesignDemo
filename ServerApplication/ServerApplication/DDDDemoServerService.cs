@@ -21,9 +21,9 @@ using ServerApplication.Entities.Products;
 using ServerApplication.FactoryFolder;
 using ServerApplication.Entities.ValueObjects.Truck;
 using ServerApplication.Entities.Truck;
-using ServerApplication.Commands.Callers;
-using ServerApplication.Commands;
-using ServerApplication.Modules.Commands;
+using ServerApplication.Requests.Callers;
+using ServerApplication.Requests;
+using ServerApplication.Modules.Requests;
 
 namespace ServerApplication
 {
@@ -37,10 +37,10 @@ namespace ServerApplication
         private ContainerBuilder objContainer;
         private Autofac.IContainer container;
 
-        private CommmandStorageCaller commmandStorageCaller;
-        private CommandTruckCaller commandTruckCaller;
-        private CommandStorageItemCaller commandProductCaller;
-        private CommandMoneyValueCaller commandMoneyValueCaller;
+        private RequestStorageCaller commmandStorageCaller;
+        private RequestTruckCaller RequestTruckCaller;
+        private RequestStorageItemCaller RequestProductCaller;
+        private RequestMoneyValueCaller RequestMoneyValueCaller;
 
         public DDDDemoServerService()
         {
@@ -71,17 +71,17 @@ namespace ServerApplication
             objContainer.RegisterModule<StorageItemModule>();
             objContainer.RegisterModule<MoneyItemValueModule>();
 
-            objContainer.RegisterModule<CommandStorageModule>();
-            objContainer.RegisterModule<CommandTruckModule>();
-            objContainer.RegisterModule<CommandStorageItemModule>();
-            objContainer.RegisterModule<CommandMoneyValueModule>();
+            objContainer.RegisterModule<RequestStorageModule>();
+            objContainer.RegisterModule<RequestTruckModule>();
+            objContainer.RegisterModule<RequestStorageItemModule>();
+            objContainer.RegisterModule<RequestMoneyValueModule>();
 
             container = objContainer.Build();
 
-            commmandStorageCaller = new CommmandStorageCaller(container);
-            commandTruckCaller = new CommandTruckCaller(container);
-            commandProductCaller = new CommandStorageItemCaller(container);
-            commandMoneyValueCaller = new CommandMoneyValueCaller(container);
+            commmandStorageCaller = new RequestStorageCaller(container);
+            RequestTruckCaller = new RequestTruckCaller(container);
+            RequestProductCaller = new RequestStorageItemCaller(container);
+            RequestMoneyValueCaller = new RequestMoneyValueCaller(container);
         }
 
         protected override void OnStop()
@@ -92,9 +92,9 @@ namespace ServerApplication
             }
         }
 
-        protected override void OnCustomCommand(int command)
+        protected override void OnCustomCommand(int Request)
         {
-            if (command == 200)
+            if (Request == 200)
             {
                 Commit();
             }
@@ -121,7 +121,7 @@ namespace ServerApplication
                         if (rq.Args.Count == 2)
                         {
                             this.numberOfClientRequest = 1;
-                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Storage);
+                            ProcessClientRequest(this.numberOfClientRequest, rq, RequestTypes.Storage);
                         }
 
                     }//if (rq.Noun.Equals("STORAGE"))
@@ -131,7 +131,7 @@ namespace ServerApplication
                         if (rq.Args.Count == 5)
                         {
                             this.numberOfClientRequest = 2;
-                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Storage);                            
+                            ProcessClientRequest(this.numberOfClientRequest, rq, RequestTypes.Storage);                            
                         }
                     }//if (rq.Noun.Equals("PRODUCT"))
                 }//if (rq.Verb.Equals("INSERT"))
@@ -143,17 +143,17 @@ namespace ServerApplication
                         if (rq.Args.Count == 0)
                         {
                             this.numberOfClientRequest = 3;
-                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Storage);                            
+                            ProcessClientRequest(this.numberOfClientRequest, rq, RequestTypes.Storage);                            
                         }//end if (rq.Args.Count == 0)
                         if (rq.Args.Count == 1)
                         {
                             this.numberOfClientRequest = 4;
-                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Storage);
+                            ProcessClientRequest(this.numberOfClientRequest, rq, RequestTypes.Storage);
                         }//end if (rq.Args.Count == 1)
                         if (rq.Args.Count == 2)
                         {
                             this.numberOfClientRequest = 5;
-                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Storage);                            
+                            ProcessClientRequest(this.numberOfClientRequest, rq, RequestTypes.Storage);                            
                         }//end if (rq.Args.Count == 2)
                     }//if (rq.Noun.Equals("STORAGE"))
 
@@ -162,13 +162,13 @@ namespace ServerApplication
                         if (rq.Args.Count == 2)
                         {
                             this.numberOfClientRequest = 6;
-                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Product);                            
+                            ProcessClientRequest(this.numberOfClientRequest, rq, RequestTypes.Product);                            
                         }//if (rq.Args.Count == 2)
 
                         if (rq.Args.Count == 3 && rq.Args[2].Equals("CHECK"))
                         {
                             this.numberOfClientRequest = 7;
-                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Product);                            
+                            ProcessClientRequest(this.numberOfClientRequest, rq, RequestTypes.Product);                            
                         }//if (rq.Args.Count == 3)
                     }//if (rq.Noun.Equals("PRODUCT"))
 
@@ -177,28 +177,28 @@ namespace ServerApplication
                         if (rq.Args.Count == 2 && rq.Args[1].Equals("MIN"))
                         {
                             this.numberOfClientRequest = 8;
-                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.MoneyValue);                           
+                            ProcessClientRequest(this.numberOfClientRequest, rq, RequestTypes.MoneyValue);                           
 
                         }//if (rq.Args.Count == 2 && rq.Args[1].Equals("MIN"))
 
                         if (rq.Args.Count == 2 && rq.Args[1].Equals("MAX"))
                         {
                             this.numberOfClientRequest = 9;
-                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.MoneyValue);                            
+                            ProcessClientRequest(this.numberOfClientRequest, rq, RequestTypes.MoneyValue);                            
 
                         }//if (rq.Args.Count == 2 && rq.Args[1].Equals("MAX"))
 
                         if (rq.Args.Count == 2 && rq.Args[1].Equals("AVG"))
                         {
                             this.numberOfClientRequest = 10;
-                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.MoneyValue);
+                            ProcessClientRequest(this.numberOfClientRequest, rq, RequestTypes.MoneyValue);
                             
                         }//if (rq.Args.Count == 2 && rq.Args[1].Equals("AVG"))
 
                         if (rq.Args.Count == 2 && rq.Args[1].Equals("SUM"))
                         {
                             this.numberOfClientRequest = 11;
-                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.MoneyValue);
+                            ProcessClientRequest(this.numberOfClientRequest, rq, RequestTypes.MoneyValue);
                         }//if (rq.Args.Count == 2 && rq.Args[1].Equals("SUM"))
                     }//if (rq.Noun.Equals("PRODUCTCOSTS"))
 
@@ -211,7 +211,7 @@ namespace ServerApplication
                         if (rq.Args.Count == 5)
                         {
                             this.numberOfClientRequest = 12;
-                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Product);                           
+                            ProcessClientRequest(this.numberOfClientRequest, rq, RequestTypes.Product);                           
                         }//if (rq.Args.Count == 5)
                     }//if (rq.Noun.Equals("PRODUCT"))
                 }//if (rq.Verb.Equals("PUT"))
@@ -223,7 +223,7 @@ namespace ServerApplication
                         if (rq.Args.Count == 3)
                         {
                             this.numberOfClientRequest = 13;
-                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Product);                           
+                            ProcessClientRequest(this.numberOfClientRequest, rq, RequestTypes.Product);                           
                         }//if (rq.Args.Count == 3)
                     }//if (rq.Noun.Equals("PRODUCT"))
                 }//if (rq.Verb.Equals("DELETE")) 
@@ -235,7 +235,7 @@ namespace ServerApplication
                         if (rq.Args.Count == 3)
                         {
                             this.numberOfClientRequest = 14;
-                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Truck);
+                            ProcessClientRequest(this.numberOfClientRequest, rq, RequestTypes.Truck);
                         }
                     }
                 }
@@ -247,7 +247,7 @@ namespace ServerApplication
                         if (rq.Args.Count == 1)
                         {
                             this.numberOfClientRequest = 14;
-                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Truck);
+                            ProcessClientRequest(this.numberOfClientRequest, rq, RequestTypes.Truck);
                         }
                     }
                 }
@@ -259,7 +259,7 @@ namespace ServerApplication
                         if (rq.Args.Count == 2)
                         {
                             this.numberOfClientRequest = 14;
-                            ProcessClientRequest(this.numberOfClientRequest, rq, CommandTypes.Truck);
+                            ProcessClientRequest(this.numberOfClientRequest, rq, RequestTypes.Truck);
                         }
                     }
                 }
@@ -267,14 +267,14 @@ namespace ServerApplication
             }
         }
 
-        private void ProcessClientRequest(long numberOfClientRequest, Request rq, CommandTypes commandType)
+        private void ProcessClientRequest(long numberOfClientRequest, Request rq, RequestTypes RequestType)
         {
-            switch (commandType)
+            switch (RequestType)
             {
-                case CommandTypes.Storage: commmandStorageCaller.HandleRequest(numberOfClientRequest, rq);break;
-                case CommandTypes.Product: commandProductCaller.HandleRequest(numberOfClientRequest, rq); break;
-                case CommandTypes.MoneyValue: commandMoneyValueCaller.HandleRequest(numberOfClientRequest, rq); break;
-                case CommandTypes.Truck: commandTruckCaller.HandleRequest(numberOfClientRequest, rq); break;
+                case RequestTypes.Storage: commmandStorageCaller.HandleRequest(numberOfClientRequest, rq);break;
+                case RequestTypes.Product: RequestProductCaller.HandleRequest(numberOfClientRequest, rq); break;
+                case RequestTypes.MoneyValue: RequestMoneyValueCaller.HandleRequest(numberOfClientRequest, rq); break;
+                case RequestTypes.Truck: RequestTruckCaller.HandleRequest(numberOfClientRequest, rq); break;
 
             }
 
