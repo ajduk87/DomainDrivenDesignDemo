@@ -11,7 +11,6 @@ namespace ServerApplication.Repositories.Implementations
 {
     public class StorageRepository : IStorageRepository
     {
-        private OleDbConnection con;
         private string connectionString = string.Empty;
 
         public StorageRepository()
@@ -44,8 +43,8 @@ namespace ServerApplication.Repositories.Implementations
             {
                 Storage storage = new Storage
                 {
-                    NameOfStorage = new NameOfStorage { Content = dr["NameOfStorage"].ToString() },
-                    KindOfStorage = new KindOfStorage { Content = dr["KindOfStorage"].ToString() }
+                    NameOfStorage = new NameOfStorage(dr["NameOfStorage"].ToString()),
+                    KindOfStorage = new KindOfStorage(dr["KindOfStorage"].ToString())
 
                 };
                 storages.Add(storage);
@@ -66,8 +65,8 @@ namespace ServerApplication.Repositories.Implementations
             string response = string.Empty;
             if (dr.Read())
             {
-                storage.NameOfStorage = new NameOfStorage { Content = dr["NameOfStorage"].ToString() };
-                storage.KindOfStorage = new KindOfStorage { Content = dr["KindOfStorage"].ToString() };
+                storage.NameOfStorage = new NameOfStorage(dr["NameOfStorage"].ToString());
+                storage.KindOfStorage = new KindOfStorage(dr["KindOfStorage"].ToString());
             }
 ;
             con.Close();
