@@ -8,6 +8,11 @@ namespace ServerApplication.Entities.ValueObjects.Truck
 {
     public class PowerUnit
     {
-        public string Content { get; set; }
+        public string Content { get; }
+
+        public PowerUnit(string Content)
+        {
+            this.Content = Content;
+        }
     }
 }

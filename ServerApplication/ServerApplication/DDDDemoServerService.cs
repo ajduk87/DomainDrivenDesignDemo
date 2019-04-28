@@ -30,7 +30,6 @@ namespace ServerApplication
         private string pathForResponse = "C:\\DomainDrivenDesignDemo\\Buffers\\bufferForResponse.txt";
         private static string pathForDatabase = "C:\\DomainDrivenDesignDemo\\InfrastructureLayer\\Database\\Storages.accdb";
         private OleDbConnection con;
-        private FileStream fs;
         private long numberOfClientRequest = 0;
         private ContainerBuilder objContainer;
         private Autofac.IContainer container;
@@ -341,7 +340,7 @@ namespace ServerApplication
                 string nameOfStorageContent = rq.Args[0];
 
                 IStorageService storageService = container.Resolve<IStorageService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 Storage storage = storageService.Enter(nameOfStorage);
 
 
@@ -362,7 +361,7 @@ namespace ServerApplication
                 string kindOfStorage = rq.Args[1];
 
                 IStorageItemService storageItemsService = container.Resolve<IStorageItemService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 List<StorageItem> storageItems = storageItemsService.GetStateOfStorage(nameOfStorage).ToList();
 
 
@@ -391,8 +390,8 @@ namespace ServerApplication
                 IStorageService storageService = container.Resolve<IStorageService>();
                 Storage strorage = new Storage
                 {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
+                    NameOfStorage = new NameOfStorage(name),
+                    KindOfStorage = new KindOfStorage(kind)
                 };
                 storageService.Create(strorage);
             }
@@ -412,8 +411,8 @@ namespace ServerApplication
                 IStorageService storageService = container.Resolve<IStorageService>();
                 Storage strorage = new Storage
                 {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
+                    NameOfStorage = new NameOfStorage(name),
+                    KindOfStorage = new KindOfStorage(kind)
                 };
                 storageService.Create(strorage);
             }
@@ -433,8 +432,8 @@ namespace ServerApplication
                 IStorageService storageService = container.Resolve<IStorageService>();
                 Storage strorage = new Storage
                 {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
+                    NameOfStorage = new NameOfStorage(name),
+                    KindOfStorage = new KindOfStorage(kind)
                 };
                 storageService.Create(strorage);
             }
@@ -454,8 +453,8 @@ namespace ServerApplication
                 IStorageService storageService = container.Resolve<IStorageService>();
                 Storage strorage = new Storage
                 {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
+                    NameOfStorage = new NameOfStorage(name),
+                    KindOfStorage = new KindOfStorage(kind)
                 };
                 storageService.Create(strorage);
             }
@@ -475,8 +474,8 @@ namespace ServerApplication
                 IStorageService storageService = container.Resolve<IStorageService>();
                 Storage strorage = new Storage
                 {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
+                    NameOfStorage = new NameOfStorage(name),
+                    KindOfStorage = new KindOfStorage(kind)
                 };
                 storageService.Create(strorage);
             }
@@ -496,8 +495,8 @@ namespace ServerApplication
                 IStorageService storageService = container.Resolve<IStorageService>();
                 Storage strorage = new Storage
                 {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
+                    NameOfStorage = new NameOfStorage(name),
+                    KindOfStorage = new KindOfStorage(kind)
                 };
                 storageService.Create(strorage);
             }
@@ -517,8 +516,8 @@ namespace ServerApplication
                 IStorageService storageService = container.Resolve<IStorageService>();
                 Storage strorage = new Storage
                 {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
+                    NameOfStorage = new NameOfStorage(name),
+                    KindOfStorage = new KindOfStorage(kind)
                 };
                 storageService.Create(strorage);
             }
@@ -538,8 +537,8 @@ namespace ServerApplication
                 IStorageService storageService = container.Resolve<IStorageService>();
                 Storage strorage = new Storage
                 {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
+                    NameOfStorage = new NameOfStorage(name),
+                    KindOfStorage = new KindOfStorage(kind)
                 };
                 storageService.Create(strorage);
             }
@@ -559,8 +558,8 @@ namespace ServerApplication
                 IStorageService storageService = container.Resolve<IStorageService>();
                 Storage strorage = new Storage
                 {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
+                    NameOfStorage = new NameOfStorage(name),
+                    KindOfStorage = new KindOfStorage(kind)
                 };
                 storageService.Create(strorage);
             }
@@ -580,8 +579,8 @@ namespace ServerApplication
                 IStorageService storageService = container.Resolve<IStorageService>();
                 Storage strorage = new Storage
                 {
-                    NameOfStorage = new NameOfStorage { Content = name },
-                    KindOfStorage = new KindOfStorage { Content = kind }
+                    NameOfStorage = new NameOfStorage(name),
+                    KindOfStorage = new KindOfStorage(kind)
                 };
                 storageService.Create(strorage);
             }
@@ -603,11 +602,11 @@ namespace ServerApplication
 
                 IProductService productService = container.Resolve<IProductService>();
                 ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
+                product.NameOfProduct = new NameOfProduct(nameOfProduct);
                 product.Cost = new UnitCost
                 {
                     Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
+                    Currency = new Currency("EUR")
                 };
 
                 productService.Create(product);
@@ -615,8 +614,8 @@ namespace ServerApplication
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
                 StorageItem storageItem = new StorageItem
                 {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
+                    NameOfStorage = new NameOfStorage(nameOfStorage),
+                    NameOfProduct = new NameOfProduct(nameOfProduct),
                     CountOfProduct = Convert.ToInt32(countString)
                 };
                 storageItemService.Insert(storageItem);
@@ -639,11 +638,11 @@ namespace ServerApplication
 
                 IProductService productService = container.Resolve<IProductService>();
                 ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
+                product.NameOfProduct = new NameOfProduct(nameOfProduct);
                 product.Cost = new UnitCost
                 {
                     Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
+                    Currency = new Currency("EUR")
                 };
 
                 productService.Create(product);
@@ -651,8 +650,8 @@ namespace ServerApplication
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
                 StorageItem storageItem = new StorageItem
                 {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
+                    NameOfStorage = new NameOfStorage(nameOfStorage),
+                    NameOfProduct = new NameOfProduct(nameOfProduct),
                     CountOfProduct = Convert.ToInt32(countString)
                 };
                 storageItemService.Insert(storageItem);
@@ -674,23 +673,11 @@ namespace ServerApplication
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
-
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)EntityFactory.Create(EntityTypes.StorageItem);
                 storageItemService.Insert(storageItem);
             }
             catch (Exception ex)
@@ -710,23 +697,12 @@ namespace ServerApplication
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
 
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)EntityFactory.Create(EntityTypes.StorageItem, nameOfStorage, nameOfProduct, countString);
                 storageItemService.Insert(storageItem);
             }
             catch (Exception ex)
@@ -746,23 +722,12 @@ namespace ServerApplication
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
 
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)EntityFactory.Create(EntityTypes.StorageItem, nameOfStorage, nameOfProduct, countString);
                 storageItemService.Insert(storageItem);
             }
             catch (Exception ex)
@@ -782,23 +747,12 @@ namespace ServerApplication
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
 
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)EntityFactory.Create(EntityTypes.StorageItem, nameOfStorage, nameOfProduct, countString);
                 storageItemService.Insert(storageItem);
             }
             catch (Exception ex)
@@ -818,23 +772,12 @@ namespace ServerApplication
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
 
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)EntityFactory.Create(EntityTypes.StorageItem, nameOfStorage, nameOfProduct, countString);
                 storageItemService.Insert(storageItem);
             }
             catch (Exception ex)
@@ -854,23 +797,12 @@ namespace ServerApplication
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
 
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)EntityFactory.Create(EntityTypes.StorageItem, nameOfStorage, nameOfProduct, countString);
                 storageItemService.Insert(storageItem);
             }
             catch (Exception ex)
@@ -890,23 +822,12 @@ namespace ServerApplication
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
 
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)EntityFactory.Create(EntityTypes.StorageItem, nameOfStorage, nameOfProduct, countString);
                 storageItemService.Insert(storageItem);
             }
             catch (Exception ex)
@@ -926,23 +847,12 @@ namespace ServerApplication
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
 
                 productService.Create(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)EntityFactory.Create(EntityTypes.StorageItem, nameOfStorage, nameOfProduct, countString);
                 storageItemService.Insert(storageItem);
             }
             catch (Exception ex)
@@ -959,11 +869,11 @@ namespace ServerApplication
                 string nameOfStorageContent = rq.Args[1];
 
                 IProductService productService = container.Resolve<IProductService>();
-                NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
+                NameOfProduct nameOfProduct = new NameOfProduct(nameOfProductContent);
                 ProductApple product = productService.Get(nameOfProduct);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 StorageItem storageItem = storageItemService.Get(nameOfStorage, product.NameOfProduct);
 
 
@@ -986,8 +896,8 @@ namespace ServerApplication
                 string nameOfStorageContent = rq.Args[1];
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
+                NameOfProduct nameOfProduct = new NameOfProduct(nameOfProductContent);
                 bool isExist = storageItemService.IsProductExistsInStorage(nameOfStorage, nameOfProduct);
 
 
@@ -1023,22 +933,11 @@ namespace ServerApplication
 
 
                 IProductService productService = container.Resolve<IProductService>();
-                ProductApple product = (ProductApple)EntityFactory.Create(EntityTypes.ProductApple);
-                product.NameOfProduct = new NameOfProduct { Content = nameOfProduct };
-                product.Cost = new UnitCost
-                {
-                    Value = Convert.ToDouble(unitCostString),
-                    Currency = new Currency { Content = "EUR" }
-                };
+                ProductApple product = (ProductApple)ProductFactory.Create(EntityTypes.ProductApple, nameOfProduct, unitCostString, "EUR");
                 productService.Update(product);
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                StorageItem storageItem = new StorageItem
-                {
-                    NameOfStorage = new NameOfStorage { Content = nameOfStorage },
-                    NameOfProduct = new NameOfProduct { Content = nameOfProduct },
-                    CountOfProduct = Convert.ToInt32(countString)
-                };
+                StorageItem storageItem = (StorageItem)EntityFactory.Create(EntityTypes.StorageItem, nameOfStorage, nameOfProduct, countString);
                 storageItemService.Update(storageItem);
             }
             catch (Exception ex)
@@ -1055,8 +954,8 @@ namespace ServerApplication
                 string nameOfProductContent = rq.Args[1];
 
                 IStorageItemService storageItemService = container.Resolve<IStorageItemService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
-                NameOfProduct nameOfProduct = new NameOfProduct { Content = nameOfProductContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
+                NameOfProduct nameOfProduct = new NameOfProduct(nameOfProductContent);
                 storageItemService.Delete(nameOfStorage, nameOfProduct);
 
             }
@@ -1073,7 +972,7 @@ namespace ServerApplication
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -1095,7 +994,7 @@ namespace ServerApplication
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -1117,7 +1016,7 @@ namespace ServerApplication
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -1139,7 +1038,7 @@ namespace ServerApplication
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -1161,7 +1060,7 @@ namespace ServerApplication
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -1183,7 +1082,7 @@ namespace ServerApplication
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -1205,7 +1104,7 @@ namespace ServerApplication
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -1227,7 +1126,7 @@ namespace ServerApplication
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -1249,7 +1148,7 @@ namespace ServerApplication
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -1271,7 +1170,7 @@ namespace ServerApplication
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Min(nameOfStorage);
 
 
@@ -1293,7 +1192,7 @@ namespace ServerApplication
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Max(nameOfStorage);
 
 
@@ -1315,7 +1214,7 @@ namespace ServerApplication
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Avg(nameOfStorage);
 
 
@@ -1337,7 +1236,7 @@ namespace ServerApplication
                 string nameOfStorageContent = rq.Args[0];
 
                 IMoneyItemValueService moneyItemValueService = container.Resolve<IMoneyItemValueService>();
-                NameOfStorage nameOfStorage = new NameOfStorage { Content = nameOfStorageContent };
+                NameOfStorage nameOfStorage = new NameOfStorage(nameOfStorageContent);
                 MoneyItemValue moneyItem = moneyItemValueService.Sum(nameOfStorage);
 
                 string response = moneyItem.Value + " " + moneyItem.Currency.Content;
@@ -1357,9 +1256,9 @@ namespace ServerApplication
             string engineIdContent = rq.Args[2];
 
             ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            TrailerId trailerId = new TrailerId(Convert.ToInt32(trailerIdContent));
+            WheelsId wheelsId = new WheelsId(Convert.ToInt32(wheelsIdContent));
+            EngineId engineId = new EngineId(Convert.ToInt32(engineIdContent));
             Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
             truckService.Insert(truck);
         }
@@ -1371,9 +1270,9 @@ namespace ServerApplication
             string engineIdContent = rq.Args[2];
 
             ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            TrailerId trailerId = new TrailerId(Convert.ToInt32(trailerIdContent));
+            WheelsId wheelsId = new WheelsId(Convert.ToInt32(wheelsIdContent));
+            EngineId engineId = new EngineId(Convert.ToInt32(engineIdContent));
             Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
             truckService.Insert(truck);
         }
@@ -1385,9 +1284,9 @@ namespace ServerApplication
             string engineIdContent = rq.Args[2];
 
             ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            TrailerId trailerId = new TrailerId(Convert.ToInt32(trailerIdContent));
+            WheelsId wheelsId = new WheelsId(Convert.ToInt32(wheelsIdContent));
+            EngineId engineId = new EngineId(Convert.ToInt32(engineIdContent));
             Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
             truckService.Insert(truck);
         }
@@ -1399,9 +1298,9 @@ namespace ServerApplication
             string engineIdContent = rq.Args[2];
 
             ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            TrailerId trailerId = new TrailerId(Convert.ToInt32(trailerIdContent));
+            WheelsId wheelsId = new WheelsId(Convert.ToInt32(wheelsIdContent));
+            EngineId engineId = new EngineId(Convert.ToInt32(engineIdContent));
             Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
             truckService.Insert(truck);
         }
@@ -1413,9 +1312,9 @@ namespace ServerApplication
             string engineIdContent = rq.Args[2];
 
             ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            TrailerId trailerId = new TrailerId(Convert.ToInt32(trailerIdContent));
+            WheelsId wheelsId = new WheelsId(Convert.ToInt32(wheelsIdContent));
+            EngineId engineId = new EngineId(Convert.ToInt32(engineIdContent));
             Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
             truckService.Insert(truck);
         }
@@ -1427,9 +1326,9 @@ namespace ServerApplication
             string engineIdContent = rq.Args[2];
 
             ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            TrailerId trailerId = new TrailerId(Convert.ToInt32(trailerIdContent));
+            WheelsId wheelsId = new WheelsId(Convert.ToInt32(wheelsIdContent));
+            EngineId engineId = new EngineId(Convert.ToInt32(engineIdContent));
             Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
             truckService.Insert(truck);
         }
@@ -1441,9 +1340,9 @@ namespace ServerApplication
             string engineIdContent = rq.Args[2];
 
             ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            TrailerId trailerId = new TrailerId(Convert.ToInt32(trailerIdContent));
+            WheelsId wheelsId = new WheelsId(Convert.ToInt32(wheelsIdContent));
+            EngineId engineId = new EngineId(Convert.ToInt32(engineIdContent));
             Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
             truckService.Insert(truck);
         }
@@ -1455,9 +1354,9 @@ namespace ServerApplication
             string engineIdContent = rq.Args[2];
 
             ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            TrailerId trailerId = new TrailerId(Convert.ToInt32(trailerIdContent));
+            WheelsId wheelsId = new WheelsId(Convert.ToInt32(wheelsIdContent));
+            EngineId engineId = new EngineId(Convert.ToInt32(engineIdContent));
             Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
             truckService.Insert(truck);
         }
@@ -1469,9 +1368,9 @@ namespace ServerApplication
             string engineIdContent = rq.Args[2];
 
             ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            TrailerId trailerId = new TrailerId(Convert.ToInt32(trailerIdContent));
+            WheelsId wheelsId = new WheelsId(Convert.ToInt32(wheelsIdContent));
+            EngineId engineId = new EngineId(Convert.ToInt32(engineIdContent));
             Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
             truckService.Insert(truck);
         }
@@ -1483,9 +1382,9 @@ namespace ServerApplication
             string engineIdContent = rq.Args[2];
 
             ITruckService truckService = container.Resolve<ITruckService>();
-            TrailerId trailerId = new TrailerId { Content = Convert.ToInt32(trailerIdContent) };
-            WheelsId wheelsId = new WheelsId { Content = Convert.ToInt32(wheelsIdContent) };
-            EngineId engineId = new EngineId { Content = Convert.ToInt32(engineIdContent) };
+            TrailerId trailerId = new TrailerId(Convert.ToInt32(trailerIdContent));
+            WheelsId wheelsId = new WheelsId(Convert.ToInt32(wheelsIdContent));
+            EngineId engineId = new EngineId(Convert.ToInt32(engineIdContent));
             Truck truck = new Truck(trailerId, wheelsId, engineId, TruckStatus.Available);
             truckService.Insert(truck);
         }
@@ -1495,7 +1394,7 @@ namespace ServerApplication
             string truckIdContent = rq.Args[0];
 
             ITruckService truckService = container.Resolve<ITruckService>();
-            TruckId truckId = new TruckId { Content = Convert.ToInt32(truckIdContent) };
+            TruckId truckId = new TruckId(Convert.ToInt32(truckIdContent));
             truckService.Send(truckId);
         }
 
@@ -1504,7 +1403,7 @@ namespace ServerApplication
             string truckIdContent = rq.Args[0];
 
             ITruckService truckService = container.Resolve<ITruckService>();
-            TruckId truckId = new TruckId { Content = Convert.ToInt32(truckIdContent) };
+            TruckId truckId = new TruckId(Convert.ToInt32(truckIdContent));
             truckService.Delivered(truckId);
         }
 

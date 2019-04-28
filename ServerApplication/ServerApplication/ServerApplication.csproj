@@ -99,6 +99,7 @@
     <Compile Include="Entities\ValueObjects\Truck\WheelsId.cs" />
     <Compile Include="Entities\Truck\WheelsSize.cs" />
     <Compile Include="FactoryFolder\EntityFactory.cs" />
+    <Compile Include="FactoryFolder\ProductFactory.cs" />
     <Compile Include="Modules\MoneyItemValueModule.cs" />
     <Compile Include="Modules\ProductsModule.cs" />
     <Compile Include="Modules\ProductsRepositoryModule.cs" />

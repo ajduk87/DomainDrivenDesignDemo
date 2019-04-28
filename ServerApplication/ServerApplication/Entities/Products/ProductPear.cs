@@ -6,5 +6,11 @@ namespace ServerApplication.Entities.Products
     {
         public NameOfProduct NameOfProduct { get; set; }
         public UnitCost Cost { get; set; }
+
+        public ProductPear(NameOfProduct nameOfProduct, UnitCost unitCost)
+        {
+            this.NameOfProduct = nameOfProduct;
+            this.Cost = unitCost;
+        }
     }
 }
