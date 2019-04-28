@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ServerApplication.Entities.ValueObjects
 {
-    public abstract class ValueObject<T>
+    public abstract class ValueObject<T> where T : class
     {
     }
 }
