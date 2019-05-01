@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\AggregateRoot.cs" />
     <Compile Include="Requests\Callers\RequestMoneyValueCaller.cs" />
     <Compile Include="Requests\Callers\RequestStorageItemCaller.cs" />
     <Compile Include="Requests\Callers\RequestTruckCaller.cs" />
