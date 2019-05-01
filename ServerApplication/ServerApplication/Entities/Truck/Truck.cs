@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ServerApplication.Entities.Truck
 {
-    public class Truck : Entity
+    public class Truck : AggregateRoot
     {
         private ITruckRepository truckRepository;
 

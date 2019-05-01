@@ -69,6 +69,7 @@
     <Compile Include="DDDDemoServerService.Designer.cs">
       <DependentUpon>DDDDemoServerService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\AggregateRoot.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\MoneyItemValue.cs" />
     <Compile Include="Entities\Products\ProductApple.cs" />
